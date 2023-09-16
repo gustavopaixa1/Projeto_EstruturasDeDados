@@ -14,6 +14,7 @@ public class HelloApplication extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("menuPrincipal.fxml"));
         stage.setTitle("Estrutura de Dados");
         stage.setScene(new Scene(root));
+        stage.setResizable(false);
         stage.show();
     }
 

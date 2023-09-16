@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetoed.ControllerLSE">
+   <children>
+      <Text layoutX="319.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lista Simplesmente Encadeada" textAlignment="CENTER" wrappingWidth="162.62890625">
+         <font>
+            <Font name="Yu Mincho Demibold" size="19.0" />
+         </font>
+      </Text>
+      <StackPane layoutX="43.0" layoutY="125.0" prefHeight="150.0" prefWidth="200.0" />
+   </children>
+</AnchorPane>

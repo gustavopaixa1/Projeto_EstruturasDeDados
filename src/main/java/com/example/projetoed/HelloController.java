@@ -32,10 +32,25 @@ public class HelloController implements Initializable {
     @FXML
     void getOpcoes(MouseEvent event) throws IOException {
         String opcao = opcoes.getSelectionModel().getSelectedItem();
-        Stage stage = (Stage)botaoDeEscolha.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("listaSeq.fxml"));
-        stage.setTitle("Lista Sequencial");
-        stage.setScene(new Scene(root));
+
+        if (opcao.equals("Lista Sequencial")){
+            Stage stage = (Stage)botaoDeEscolha.getScene().getWindow();
+            Parent root = FXMLLoader.load(getClass().getResource("listaSeq.fxml"));
+            stage.setTitle("Lista Sequencial");
+            stage.setScene(new Scene(root));
+        }
+        else if(opcao.equals("Lista Simplesmente Encadeada")){
+            Stage stage = (Stage)botaoDeEscolha.getScene().getWindow();
+            Parent root = FXMLLoader.load(getClass().getResource("LSE.fxml"));
+            stage.setTitle("Lista Simplesmente Encadeada");
+            stage.setScene(new Scene(root));
+        }
+        else if(opcao.equals("Lista Duplamente Encadeada")){
+            Stage stage = (Stage)botaoDeEscolha.getScene().getWindow();
+            Parent root = FXMLLoader.load(getClass().getResource("LDE.fxml"));
+            stage.setTitle("Lista Duplamente Encadeada");
+            stage.setScene(new Scene(root));
+        }
 
     }
 

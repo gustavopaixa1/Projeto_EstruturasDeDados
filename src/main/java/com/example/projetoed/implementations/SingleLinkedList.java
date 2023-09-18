@@ -1,33 +1,33 @@
 package com.example.projetoed.implementations;
 
-class Node<T> {
-    private T content;
-    private Node<T> next;
-
-    public Node() {
-        this.content = null;
-        this.next = null;
-    }
-
-    public T getContent() {
-        return this.content;
-    }
-
-    public Node<T> getNext() {
-        return this.next;
-    }
-
-    public void setContent(T content) {
-        this.content = content;
-    }
-
-    public void setNext(Node<T> next) {
-        this.next = next;
-    }
-}
-
 public class SingleLinkedList<T> implements DEList<T> {
-    private Node<T> head;
+    class Node {
+        private T content;
+        private Node next;
+
+        public Node() {
+            this.content = null;
+            this.next = null;
+        }
+
+        public T getContent() {
+            return this.content;
+        }
+
+        public Node getNext() {
+            return this.next;
+        }
+
+        public void setContent(T content) {
+            this.content = content;
+        }
+
+        public void setNext(Node next) {
+            this.next = next;
+        }
+    }
+
+    private Node head;
     private int numberOfElements;
 
     public SingleLinkedList() {
@@ -36,9 +36,7 @@ public class SingleLinkedList<T> implements DEList<T> {
     }
 
     public boolean isEmpty() {
-        if (this.size() == 0)
-            return true;
-        return false;
+        return this.size() == 0;
     }
 
     public int size() {
@@ -49,7 +47,7 @@ public class SingleLinkedList<T> implements DEList<T> {
         if (this.isEmpty() || index < 0 || index >= this.size())
             return null;
 
-        Node<T> aux = this.head;
+        Node aux = this.head;
 
         for (int i = 0; i < index; i++)
             aux = aux.getNext();
@@ -61,7 +59,7 @@ public class SingleLinkedList<T> implements DEList<T> {
         if (this.isEmpty())
             return -1;
 
-        Node<T> aux = this.head;
+        Node aux = this.head;
 
         for (int i = 0; i < this.size(); i++) {
             if (aux.getContent().equals(v))
@@ -75,7 +73,7 @@ public class SingleLinkedList<T> implements DEList<T> {
         if (this.isEmpty() || offset < 0 || offset >= this.size())
             return -1;
 
-        Node<T> aux = this.head;
+        Node aux = this.head;
 
         for (int i = 0; i < offset; i++)
             aux = aux.getNext();
@@ -89,13 +87,13 @@ public class SingleLinkedList<T> implements DEList<T> {
         return -1;
     }
 
-    public int indexOf(T v, int offset, int targethOccurrence) {
+    public int indexOf(T v, int offset, int targetOccurrence) {
         if (this.isEmpty() || offset < 0 || offset >= this.size()
-                || targethOccurrence > this.size())
+                || targetOccurrence > this.size())
             return -1;
 
         int numberOfOccurrences = 0;
-        Node<T> aux = this.head;
+        Node aux = this.head;
 
         for (int i = 0; i < offset; i++)
             aux = aux.getNext();
@@ -103,7 +101,7 @@ public class SingleLinkedList<T> implements DEList<T> {
         for (int i = offset; i < this.size(); i++) {
             if (aux.getContent().equals(v)) {
                 numberOfOccurrences++;
-                if (numberOfOccurrences == targethOccurrence)
+                if (numberOfOccurrences == targetOccurrence)
                     return i;
             }
             aux = aux.getNext();
@@ -117,17 +115,17 @@ public class SingleLinkedList<T> implements DEList<T> {
             return false;
 
         if (index == 0) {
-            Node<T> newNode = new Node<T>();
+            Node newNode = new Node();
             newNode.setContent(v);
             newNode.setNext(this.head);
             this.head = newNode;
         } else {
-            Node<T> predecessor = this.head;
+            Node predecessor = this.head;
 
             for (int i = 0; i < index - 1; i++)
                 predecessor = predecessor.getNext();
 
-            Node<T> newNode = new Node<T>();
+            Node newNode = new Node();
             newNode.setContent(v);
             newNode.setNext(predecessor.getNext());
             predecessor.setNext(newNode);
@@ -146,7 +144,7 @@ public class SingleLinkedList<T> implements DEList<T> {
             removedElement = this.head.getContent();
             this.head = this.head.getNext();
         } else {
-            Node<T> predecessor = this.head;
+            Node predecessor = this.head;
 
             for (int i = 0; i < index - 1; i++)
                 predecessor = predecessor.getNext();
@@ -172,7 +170,7 @@ public class SingleLinkedList<T> implements DEList<T> {
         StringBuilder sb = new StringBuilder();
         sb.append('[');
 
-        Node<T> aux = this.head;
+        Node aux = this.head;
         while (aux.getNext() != null) {
             sb.append(aux.getContent().toString());
             sb.append(", ");

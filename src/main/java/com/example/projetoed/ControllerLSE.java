@@ -1,5 +1,6 @@
 package com.example.projetoed;
 
+import javafx.animation.FillTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -19,6 +21,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import com.example.projetoed.implementations.SingleLinkedList;
+import javafx.util.Duration;
 
 public class ControllerLSE implements Initializable {
     private SingleLinkedList<String> LSE;
@@ -71,10 +74,7 @@ public class ControllerLSE implements Initializable {
 
     @FXML
     private HBox HBoxLinha5;
-
-    @FXML
-    private HBox HBoxBloco;
-
+    
     private HBox[] linhas = new HBox[5];
 
     @FXML
@@ -136,13 +136,6 @@ public class ControllerLSE implements Initializable {
         for (int i = pos / 8; i < 4; i++)
             if (this.LSE.size() >= (i + 1) * 8)
                 linhas[i].getChildren().add(7, linhas[i + 1].getChildren().get(0));
-
-
-//        for (int i = 0; i < 5; i++) {
-//            if (linhas[i].getChildren().size() > 8) {
-//                linhas[i + 1].getChildren().add(0, linhas[i].getChildren().get(8));
-//            }
-//        }
     }
 
     @FXML
@@ -157,7 +150,7 @@ public class ControllerLSE implements Initializable {
         TFConsultaValorConteudo.setText("");
 
         // Consultar os Blocos por Valor
-        System.out.printf("%d - %s\n", contIndex, cont);
+        this.animacao(contIndex);
     }
     @FXML
     void EventoConsultaIndice(MouseEvent event) throws IOException {
@@ -174,7 +167,7 @@ public class ControllerLSE implements Initializable {
         TFConsultaIndicePosicao.setText("");
 
         // Consultar os Blocos por Indice
-        System.out.printf("%d - %s\n", contIndex, cont);
+        this.animacao(contIndex);
     }
 
     private HBox bloco(String conteudo) {
@@ -192,6 +185,7 @@ public class ControllerLSE implements Initializable {
 
         Text texto = new Text(conteudo);
         texto.setFont(Font.font("Consolas", 15));
+        texto.setFill(Color.web("#ffffff"));
         texto.setWrappingWidth(50);
         texto.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         sp.getChildren().add(texto);
@@ -206,6 +200,20 @@ public class ControllerLSE implements Initializable {
         return novoNo;
     }
 
+    private void animacao(int contIndex) {
+        HBox auxHBox = (HBox) linhas[contIndex / 8].getChildren().get(contIndex % 8);
+        StackPane auxSP = (StackPane) auxHBox.getChildren().get(0);
+        Rectangle auxRec = (Rectangle) auxSP.getChildren().get(0);
+        Text auxText = (Text) auxSP.getChildren().get(1);
+
+        FillTransition transition = new FillTransition();
+        transition.setShape(auxRec);
+        transition.setFromValue(Color.web("#8b0000"));
+        transition.setToValue(Color.web("#008B8B"));
+        transition.setCycleCount(2);
+        transition.setDuration(Duration.seconds(1));
+        transition.play();
+    }
 
 //   // indice especifico
 //    no1.getChildren().aff(índice,teste);

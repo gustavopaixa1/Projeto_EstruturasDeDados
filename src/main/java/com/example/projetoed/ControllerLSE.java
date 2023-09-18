@@ -3,11 +3,17 @@ package com.example.projetoed;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
@@ -15,29 +21,8 @@ import java.util.ResourceBundle;
 import com.example.projetoed.implementations.SingleLinkedList;
 
 public class ControllerLSE implements Initializable {
-    SingleLinkedList<String> LSE;
-    int numeroDeElementos;
-
-    @FXML
-    private AnchorPane APBase;
-
-    @FXML
-    private AnchorPane APTitulo;
-
-    @FXML
-    private AnchorPane APNumeroDeElementos;
-
-    @FXML
-    private AnchorPane APInserir;
-
-    @FXML
-    private AnchorPane APRemover;
-
-    @FXML
-    private AnchorPane APConsultaValor;
-
-    @FXML
-    private AnchorPane APConsultaIndice;
+    private SingleLinkedList<String> LSE;
+    private int numeroDeElementos;
 
     @FXML
     private Button BotaoVoltar;
@@ -73,6 +58,26 @@ public class ControllerLSE implements Initializable {
     private TextField TFConsultaIndicePosicao;
 
     @FXML
+    private HBox HBoxLinha1;
+
+    @FXML
+    private HBox HBoxLinha2;
+
+    @FXML
+    private HBox HBoxLinha3;
+
+    @FXML
+    private HBox HBoxLinha4;
+
+    @FXML
+    private HBox HBoxLinha5;
+
+    @FXML
+    private HBox HBoxBloco;
+
+    private HBox[] linhas = new HBox[5];
+
+    @FXML
     void EventoVoltar(MouseEvent event) throws IOException {
         Stage stage = (Stage) BotaoVoltar.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("menuPrincipal.fxml"));
@@ -92,7 +97,8 @@ public class ControllerLSE implements Initializable {
         } catch (Exception e) {
             return;
         }
-
+        if (this.LSE.size() == 40)
+            return;
         if (!this.LSE.insert(cont, pos))
             return;
         TFInserirPosicao.setText("");
@@ -101,6 +107,12 @@ public class ControllerLSE implements Initializable {
 
         // Criar os Blocos
         System.out.println(this.LSE.toString());
+        linhas[pos / 8].getChildren().add(pos % 8, bloco(cont));
+        for (int i = 0; i < 5; i++) {
+            if (linhas[i].getChildren().size() > 8) {
+                linhas[i + 1].getChildren().add(0, linhas[i].getChildren().get(8));
+            }
+        }
     }
 
     @FXML
@@ -120,6 +132,17 @@ public class ControllerLSE implements Initializable {
 
         // Remover os Blocos
         System.out.println(this.LSE.toString());
+        linhas[pos / 8].getChildren().remove(pos % 8);
+        for (int i = pos / 8; i < 4; i++)
+            if (this.LSE.size() >= (i + 1) * 8)
+                linhas[i].getChildren().add(7, linhas[i + 1].getChildren().get(0));
+
+
+//        for (int i = 0; i < 5; i++) {
+//            if (linhas[i].getChildren().size() > 8) {
+//                linhas[i + 1].getChildren().add(0, linhas[i].getChildren().get(8));
+//            }
+//        }
     }
 
     @FXML
@@ -154,10 +177,86 @@ public class ControllerLSE implements Initializable {
         System.out.printf("%d - %s\n", contIndex, cont);
     }
 
+    private HBox bloco(String conteudo) {
+        HBox novoNo = new HBox();
+        novoNo.setAlignment(Pos.CENTER);
+
+        StackPane sp = new StackPane();
+        sp.setPrefWidth(60);
+        sp.setPrefHeight(50);
+        sp.setAlignment(Pos.CENTER);
+
+        Rectangle retangulo = new Rectangle(60,50);
+        retangulo.getStyleClass().add("profile-boxes");
+        sp.getChildren().add(retangulo);
+
+        Text texto = new Text(conteudo);
+        texto.setFont(Font.font("Consolas", 15));
+        texto.setWrappingWidth(50);
+        texto.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+        sp.getChildren().add(texto);
+
+        novoNo.getChildren().add(sp);
+
+        ImageView img = new ImageView("seta.png");
+        img.setFitWidth(30);
+        img.setFitHeight(30);
+        novoNo.getChildren().add(img);
+
+        return novoNo;
+    }
+
+
+//   // indice especifico
+//    no1.getChildren().aff(índice,teste);
+//    @FXML
+//    void adicionaraovbox(MouseEvent event) {
+//        no1.setSpacing(10);
+//        StackPane teste = new StackPane();
+//        Rectangle rectangulo = new Rectangle(50,50);
+//        String adicionar = (adicionarelemento.getText());
+//        rectangulo.setFill(Color.web("#4682B4"));
+//        rectangulo.setArcHeight(10);
+//        rectangulo.setArcWidth(10);
+//        rectangulo.setStrokeWidth(2);
+//        rectangulo.setStroke(Color.BLACK);
+//        teste.getChildren().add(rectangulo);
+//        Label label = new Label(adicionar);
+////        label.setTextFill(Color.WHITE);
+////        teste.getChildren().add(label);
+////        no1.getChildren().add(teste);
+////    }
+//
+//
+//    @FXML
+//    void removerElemento(MouseEvent event) {
+//        int remover = Integer.valueOf(camporemover.getText());
+//        no1.getChildren().remove(remover);
+//    }
+//
+//    void adicionaraovbox(MouseEvent event) {
+//        StackPane teste = new StackPane();
+//        Rectangle rectangulo = new Rectangle(50,50);
+//        String adicionar = (adicionarelemento.getText());
+//        rectangulo.setFill(Color.BLUE);
+//        teste.getChildren().add(rectangulo);
+//        teste.getChildren().add(new Label(adicionar));
+//        no1.getChildren().add(teste);
+//    }
+
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.LSE = new SingleLinkedList<>();
         this.numeroDeElementos = 0;
         TFNumeroDeElementos.setText("0");
+
+        linhas[0] = HBoxLinha1;
+        linhas[1] = HBoxLinha2;
+        linhas[2] = HBoxLinha3;
+        linhas[3] = HBoxLinha4;
+        linhas[4] = HBoxLinha5;
     }
 }

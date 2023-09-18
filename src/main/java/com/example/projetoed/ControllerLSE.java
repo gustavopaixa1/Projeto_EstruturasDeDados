@@ -74,7 +74,7 @@ public class ControllerLSE implements Initializable {
 
     @FXML
     private HBox HBoxLinha5;
-    
+
     private HBox[] linhas = new HBox[5];
 
     @FXML
@@ -106,13 +106,15 @@ public class ControllerLSE implements Initializable {
         TFNumeroDeElementos.setText(String.valueOf(++numeroDeElementos));
 
         // Criar os Blocos
-        System.out.println(this.LSE.toString());
         linhas[pos / 8].getChildren().add(pos % 8, bloco(cont));
         for (int i = 0; i < 5; i++) {
             if (linhas[i].getChildren().size() > 8) {
                 linhas[i + 1].getChildren().add(0, linhas[i].getChildren().get(8));
             }
         }
+
+        this.animacaoSequencia(0, 1, 0.1, pos - 1);
+        this.animacao(pos, 1 + pos / 5, 0.5).play();
     }
 
     @FXML
@@ -131,11 +133,16 @@ public class ControllerLSE implements Initializable {
         TFNumeroDeElementos.setText(String.valueOf(--numeroDeElementos));
 
         // Remover os Blocos
-        System.out.println(this.LSE.toString());
-        linhas[pos / 8].getChildren().remove(pos % 8);
-        for (int i = pos / 8; i < 4; i++)
-            if (this.LSE.size() >= (i + 1) * 8)
-                linhas[i].getChildren().add(7, linhas[i + 1].getChildren().get(0));
+        this.animacaoSequencia(0, 1, 0.1, pos - 1);
+        FillTransition aux = this.animacao(pos, 1 + pos / 5, 0.5);
+
+        aux.setOnFinished(evento -> {
+            linhas[pos / 8].getChildren().remove(pos % 8);
+            for (int i = pos / 8; i < 4; i++)
+                if (this.LSE.size() >= (i + 1) * 8)
+                    linhas[i].getChildren().add(7, linhas[i + 1].getChildren().get(0));
+        });
+        aux.play();
     }
 
     @FXML
@@ -150,7 +157,7 @@ public class ControllerLSE implements Initializable {
         TFConsultaValorConteudo.setText("");
 
         // Consultar os Blocos por Valor
-        this.animacao(contIndex);
+        this.animacao(contIndex, 2, 1).play();
     }
     @FXML
     void EventoConsultaIndice(MouseEvent event) throws IOException {
@@ -167,7 +174,7 @@ public class ControllerLSE implements Initializable {
         TFConsultaIndicePosicao.setText("");
 
         // Consultar os Blocos por Indice
-        this.animacao(contIndex);
+        this.animacao(contIndex, 2, 1).play();
     }
 
     private HBox bloco(String conteudo) {
@@ -200,60 +207,32 @@ public class ControllerLSE implements Initializable {
         return novoNo;
     }
 
-    private void animacao(int contIndex) {
+    private FillTransition animacao(int contIndex, int cycles, double time) {
         HBox auxHBox = (HBox) linhas[contIndex / 8].getChildren().get(contIndex % 8);
         StackPane auxSP = (StackPane) auxHBox.getChildren().get(0);
         Rectangle auxRec = (Rectangle) auxSP.getChildren().get(0);
-        Text auxText = (Text) auxSP.getChildren().get(1);
 
         FillTransition transition = new FillTransition();
         transition.setShape(auxRec);
         transition.setFromValue(Color.web("#8b0000"));
         transition.setToValue(Color.web("#008B8B"));
-        transition.setCycleCount(2);
-        transition.setDuration(Duration.seconds(1));
-        transition.play();
+        transition.setCycleCount(cycles);
+        transition.setDuration(Duration.seconds(time));
+        return transition;
     }
 
-//   // indice especifico
-//    no1.getChildren().aff(índice,teste);
-//    @FXML
-//    void adicionaraovbox(MouseEvent event) {
-//        no1.setSpacing(10);
-//        StackPane teste = new StackPane();
-//        Rectangle rectangulo = new Rectangle(50,50);
-//        String adicionar = (adicionarelemento.getText());
-//        rectangulo.setFill(Color.web("#4682B4"));
-//        rectangulo.setArcHeight(10);
-//        rectangulo.setArcWidth(10);
-//        rectangulo.setStrokeWidth(2);
-//        rectangulo.setStroke(Color.BLACK);
-//        teste.getChildren().add(rectangulo);
-//        Label label = new Label(adicionar);
-////        label.setTextFill(Color.WHITE);
-////        teste.getChildren().add(label);
-////        no1.getChildren().add(teste);
-////    }
-//
-//
-//    @FXML
-//    void removerElemento(MouseEvent event) {
-//        int remover = Integer.valueOf(camporemover.getText());
-//        no1.getChildren().remove(remover);
-//    }
-//
-//    void adicionaraovbox(MouseEvent event) {
-//        StackPane teste = new StackPane();
-//        Rectangle rectangulo = new Rectangle(50,50);
-//        String adicionar = (adicionarelemento.getText());
-//        rectangulo.setFill(Color.BLUE);
-//        teste.getChildren().add(rectangulo);
-//        teste.getChildren().add(new Label(adicionar));
-//        no1.getChildren().add(teste);
-//    }
+    private void animacaoSequencia(int contIndex, int cycles, double time, int max) {
+        if (contIndex > max)
+            return;
+        FillTransition aux = animacao(contIndex, cycles, time);
+        aux.setAutoReverse(true);
 
+        aux.setOnFinished(event -> {
+            animacaoSequencia(contIndex + 1, cycles, time, max);
+        });
 
-
+        aux.play();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

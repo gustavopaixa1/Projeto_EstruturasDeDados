@@ -3,6 +3,6 @@ Repositório referente ao primeiro projeto da disciplina Estrutura de Dados, na 
 
 ## Progresso
 - [ ] Menu
-- [x] Lista Sequencial
-- [ ] Lista Simplesmente Encadeada
+- [ ] Lista Sequencial
+- [x] Lista Simplesmente Encadeada
 - [ ] Lista Duplamente Encadeada

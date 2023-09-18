@@ -1,17 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetoed.ControllerLSE">
    <children>
-      <Text layoutX="319.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lista Simplesmente Encadeada" textAlignment="CENTER" wrappingWidth="162.62890625">
+      <AnchorPane layoutX="663.0" layoutY="18.85986328125">
+         <children>
+            <Text layoutY="8.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Número de Elementos" textAlignment="CENTER" wrappingWidth="91.0">
+               <font>
+                  <Font name="Consolas" size="15.0" />
+               </font>
+            </Text>
+            <TextField alignment="CENTER" editable="false" layoutY="41.14013671875" prefHeight="40.0" prefWidth="91.0" style="-fx-background-radius: 10 10 10 10;" text="0">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+         </children>
+      </AnchorPane>
+      <Pane layoutX="240.0" layoutY="13.0" prefHeight="72.0" prefWidth="321.0" style="-fx-background-color: #008B8B; -fx-background-radius: 10 10 10 10;">
+         <children>
+            <Text fill="WHITE" layoutX="61.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lista Simplesmente Encadeada" textAlignment="CENTER" wrappingWidth="200.0">
+               <font>
+                  <Font name="Consolas" size="20.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Button layoutX="43.0" layoutY="35.0" mnemonicParsing="false" style="-fx-background-color: #8B0000; -fx-background-radius: 10 10 10;" text="Voltar" textFill="WHITE">
          <font>
-            <Font name="Yu Mincho Demibold" size="19.0" />
+            <Font name="Consolas" size="15.0" />
          </font>
-      </Text>
-      <StackPane layoutX="43.0" layoutY="125.0" prefHeight="150.0" prefWidth="200.0" />
+      </Button>
+      <StackPane layoutX="113.0" layoutY="418.0" prefHeight="150.0" prefWidth="200.0" />
+      <Button layoutX="74.0" layoutY="115.0" mnemonicParsing="false" style="-fx-background-color: #8B0000; -fx-background-radius: 10 10 10;" text="Inserir" textFill="WHITE">
+         <font>
+            <Font name="Consolas" size="15.0" />
+         </font>
+      </Button>
+      <Button layoutX="201.0" layoutY="115.0" mnemonicParsing="false" style="-fx-background-color: #8B0000; -fx-background-radius: 10 10 10;" text="Remover" textFill="WHITE">
+         <font>
+            <Font name="Consolas" size="15.0" />
+         </font>
+      </Button>
+      <Button layoutX="337.0" layoutY="115.0" mnemonicParsing="false" style="-fx-background-color: #8B0000; -fx-background-radius: 10 10 10;" text="Consultar por Valor" textFill="WHITE">
+         <font>
+            <Font name="Consolas" size="15.0" />
+         </font>
+      </Button>
+      <Button layoutX="561.0" layoutY="115.0" mnemonicParsing="false" style="-fx-background-color: #8B0000; -fx-background-radius: 10 10 10;" text="Consultar por Índice" textFill="WHITE">
+         <font>
+            <Font name="Consolas" size="15.0" />
+         </font>
+      </Button>
+      <TextField alignment="CENTER" editable="false" layoutX="594.0" layoutY="150.0" prefHeight="40.0" prefWidth="119.0" promptText="Posição" style="-fx-background-radius: 10 10 10 10;">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <TextField alignment="CENTER" editable="false" layoutX="366.0" layoutY="150.0" prefHeight="40.0" prefWidth="119.0" promptText="Conteúdo" style="-fx-background-radius: 10 10 10 10;">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <TextField alignment="CENTER" editable="false" layoutX="74.0" layoutY="150.0" prefHeight="40.0" prefWidth="78.0" promptText="Posição" style="-fx-background-radius: 10 10 10 10;">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <TextField alignment="CENTER" editable="false" layoutX="201.0" layoutY="150.0" prefHeight="40.0" prefWidth="78.0" promptText="Posição" style="-fx-background-radius: 10 10 10 10;">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <TextField alignment="CENTER" editable="false" layoutX="61.0" layoutY="198.0" prefHeight="40.0" prefWidth="104.0" promptText="Conteúdo" style="-fx-background-radius: 10 10 10 10;">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
    </children>
 </AnchorPane>

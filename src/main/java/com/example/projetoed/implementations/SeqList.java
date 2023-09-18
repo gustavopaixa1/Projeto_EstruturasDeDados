@@ -25,15 +25,11 @@ public class SeqList<T> implements DEList<T> {
     }
 
     public boolean isEmpty() {
-        if (this.numberOfElements == 0)
-            return true;
-        return false;
+        return this.size() == 0;
     }
 
     public boolean isFull() {
-        if (this.numberOfElements == this.maxElements)
-            return true;
-        return false;
+        return this.size() == this.maxElements;
     }
 
     public int size() {
@@ -66,15 +62,16 @@ public class SeqList<T> implements DEList<T> {
         return -1;
     }
 
-    public int indexOf(T v, int offset, int targethOccurrence) {
-        if (this.isEmpty() || offset < 0 || offset >= this.numberOfElements || targethOccurrence > this.numberOfElements)
+    public int indexOf(T v, int offset, int targetOccurrence) {
+        if (this.isEmpty() || offset < 0 || offset >= this.numberOfElements
+                || targetOccurrence > this.numberOfElements)
             return -1;
 
         int numberOfOccurrences = 0;
         for (int i = offset; i < this.numberOfElements; i++)
             if (this.data[i].equals(v)) {
                 numberOfOccurrences++;
-                if (numberOfOccurrences == targethOccurrence)
+                if (numberOfOccurrences == targetOccurrence)
                     return i;
             }
 

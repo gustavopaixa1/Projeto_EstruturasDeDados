@@ -8,6 +8,24 @@
         -fx-background-radius: 10 10 10 10;
 }
 
+.profile-text-field{
+        -fx-background-radius: 10 10 10 10;
+}
+
+.profile-vbox{
+    -fx-border-color: #008B8B;
+    -fx-border-width: 7;
+    -fx-border-radius: 10 10 10 10;
+}
+.profile-boxes{
+    -fx-arc-height: 10;
+    -fx-arc-width: 10;
+    -fx-stroke: #003B6F;
+    -fx-fill: #008B8B;
+    -fx-stroke-width: 3;
+}
+
+
 .choice-box {
   -fx-background-color: white;
   -fx-mark-color: #4682B4; // arrow color

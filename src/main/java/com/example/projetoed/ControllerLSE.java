@@ -90,7 +90,7 @@ public class ControllerLSE implements Initializable {
         int pos;
         String cont;
         try {
-            pos = Integer.parseInt(TFInserirPosicao.getText());
+            pos = Integer.parseInt(TFInserirPosicao.getText()) - 1;
             cont = TFInserirConteudo.getText();
             if (cont.isEmpty())
                 return;
@@ -121,7 +121,7 @@ public class ControllerLSE implements Initializable {
     void EventoRemover(MouseEvent event) throws IOException {
         int pos;
         try {
-            pos = Integer.parseInt(TFRemoverPosicao.getText());
+            pos = Integer.parseInt(TFRemoverPosicao.getText()) - 1;
         } catch (Exception e) {
             return;
         }
@@ -163,7 +163,7 @@ public class ControllerLSE implements Initializable {
     void EventoConsultaIndice(MouseEvent event) throws IOException {
         int contIndex;
         try {
-            contIndex = Integer.parseInt(TFConsultaIndicePosicao.getText());
+            contIndex = Integer.parseInt(TFConsultaIndicePosicao.getText()) - 1;
         } catch (Exception e) {
             return;
         }

@@ -8,6 +8,10 @@
         -fx-background-radius: 10 10 10 10;
 }
 
+.profile-text-field{
+        -fx-background-radius: 10 10 10 10;
+}
+
 .choice-box {
   -fx-background-color: white;
   -fx-mark-color: #4682B4; // arrow color

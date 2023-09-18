@@ -1,0 +1,19 @@
+.profile-layout{
+    -fx-background-color:  #008B8B;
+    -fx-background-radius: 0 0 20 20;
+}
+
+.profile-button{
+        -fx-background-color: #8B0000;
+        -fx-background-radius: 10 10 10 10;
+}
+
+.choice-box {
+  -fx-background-color: white;
+  -fx-mark-color: #4682B4; // arrow color
+  -fx-border-color: #4682B4;
+  -fx-border-radius: 10 10 10 10;
+}
+
+// Selected item text color on the control itself
+.choice-box > .label { -fx-text-fill: #8B0000; }

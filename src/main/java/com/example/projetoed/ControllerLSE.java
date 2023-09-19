@@ -7,7 +7,6 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
@@ -29,18 +28,6 @@ public class ControllerLSE implements Initializable {
 
     @FXML
     private Button BotaoVoltar;
-
-    @FXML
-    private Button BotaoInserir;
-
-    @FXML
-    private Button BotaoRemover;
-
-    @FXML
-    private Button BotaoConsultaValor;
-
-    @FXML
-    private Button BotaoConsultaIndice;
 
     @FXML
     private TextField TFNumeroDeElementos;
@@ -113,8 +100,8 @@ public class ControllerLSE implements Initializable {
             }
         }
 
-        this.animacaoSequencia(0, 1, 0.1, pos - 1);
-        this.animacao(pos, 1 + pos / 5, 0.5).play();
+        this.animacaoSequencia(0, 1, 0.1, "#8b0000", "#008B8B", pos - 1);
+        this.animacao(pos, 1 + pos / 5, 0.5, "#73ee81", "#008B8B").play();
     }
 
     @FXML
@@ -133,8 +120,8 @@ public class ControllerLSE implements Initializable {
         TFNumeroDeElementos.setText(String.valueOf(--numeroDeElementos));
 
         // Remover os Blocos
-        this.animacaoSequencia(0, 1, 0.1, pos - 1);
-        FillTransition aux = this.animacao(pos, 1 + pos / 5, 0.5);
+        this.animacaoSequencia(0, 1, 0.1, "#8b0000", "#008B8B", pos - 1);
+        FillTransition aux = this.animacao(pos, 1 + pos / 5, 0.5, "#008B8B", "#ffffff");
 
         aux.setOnFinished(evento -> {
             linhas[pos / 8].getChildren().remove(pos % 8);
@@ -157,7 +144,7 @@ public class ControllerLSE implements Initializable {
         TFConsultaValorConteudo.setText("");
 
         // Consultar os Blocos por Valor
-        this.animacao(contIndex, 2, 1).play();
+        this.animacao(contIndex, 2, 1, "#8b0000", "#008B8B").play();
     }
     @FXML
     void EventoConsultaIndice(MouseEvent event) throws IOException {
@@ -174,7 +161,7 @@ public class ControllerLSE implements Initializable {
         TFConsultaIndicePosicao.setText("");
 
         // Consultar os Blocos por Indice
-        this.animacao(contIndex, 2, 1).play();
+        this.animacao(contIndex, 2, 1, "#8b0000", "#008B8B").play();
     }
 
     private HBox bloco(String conteudo) {
@@ -207,28 +194,28 @@ public class ControllerLSE implements Initializable {
         return novoNo;
     }
 
-    private FillTransition animacao(int contIndex, int cycles, double time) {
+    private FillTransition animacao(int contIndex, int cycles, double time, String fromColor, String toColor) {
         HBox auxHBox = (HBox) linhas[contIndex / 8].getChildren().get(contIndex % 8);
         StackPane auxSP = (StackPane) auxHBox.getChildren().get(0);
         Rectangle auxRec = (Rectangle) auxSP.getChildren().get(0);
 
         FillTransition transition = new FillTransition();
         transition.setShape(auxRec);
-        transition.setFromValue(Color.web("#8b0000"));
-        transition.setToValue(Color.web("#008B8B"));
+        transition.setFromValue(Color.web(fromColor));
+        transition.setToValue(Color.web(toColor));
         transition.setCycleCount(cycles);
         transition.setDuration(Duration.seconds(time));
         return transition;
     }
 
-    private void animacaoSequencia(int contIndex, int cycles, double time, int max) {
+    private void animacaoSequencia(int contIndex, int cycles, double time, String fromColor, String toColor, int max) {
         if (contIndex > max)
             return;
-        FillTransition aux = animacao(contIndex, cycles, time);
+        FillTransition aux = animacao(contIndex, cycles, time, fromColor, toColor);
         aux.setAutoReverse(true);
 
         aux.setOnFinished(event -> {
-            animacaoSequencia(contIndex + 1, cycles, time, max);
+            animacaoSequencia(contIndex + 1, cycles, time, fromColor, toColor, max);
         });
 
         aux.play();

@@ -41,7 +41,7 @@
       </AnchorPane>
       <AnchorPane layoutX="10.0" layoutY="115.0" prefHeight="75.0" prefWidth="207.0">
          <children>
-            <Button fx:id="BotaoInserir" layoutX="70.0" mnemonicParsing="false" onMouseClicked="#EventoInserir" styleClass="profile-button" stylesheets="@style.css" text="Inserir" textAlignment="CENTER" textFill="WHITE">
+            <Button layoutX="70.0" mnemonicParsing="false" onMouseClicked="#EventoInserir" styleClass="profile-button" stylesheets="@style.css" text="Inserir" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Consolas" size="15.0" />
                </font>
@@ -60,7 +60,7 @@
       </AnchorPane>
       <AnchorPane layoutX="259.0" layoutY="115.0">
          <children>
-            <Button fx:id="BotaoRemover" mnemonicParsing="false" onMouseClicked="#EventoRemover" styleClass="profile-button" stylesheets="@style.css" text="Remover" textAlignment="CENTER" textFill="WHITE">
+            <Button mnemonicParsing="false" onMouseClicked="#EventoRemover" styleClass="profile-button" stylesheets="@style.css" text="Remover" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Consolas" size="15.0" />
                </font>
@@ -74,7 +74,7 @@
       </AnchorPane>
       <AnchorPane layoutX="360.0" layoutY="115.0">
          <children>
-            <Button fx:id="BotaoConsultaValor" mnemonicParsing="false" onMouseClicked="#EventoConsultaValor" styleClass="profile-button" stylesheets="@style.css" text="Consultar por Valor" textAlignment="CENTER" textFill="WHITE">
+            <Button mnemonicParsing="false" onMouseClicked="#EventoConsultaValor" styleClass="profile-button" stylesheets="@style.css" text="Consultar por Valor" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Consolas" size="15.0" />
                </font>
@@ -88,7 +88,7 @@
       </AnchorPane>
       <AnchorPane layoutX="561.0" layoutY="115.0">
          <children>
-            <Button fx:id="BotaoConsultaIndice" mnemonicParsing="false" onMouseClicked="#EventoConsultaIndice" styleClass="profile-button" stylesheets="@style.css" text="Consultar por Posição" textAlignment="CENTER" textFill="WHITE">
+            <Button mnemonicParsing="false" onMouseClicked="#EventoConsultaIndice" styleClass="profile-button" stylesheets="@style.css" text="Consultar por Posição" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Consolas" size="15.0" />
                </font>

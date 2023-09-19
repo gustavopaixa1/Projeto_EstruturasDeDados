@@ -48,21 +48,7 @@ public class ControllerLSE implements Initializable {
     private TextField TFConsultaIndicePosicao;
 
     @FXML
-    private HBox HBoxLinha1;
-
-    @FXML
-    private HBox HBoxLinha2;
-
-    @FXML
-    private HBox HBoxLinha3;
-
-    @FXML
-    private HBox HBoxLinha4;
-
-    @FXML
-    private HBox HBoxLinha5;
-
-    private HBox[] linhas = new HBox[5];
+    private FlowPane FPDados;
 
     @FXML
     void EventoVoltar(MouseEvent event) throws IOException {
@@ -84,8 +70,7 @@ public class ControllerLSE implements Initializable {
         } catch (Exception e) {
             return;
         }
-        if (this.LSE.size() == 40)
-            return;
+
         if (!this.LSE.insert(cont, pos))
             return;
         TFInserirPosicao.setText("");
@@ -93,12 +78,7 @@ public class ControllerLSE implements Initializable {
         TFNumeroDeElementos.setText(String.valueOf(++numeroDeElementos));
 
         // Criar os Blocos
-        linhas[pos / 8].getChildren().add(pos % 8, bloco(cont));
-        for (int i = 0; i < 5; i++) {
-            if (linhas[i].getChildren().size() > 8) {
-                linhas[i + 1].getChildren().add(0, linhas[i].getChildren().get(8));
-            }
-        }
+        FPDados.getChildren().add(pos, bloco(cont));
 
         this.animacaoSequencia(0, 1, 0.1, "#8b0000", "#008B8B", pos - 1);
         this.animacao(pos, 1 + pos / 5, 0.5, "#73ee81", "#008B8B").play();
@@ -124,10 +104,7 @@ public class ControllerLSE implements Initializable {
         FillTransition aux = this.animacao(pos, 1 + pos / 5, 0.5, "#008B8B", "#ffffff");
 
         aux.setOnFinished(evento -> {
-            linhas[pos / 8].getChildren().remove(pos % 8);
-            for (int i = pos / 8; i < 4; i++)
-                if (this.LSE.size() >= (i + 1) * 8)
-                    linhas[i].getChildren().add(7, linhas[i + 1].getChildren().get(0));
+            FPDados.getChildren().remove(pos);
         });
         aux.play();
     }
@@ -195,7 +172,7 @@ public class ControllerLSE implements Initializable {
     }
 
     private FillTransition animacao(int contIndex, int cycles, double time, String fromColor, String toColor) {
-        HBox auxHBox = (HBox) linhas[contIndex / 8].getChildren().get(contIndex % 8);
+        HBox auxHBox = (HBox) FPDados.getChildren().get(contIndex);
         StackPane auxSP = (StackPane) auxHBox.getChildren().get(0);
         Rectangle auxRec = (Rectangle) auxSP.getChildren().get(0);
 
@@ -226,11 +203,5 @@ public class ControllerLSE implements Initializable {
         this.LSE = new SingleLinkedList<>();
         this.numeroDeElementos = 0;
         TFNumeroDeElementos.setText("0");
-
-        linhas[0] = HBoxLinha1;
-        linhas[1] = HBoxLinha2;
-        linhas[2] = HBoxLinha3;
-        linhas[3] = HBoxLinha4;
-        linhas[4] = HBoxLinha5;
     }
 }

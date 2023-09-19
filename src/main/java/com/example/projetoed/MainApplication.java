@@ -14,7 +14,9 @@ public class MainApplication extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("menuPrincipal.fxml"));
         stage.setTitle("Estrutura de Dados");
         stage.setScene(new Scene(root));
-        stage.setResizable(false);
+        stage.setResizable(true);
+        stage.setMinWidth(800);
+        stage.setMinHeight(450);
         stage.show();
     }
 

@@ -144,7 +144,7 @@ public class ControllerLDE implements Initializable {
         }
 
         // Remover o VBox esquerdo do No que era a antiga cabeça
-        if (pos % 8 <= (this.LDE.size() - 2) % 8 && pos % 8 == 0 && (this.LDE.size() - 1) % 8 != 0) {
+        if (pos % 8 <= (this.LDE.size() - 2) % 8 && pos % 8 == 0) {
             HBox hSeta = (HBox) linhas[pos / 8].getChildren().get(pos % 8);
             hSeta.getChildren().remove(0);
         }
@@ -260,7 +260,7 @@ public class ControllerLDE implements Initializable {
                 if (this.LDE.size() >= (i + 1) * 8) {
                     HBox novoVizinho = (HBox) linhas[i].getChildren().get(6);
                     HBox bound = (HBox)  linhas[i + 1].getChildren().get(0);
-                    if (this.LDE.size() > 8) {
+                    if (this.LDE.size() > (i + 1) * 8) {
                         HBox vizinho = (HBox) linhas[i + 1].getChildren().get(1);
 
                         vizinho.getChildren().add(0, bound.getChildren().get(0));

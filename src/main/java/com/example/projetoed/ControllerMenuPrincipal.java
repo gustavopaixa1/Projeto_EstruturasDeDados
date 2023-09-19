@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class HelloController implements Initializable {
+public class ControllerMenuPrincipal implements Initializable {
 
     @FXML
     private Button botaoDeEscolha;

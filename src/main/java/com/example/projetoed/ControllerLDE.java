@@ -260,7 +260,7 @@ public class ControllerLDE implements Initializable {
                 if (this.LDE.size() >= (i + 1) * 8) {
                     HBox novoVizinho = (HBox) linhas[i].getChildren().get(6);
                     HBox bound = (HBox)  linhas[i + 1].getChildren().get(0);
-                    if (this.LDE.size() > 8) {
+                    if (this.LDE.size() > (i + 1) * 8) {
                         HBox vizinho = (HBox) linhas[i + 1].getChildren().get(1);
 
                         vizinho.getChildren().add(0, bound.getChildren().get(0));

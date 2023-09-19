@@ -11,11 +11,6 @@
 
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="300.0" minWidth="750.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetoed.ControllerLSE">
    <children>
-      <Button fx:id="BotaoVoltar" layoutX="43.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#EventoVoltar" styleClass="profile-button" stylesheets="@style.css" text="Voltar" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
-         <font>
-            <Font name="Consolas" size="15.0" />
-         </font>
-      </Button>
       <HBox alignment="CENTER" layoutX="160.0" layoutY="13.0" prefHeight="68.0" prefWidth="770.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
          <children>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="72.0" prefWidth="321.0" style="-fx-background-radius: 10 10 10 10;" styleClass="profile-layout" stylesheets="@style.css">
@@ -29,6 +24,11 @@
             </AnchorPane>
          </children>
       </HBox>
+      <Button fx:id="BotaoVoltar" layoutX="43.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#EventoVoltar" styleClass="profile-button" stylesheets="@style.css" text="Voltar" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
+         <font>
+            <Font name="Consolas" size="15.0" />
+         </font>
+      </Button>
       <AnchorPane layoutX="663.0" layoutY="18.85986328125" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
          <children>
             <Text layoutY="8.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Número de Elementos" textAlignment="CENTER" wrappingWidth="91.0" AnchorPane.rightAnchor="0.0">

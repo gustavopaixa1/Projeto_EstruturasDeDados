@@ -282,6 +282,7 @@ public class ControllerListaSeq implements Initializable {
         }
 
         this.totalDeElementos = 0;
+        TFNumeroDeElementos.setText("0");
     }
 
     @FXML

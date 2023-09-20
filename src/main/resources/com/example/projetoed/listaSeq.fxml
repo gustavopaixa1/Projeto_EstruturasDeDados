@@ -41,7 +41,7 @@
       <AnchorPane layoutX="14.0" layoutY="116.0" prefHeight="56.0" prefWidth="86.0">
          <children>
             <TextField fx:id="TFCriar" alignment="CENTER" layoutY="43.0" prefHeight="26.0" prefWidth="86.0" promptText="Tamanho" styleClass="profile-text-field" stylesheets="@style.css" />
-            <Button layoutY="1.0" mnemonicParsing="false" onMouseClicked="#criarListaSequencial" prefHeight="26.0" prefWidth="86.0" styleClass="profile-button" stylesheets="@style.css" text="Criar" textFill="WHITE" />
+            <Button alignment="CENTER" layoutY="1.0" mnemonicParsing="false" onMouseClicked="#criarListaSequencial" prefHeight="26.0" prefWidth="86.0" styleClass="profile-button" stylesheets="@style.css" text="Criar" textAlignment="CENTER" textFill="WHITE" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="119.0" layoutY="145.0" prefHeight="78.0" prefWidth="174.0">

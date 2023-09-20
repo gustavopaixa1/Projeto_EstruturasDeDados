@@ -150,7 +150,7 @@ public class ControllerLSE implements Initializable {
         sp.setPrefHeight(50);
         sp.setAlignment(Pos.CENTER);
 
-        Rectangle retangulo = new Rectangle(60,50);
+        Rectangle retangulo = new Rectangle(50,50);
         retangulo.getStyleClass().add("profile-boxes");
         sp.getChildren().add(retangulo);
 
@@ -203,5 +203,10 @@ public class ControllerLSE implements Initializable {
         this.LSE = new SingleLinkedList<>();
         this.numeroDeElementos = 0;
         TFNumeroDeElementos.setText("0");
+
+        Rectangle clip = new Rectangle();
+        clip.widthProperty().bind(FPDados.widthProperty());
+        clip.heightProperty().bind(FPDados.heightProperty());
+        FPDados.setClip(clip);
     }
 }

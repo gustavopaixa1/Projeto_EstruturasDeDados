@@ -93,7 +93,7 @@
       </AnchorPane>
       <AnchorPane layoutX="561.0" layoutY="115.0">
          <children>
-            <Button fx:id="BotaoConsultaIndice" mnemonicParsing="false" onMouseClicked="#EventoConsultaIndice" styleClass="profile-button" stylesheets="@style.css" text="Consultar por Índice" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="BotaoConsultaPosicao" mnemonicParsing="false" onMouseClicked="#EventoConsultaPosicao" styleClass="profile-button" stylesheets="@style.css" text="Consultar por Posição" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Consolas" size="15.0" />
                </font>

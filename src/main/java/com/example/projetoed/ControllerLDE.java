@@ -42,7 +42,7 @@ public class ControllerLDE implements Initializable {
     private Button BotaoConsultaValor;
 
     @FXML
-    private Button BotaoConsultaIndice;
+    private Button BotaoConsultaPosicao;
 
     @FXML
     private TextField TFNumeroDeElementos;
@@ -234,7 +234,7 @@ public class ControllerLDE implements Initializable {
 
         aux.setOnFinished(evento -> {
 
-            if (pos % 8 == 0) {
+            if (pos % 8 == 0 && LDE.size() != 0) {
                 HBox No = (HBox) linhas[pos / 8].getChildren().get((pos + 1) % 8);
                 VBox setas = new VBox();
                 setas.setAlignment(Pos.CENTER_LEFT);
@@ -309,7 +309,7 @@ public class ControllerLDE implements Initializable {
         this.animacao(contIndex, 2, 1).play();
     }
     @FXML
-    void EventoConsultaIndice(MouseEvent event) throws IOException {
+    void EventoConsultaPosicao(MouseEvent event) throws IOException {
         int contIndex;
         Alert alerta = new Alert(AlertType.ERROR);
         alerta.setTitle("ERRO!");

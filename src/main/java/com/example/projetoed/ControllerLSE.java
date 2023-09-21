@@ -141,6 +141,23 @@ public class ControllerLSE implements Initializable {
         this.animacao(contIndex, 2, 1, "#8b0000", "#008B8B").play();
     }
 
+    @FXML
+    void EventoDebugEncher(MouseEvent event) throws IOException {
+        for (int i = 1; i <= 40; i++) {
+            this.TFInserirPosicao.setText(Integer.toString(i));
+            this.TFInserirConteudo.setText(Integer.toString(i));
+            this.EventoInserir(event);
+        }
+    }
+
+    @FXML
+    void EventoDebugEsvaziar(MouseEvent event) throws IOException {
+        for (int i = this.numeroDeElementos; i >= 1; i--) {
+            this.TFRemoverPosicao.setText("1");
+            this.EventoRemover(event);
+        }
+    }
+
     private HBox bloco(String conteudo) {
         HBox novoNo = new HBox();
         novoNo.setAlignment(Pos.CENTER);

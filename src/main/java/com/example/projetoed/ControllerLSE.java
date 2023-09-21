@@ -62,17 +62,31 @@ public class ControllerLSE implements Initializable {
     void EventoInserir(MouseEvent event) throws IOException {
         int pos;
         String cont;
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("ERRO");
         try {
-            pos = Integer.parseInt(TFInserirPosicao.getText()) - 1;
-            cont = TFInserirConteudo.getText();
+            pos = Integer.parseInt(TFInserirPosicao.getText().trim()) - 1;
+            cont = TFInserirConteudo.getText().trim();
+            if (pos < 0 || pos > this.numeroDeElementos)
+                throw new NumberFormatException();
             if (cont.isEmpty())
-                return;
+                throw new Exception();
+        } catch (NumberFormatException e) {
+            alerta.setHeaderText("Valor inválido.");
+            if (this.numeroDeElementos == 0)
+                alerta.setContentText("Por favor, preencha o campo da posição com o valor 1 para adicionar o primeiro elemento da lista.");
+            else
+                alerta.setContentText(String.format("Por favor, preencha o campo da posição com um número inteiro entre 1 e %d.", this.numeroDeElementos + 1));
+            alerta.showAndWait();
+            return;
         } catch (Exception e) {
+            alerta.setHeaderText("Conteúdo inválido.");
+            alerta.setContentText("Por favor, preencha o campo de conteúdo com algo para ser armazenado (apenas espaços não são caracteres válidos).");
+            alerta.showAndWait();
             return;
         }
 
-        if (!this.LSE.insert(cont, pos))
-            return;
+        this.LSE.insert(cont, pos);
         TFInserirPosicao.setText("");
         TFInserirConteudo.setText("");
         TFNumeroDeElementos.setText(String.valueOf(++numeroDeElementos));
@@ -87,15 +101,28 @@ public class ControllerLSE implements Initializable {
     @FXML
     void EventoRemover(MouseEvent event) throws IOException {
         int pos;
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("ERRO");
         try {
-            pos = Integer.parseInt(TFRemoverPosicao.getText()) - 1;
+            pos = Integer.parseInt(TFRemoverPosicao.getText().trim()) - 1;
+            if (pos < 0 || pos >= this.numeroDeElementos)
+                throw new Exception();
         } catch (Exception e) {
+            if (this.numeroDeElementos == 0) {
+                alerta.setHeaderText("Lista vazia.");
+                alerta.setContentText("A lista está vazia, não existem itens para serem removidos.");
+            } else if (this.numeroDeElementos == 1) {
+                alerta.setHeaderText("Valor inválido.");
+                alerta.setContentText("Por favor, preencha o campo da posição com o valor 1 para remover o único elemento da lista.");
+            } else {
+                alerta.setHeaderText("Valor inválido.");
+                alerta.setContentText(String.format("Por favor, preencha o campo da posição com um número inteiro entre 1 e %d.", this.numeroDeElementos));
+            }
+            alerta.showAndWait();
             return;
         }
 
-        String cont = this.LSE.remove(pos);
-        if (cont == null)
-            return;
+        this.LSE.remove(pos);
         TFRemoverPosicao.setText("");
         TFNumeroDeElementos.setText(String.valueOf(--numeroDeElementos));
 
@@ -111,13 +138,29 @@ public class ControllerLSE implements Initializable {
 
     @FXML
     void EventoConsultaValor(MouseEvent event) throws IOException {
-        String cont = TFConsultaValorConteudo.getText();
-        if (cont.isEmpty())
+        String cont;
+        int contIndex;
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("ERRO");
+        try {
+            cont = TFConsultaValorConteudo.getText().trim();
+            if (cont.isEmpty())
+                throw new Exception();
+            contIndex = this.LSE.indexOf(cont);
+            if (contIndex == -1)
+                throw new NumberFormatException();
+        } catch (NumberFormatException e) {
+            alerta.setHeaderText("Conteúdo não encontrado.");
+            alerta.setContentText("O conteúdo buscado não se encontra na lista atualmente.");
+            alerta.showAndWait();
             return;
+        } catch (Exception e) {
+            alerta.setHeaderText("Conteúdo inválido.");
+            alerta.setContentText("Por favor, preencha o campo de conteúdo com algo para ser buscado (apenas espaços não são caracteres válidos).");
+            alerta.showAndWait();
+            return;
+        }
 
-        int contIndex = this.LSE.indexOf(cont);
-        if (contIndex == -1)
-            return;
         TFConsultaValorConteudo.setText("");
 
         // Consultar os Blocos por Valor
@@ -126,15 +169,27 @@ public class ControllerLSE implements Initializable {
     @FXML
     void EventoConsultaIndice(MouseEvent event) throws IOException {
         int contIndex;
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("ERRO");
         try {
-            contIndex = Integer.parseInt(TFConsultaIndicePosicao.getText()) - 1;
+            contIndex = Integer.parseInt(TFConsultaIndicePosicao.getText().trim()) - 1;
+            if (contIndex < 0 || contIndex >= this.numeroDeElementos)
+                throw new Exception();
         } catch (Exception e) {
+            if (this.numeroDeElementos == 0) {
+                alerta.setHeaderText("Lista vazia.");
+                alerta.setContentText("A lista está vazia, não existem itens para serem buscados.");
+            } else if (this.numeroDeElementos == 1) {
+                alerta.setHeaderText("Valor inválido.");
+                alerta.setContentText("Por favor, preencha o campo da posição com o valor 1 para buscar o único elemento da lista.");
+            } else {
+                alerta.setHeaderText("Valor inválido.");
+                alerta.setContentText(String.format("Por favor, preencha o campo da posição com um número inteiro entre 1 e %d.", this.numeroDeElementos));
+            }
+            alerta.showAndWait();
             return;
         }
 
-        String cont = this.LSE.get(contIndex);
-        if (cont == null)
-            return;
         TFConsultaIndicePosicao.setText("");
 
         // Consultar os Blocos por Indice

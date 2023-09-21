@@ -1,6 +1,5 @@
 package com.example.projetoed;
 
-import com.sun.javafx.stage.EmbeddedWindow;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,7 +23,6 @@ public class ControllerListaSeq {
     @FXML
     private ChoiceBox<String> opcoes;
 
-    private EmbeddedWindow stage;
 
     @FXML
     void getOpcoes(MouseEvent event) throws IOException {

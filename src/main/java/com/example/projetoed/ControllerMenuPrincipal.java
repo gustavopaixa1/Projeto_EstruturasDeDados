@@ -1,6 +1,5 @@
 package com.example.projetoed;
 
-import com.sun.javafx.stage.EmbeddedWindow;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,10 +23,8 @@ public class ControllerMenuPrincipal implements Initializable {
     @FXML
     private ChoiceBox<String> opcoes;
 
-
     @FXML
     private Text opcaoEscolhida;
-    private EmbeddedWindow stage;
 
     @FXML
     void getOpcoes(MouseEvent event) throws IOException {

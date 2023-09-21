@@ -25,6 +25,14 @@
     -fx-stroke-width: 3;
 }
 
+.profile-boxes-black{
+    -fx-arc-height: 10;
+    -fx-arc-width: 10;
+    -fx-stroke: #00194D;
+    -fx-fill: #008B8B;
+    -fx-stroke-width: 3;
+}
+
 
 .choice-box {
   -fx-background-color: white;

@@ -31,10 +31,13 @@ public class ControllerMenuPrincipal implements Initializable {
         String opcao = opcoes.getSelectionModel().getSelectedItem();
 
         if (opcao.equals("Lista Sequencial")){
+            Scene scene;
             Stage stage = (Stage)botaoDeEscolha.getScene().getWindow();
             Parent root = FXMLLoader.load(getClass().getResource("listaSeq.fxml"));
             stage.setTitle("Lista Sequencial");
-            stage.setScene(new Scene(root));
+            scene = new Scene(root);
+            scene.getStylesheets().add("style.css");
+            stage.setScene(scene);
         }
         else if(opcao.equals("Lista Simplesmente Encadeada")){
             Stage stage = (Stage)botaoDeEscolha.getScene().getWindow();

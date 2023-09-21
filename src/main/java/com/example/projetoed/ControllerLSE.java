@@ -1,46 +1,32 @@
 package com.example.projetoed;
 
-import javafx.animation.FillTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.animation.FillTransition;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import java.util.ResourceBundle;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ResourceBundle;
 import com.example.projetoed.implementations.SingleLinkedList;
-import javafx.util.Duration;
 
 public class ControllerLSE implements Initializable {
     private SingleLinkedList<String> LSE;
-    private int numeroDeElementos;
 
     @FXML
     private Button BotaoVoltar;
-
-    @FXML
-    private Button BotaoInserir;
-
-    @FXML
-    private Button BotaoRemover;
-
-    @FXML
-    private Button BotaoConsultaValor;
-
-    @FXML
-    private Button BotaoConsultaIndice;
 
     @FXML
     private TextField TFNumeroDeElementos;
@@ -61,21 +47,7 @@ public class ControllerLSE implements Initializable {
     private TextField TFConsultaIndicePosicao;
 
     @FXML
-    private HBox HBoxLinha1;
-
-    @FXML
-    private HBox HBoxLinha2;
-
-    @FXML
-    private HBox HBoxLinha3;
-
-    @FXML
-    private HBox HBoxLinha4;
-
-    @FXML
-    private HBox HBoxLinha5;
-
-    private HBox[] linhas = new HBox[5];
+    private FlowPane FPDados;
 
     @FXML
     void EventoVoltar(MouseEvent event) throws IOException {
@@ -89,92 +61,138 @@ public class ControllerLSE implements Initializable {
     void EventoInserir(MouseEvent event) throws IOException {
         int pos;
         String cont;
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("ERRO");
         try {
-            pos = Integer.parseInt(TFInserirPosicao.getText()) - 1;
-            cont = TFInserirConteudo.getText();
+            pos = Integer.parseInt(TFInserirPosicao.getText().trim()) - 1;
+            cont = TFInserirConteudo.getText().trim();
+            if (pos < 0 || pos > this.LSE.size())
+                throw new NumberFormatException();
             if (cont.isEmpty())
-                return;
+                throw new Exception();
+        } catch (NumberFormatException e) {
+            alerta.setHeaderText("Valor inválido.");
+            if (this.LSE.isEmpty())
+                alerta.setContentText("Por favor, preencha o campo da posição com o valor 1 para adicionar o primeiro elemento da lista.");
+            else
+                alerta.setContentText(String.format("Por favor, preencha o campo da posição com um número inteiro entre 1 e %d.", this.LSE.size() + 1));
+            alerta.showAndWait();
+            return;
         } catch (Exception e) {
+            alerta.setHeaderText("Conteúdo inválido.");
+            alerta.setContentText("Por favor, preencha o campo de conteúdo com algo para ser armazenado (apenas espaços não são caracteres válidos).");
+            alerta.showAndWait();
             return;
         }
-        if (this.LSE.size() == 40)
-            return;
-        if (!this.LSE.insert(cont, pos))
-            return;
+
+        this.LSE.insert(cont, pos);
         TFInserirPosicao.setText("");
         TFInserirConteudo.setText("");
-        TFNumeroDeElementos.setText(String.valueOf(++numeroDeElementos));
+        TFNumeroDeElementos.setText(String.valueOf(this.LSE.size()));
 
         // Criar os Blocos
-        linhas[pos / 8].getChildren().add(pos % 8, bloco(cont));
-        for (int i = 0; i < 5; i++) {
-            if (linhas[i].getChildren().size() > 8) {
-                linhas[i + 1].getChildren().add(0, linhas[i].getChildren().get(8));
-            }
-        }
+        FPDados.getChildren().add(pos, bloco(cont));
 
-        this.animacaoSequencia(0, 1, 0.1, pos - 1);
-        this.animacao(pos, 1 + pos / 5, 0.5).play();
+        this.animacaoSequencia(0, 1, 0.1, "#8b0000", "#008B8B", pos - 1);
+        this.animacao(pos, 1 + pos / 5, 0.5, "#73ee81", "#008B8B").play();
     }
 
     @FXML
     void EventoRemover(MouseEvent event) throws IOException {
         int pos;
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("ERRO");
         try {
-            pos = Integer.parseInt(TFRemoverPosicao.getText()) - 1;
+            pos = Integer.parseInt(TFRemoverPosicao.getText().trim()) - 1;
+            if (pos < 0 || pos >= this.LSE.size())
+                throw new Exception();
         } catch (Exception e) {
+            if (this.LSE.isEmpty()) {
+                alerta.setHeaderText("Lista vazia.");
+                alerta.setContentText("A lista está vazia, não existem itens para serem removidos.");
+            } else if (this.LSE.size() == 1) {
+                alerta.setHeaderText("Valor inválido.");
+                alerta.setContentText("Por favor, preencha o campo da posição com o valor 1 para remover o único elemento da lista.");
+            } else {
+                alerta.setHeaderText("Valor inválido.");
+                alerta.setContentText(String.format("Por favor, preencha o campo da posição com um número inteiro entre 1 e %d.", this.LSE.size()));
+            }
+            alerta.showAndWait();
             return;
         }
 
-        String cont = this.LSE.remove(pos);
-        if (cont == null)
-            return;
+        this.LSE.remove(pos);
         TFRemoverPosicao.setText("");
-        TFNumeroDeElementos.setText(String.valueOf(--numeroDeElementos));
+        TFNumeroDeElementos.setText(String.valueOf(this.LSE.size()));
 
         // Remover os Blocos
-        this.animacaoSequencia(0, 1, 0.1, pos - 1);
-        FillTransition aux = this.animacao(pos, 1 + pos / 5, 0.5);
+        this.animacaoSequencia(0, 1, 0.1, "#8b0000", "#008B8B", pos - 1);
+        FillTransition aux = this.animacao(pos, 1 + pos / 5, 0.5, "#008B8B", "#ffffff");
 
         aux.setOnFinished(evento -> {
-            linhas[pos / 8].getChildren().remove(pos % 8);
-            for (int i = pos / 8; i < 4; i++)
-                if (this.LSE.size() >= (i + 1) * 8)
-                    linhas[i].getChildren().add(7, linhas[i + 1].getChildren().get(0));
+            FPDados.getChildren().remove(pos);
         });
         aux.play();
     }
 
     @FXML
     void EventoConsultaValor(MouseEvent event) throws IOException {
-        String cont = TFConsultaValorConteudo.getText();
-        if (cont.isEmpty())
+        String cont;
+        int contIndex;
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("ERRO");
+        try {
+            cont = TFConsultaValorConteudo.getText().trim();
+            if (cont.isEmpty())
+                throw new Exception();
+            contIndex = this.LSE.indexOf(cont);
+            if (contIndex == -1)
+                throw new NumberFormatException();
+        } catch (NumberFormatException e) {
+            alerta.setHeaderText("Conteúdo não encontrado.");
+            alerta.setContentText("O conteúdo buscado não se encontra na lista atualmente.");
+            alerta.showAndWait();
             return;
+        } catch (Exception e) {
+            alerta.setHeaderText("Conteúdo inválido.");
+            alerta.setContentText("Por favor, preencha o campo de conteúdo com algo para ser buscado (apenas espaços não são caracteres válidos).");
+            alerta.showAndWait();
+            return;
+        }
 
-        int contIndex = this.LSE.indexOf(cont);
-        if (contIndex == -1)
-            return;
         TFConsultaValorConteudo.setText("");
 
         // Consultar os Blocos por Valor
-        this.animacao(contIndex, 2, 1).play();
+        this.animacao(contIndex, 2, 1, "#8b0000", "#008B8B").play();
     }
     @FXML
     void EventoConsultaIndice(MouseEvent event) throws IOException {
         int contIndex;
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("ERRO");
         try {
-            contIndex = Integer.parseInt(TFConsultaIndicePosicao.getText()) - 1;
+            contIndex = Integer.parseInt(TFConsultaIndicePosicao.getText().trim()) - 1;
+            if (contIndex < 0 || contIndex >= this.LSE.size())
+                throw new Exception();
         } catch (Exception e) {
+            if (this.LSE.isEmpty()) {
+                alerta.setHeaderText("Lista vazia.");
+                alerta.setContentText("A lista está vazia, não existem itens para serem buscados.");
+            } else if (this.LSE.size() == 1) {
+                alerta.setHeaderText("Valor inválido.");
+                alerta.setContentText("Por favor, preencha o campo da posição com o valor 1 para buscar o único elemento da lista.");
+            } else {
+                alerta.setHeaderText("Valor inválido.");
+                alerta.setContentText(String.format("Por favor, preencha o campo da posição com um número inteiro entre 1 e %d.", this.LSE.size()));
+            }
+            alerta.showAndWait();
             return;
         }
 
-        String cont = this.LSE.get(contIndex);
-        if (cont == null)
-            return;
         TFConsultaIndicePosicao.setText("");
 
         // Consultar os Blocos por Indice
-        this.animacao(contIndex, 2, 1).play();
+        this.animacao(contIndex, 2, 1, "#8b0000", "#008B8B").play();
     }
 
     private HBox bloco(String conteudo) {
@@ -186,7 +204,7 @@ public class ControllerLSE implements Initializable {
         sp.setPrefHeight(50);
         sp.setAlignment(Pos.CENTER);
 
-        Rectangle retangulo = new Rectangle(60,50);
+        Rectangle retangulo = new Rectangle(50,50);
         retangulo.getStyleClass().add("profile-boxes");
         sp.getChildren().add(retangulo);
 
@@ -202,28 +220,28 @@ public class ControllerLSE implements Initializable {
         return novoNo;
     }
 
-    private FillTransition animacao(int contIndex, int cycles, double time) {
-        HBox auxHBox = (HBox) linhas[contIndex / 8].getChildren().get(contIndex % 8);
+    private FillTransition animacao(int contIndex, int cycles, double time, String fromColor, String toColor) {
+        HBox auxHBox = (HBox) FPDados.getChildren().get(contIndex);
         StackPane auxSP = (StackPane) auxHBox.getChildren().get(0);
         Rectangle auxRec = (Rectangle) auxSP.getChildren().get(0);
 
         FillTransition transition = new FillTransition();
         transition.setShape(auxRec);
-        transition.setFromValue(Color.web("#8b0000"));
-        transition.setToValue(Color.web("#008B8B"));
+        transition.setFromValue(Color.web(fromColor));
+        transition.setToValue(Color.web(toColor));
         transition.setCycleCount(cycles);
         transition.setDuration(Duration.seconds(time));
         return transition;
     }
 
-    private void animacaoSequencia(int contIndex, int cycles, double time, int max) {
+    private void animacaoSequencia(int contIndex, int cycles, double time, String fromColor, String toColor, int max) {
         if (contIndex > max)
             return;
-        FillTransition aux = animacao(contIndex, cycles, time);
+        FillTransition aux = animacao(contIndex, cycles, time, fromColor, toColor);
         aux.setAutoReverse(true);
 
         aux.setOnFinished(event -> {
-            animacaoSequencia(contIndex + 1, cycles, time, max);
+            animacaoSequencia(contIndex + 1, cycles, time, fromColor, toColor, max);
         });
 
         aux.play();
@@ -232,13 +250,11 @@ public class ControllerLSE implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.LSE = new SingleLinkedList<>();
-        this.numeroDeElementos = 0;
         TFNumeroDeElementos.setText("0");
 
-        linhas[0] = HBoxLinha1;
-        linhas[1] = HBoxLinha2;
-        linhas[2] = HBoxLinha3;
-        linhas[3] = HBoxLinha4;
-        linhas[4] = HBoxLinha5;
+        Rectangle clip = new Rectangle();
+        clip.widthProperty().bind(FPDados.widthProperty());
+        clip.heightProperty().bind(FPDados.heightProperty());
+        FPDados.setClip(clip);
     }
 }

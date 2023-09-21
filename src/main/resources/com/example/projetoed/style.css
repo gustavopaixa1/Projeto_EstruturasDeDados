@@ -12,7 +12,7 @@
         -fx-background-radius: 10 10 10 10;
 }
 
-.profile-vbox{
+.profile-flowpane{
     -fx-border-color: #008B8B;
     -fx-border-width: 7;
     -fx-border-radius: 10 10 10 10;
@@ -40,6 +40,3 @@
   -fx-border-color: #4682B4;
   -fx-border-radius: 10 10 10 10;
 }
-
-// Selected item text color on the control itself
-.choice-box > .label { -fx-text-fill: #8B0000; }

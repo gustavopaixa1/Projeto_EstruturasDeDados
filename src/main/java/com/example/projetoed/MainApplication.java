@@ -8,13 +8,15 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class MainApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("menuPrincipal.fxml"));
         stage.setTitle("Estrutura de Dados");
         stage.setScene(new Scene(root));
-        stage.setResizable(false);
+        stage.setResizable(true);
+        stage.setMinWidth(800);
+        stage.setMinHeight(450);
         stage.show();
     }
 

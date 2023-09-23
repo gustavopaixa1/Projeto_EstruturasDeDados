@@ -15,7 +15,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" styleClass="style.css" stylesheets="@style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetoed.ControllerListaSeq">
    <children>
-      <VBox layoutX="23.0" layoutY="260.0" prefHeight="329.0" prefWidth="754.0" styleClass="profile-vbox" stylesheets="@style.css">
+      <VBox layoutX="33.0" layoutY="241.0" prefHeight="329.0" prefWidth="754.0" styleClass="profile-flowpane" stylesheets="@style.css">
          <children>
             <HBox fx:id="HBoxLinha1" fillHeight="false" prefHeight="49.0" prefWidth="771.0" spacing="5.0">
                <VBox.margin>
@@ -101,7 +101,7 @@
          <font>
             <Font name="Consolas Bold" size="39.0" />
          </font></Button>
-      <Separator layoutX="33.0" layoutY="239.0" prefHeight="2.0" prefWidth="754.0" />
+      <Separator layoutX="33.0" layoutY="219.0" prefHeight="2.0" prefWidth="754.0" />
       <AnchorPane fx:id="paneCriarLista" layoutX="33.0" layoutY="128.0" prefHeight="92.0" prefWidth="156.0" stylesheets="@style.css">
          <children>
             <TextField fx:id="TFCriar" alignment="CENTER" layoutX="26.0" layoutY="52.0" prefHeight="26.0" prefWidth="105.0" promptText="Insira o tamanho" styleClass="profile-text-field" stylesheets="@style.css">

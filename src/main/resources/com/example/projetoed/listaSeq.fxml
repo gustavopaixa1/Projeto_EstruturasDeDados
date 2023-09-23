@@ -54,12 +54,12 @@
                </font></Button>
             <ImageView disable="true" fitHeight="19.0" fitWidth="20.0" layoutX="-9.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../userlmn_3f9a04707b31848e1d8209cd9f9f7bee.png" />
+                  <Image url="@../../../pesquisa.png" />
                </image>
             </ImageView>
             <ImageView disable="true" fitHeight="20.0" fitWidth="20.0" layoutX="105.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../userlmn_b0f7b34c38d625c34ed6bcb181b57c7b.png" />
+                  <Image url="@../../../lixeira.png" />
                </image>
             </ImageView>
          </children>
@@ -80,7 +80,7 @@
                <font>
                   <Font name="Consolas" size="12.0" />
                </font></Text>
-            <TextField fx:id="TFNumeroDeElementos" alignment="CENTER" layoutX="32.0" layoutY="24.0" prefHeight="25.0" prefWidth="136.0" styleClass="profile-text-field" stylesheets="@style.css" text="0" />
+            <TextField fx:id="TFNumeroDeElementos" alignment="CENTER" editable="false" layoutX="32.0" layoutY="24.0" prefHeight="25.0" prefWidth="136.0" styleClass="profile-text-field" stylesheets="@style.css" text="0" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="paneBuscarValor" layoutX="629.0" layoutY="128.0" prefHeight="92.0" prefWidth="174.0" stylesheets="@style.css">
@@ -92,7 +92,7 @@
                </font></Button>
             <ImageView disable="true" fitHeight="19.0" fitWidth="19.0" layoutX="39.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../userlmn_3f9a04707b31848e1d8209cd9f9f7bee.png" />
+                  <Image url="@../../../pesquisa.png" />
                </image>
             </ImageView>
          </children>
@@ -108,7 +108,7 @@
             </Button>
             <ImageView disable="true" fitHeight="25.0" fitWidth="20.0" layoutX="29.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../userlmn_e064c6a7c61f057523f39b58ca8e0aec.png" />
+                  <Image url="@../../../adicionar.png" />
                </image>
             </ImageView>
          </children>
@@ -132,7 +132,7 @@
             </Button>
             <ImageView disable="true" fitHeight="26.0" fitWidth="20.0" layoutX="24.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../userlmn_dfdfd9b99d661f2af53542a2d98c40ca.png" />
+                  <Image url="@../../../criar.png" />
                </image>
             </ImageView>
          </children>
@@ -144,12 +144,12 @@
       </Button>
       <ImageView disable="true" fitHeight="35.0" fitWidth="64.0" layoutX="29.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../userlmn_33a9b3cb10248b98fa68ffcc3c1ce0a7.png" />
+            <Image url="@../../../retorno.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="20.0" fitWidth="19.0" layoutX="675.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../../../Users/luizg/Downloads/userlmn_c95362519f7e85e2cf65d9ddccde28f8.png" />
+            <Image url="@../../../apagar.png" />
          </image>
       </ImageView>
    </children>

@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
@@ -82,6 +83,41 @@ public class ControllerListaSeq implements Initializable {
 
     @FXML
     private AnchorPane paneCriarLista;
+
+    private void ERROForaDeEscopo(Alert alerta, String acao, int valor) {
+        alerta.setHeaderText("FORA DE ESCOPO");
+        alerta.setContentText(String.format("não é possível %s o elemento na posição (%d)!", acao, valor));
+
+        alerta.showAndWait();
+    }
+
+    private void ERROParametroVazio(Alert alerta, String campo) {
+        alerta.setHeaderText("VAZIO!");
+        alerta.setContentText(String.format("Preencha o campo '%s' com um valor numérico!", campo));
+
+        alerta.showAndWait();
+    }
+
+    private void ERRONaoNumerico(Alert alerta, String campo) {
+        alerta.setHeaderText("NÃO NUMÉRICO");
+        alerta.setContentText(String.format("Preencha o campo '%s' com um valor numérico!", campo));
+
+        alerta.showAndWait();
+    }
+
+    private void ERROFalhou(Alert alerta, String nomeDoComando) {
+        alerta.setHeaderText("FALHOU");
+        alerta.setContentText(String.format("Não foi possível efetuar o comando '%s'", nomeDoComando));
+
+        alerta.showAndWait();
+    }
+
+    private void ERROSemLista(Alert alerta) {
+        alerta.setHeaderText("SEM LISTA");
+        alerta.setContentText("Você ainda não criou uma nova lista!");
+
+        alerta.showAndWait();
+    }
 
     private FillTransition animacao(int contIndex, int cycles, double time) {
         HBox auxHBox = (HBox) linhas[contIndex / 11].getChildren().get(contIndex % 11);
@@ -194,18 +230,34 @@ public class ControllerListaSeq implements Initializable {
     void adicionar(MouseEvent event) throws IOException{
         int pos;
         String cont;
+
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("ERRO");
+
+        if (this.LS == null) {
+            ERROSemLista(alerta);
+            return;
+        }
+
         try {
             pos = Integer.parseInt(TFAdicionarPosicao.getText()) - 1;
             cont = TFAdicionarValor.getText();
-            if (cont.isEmpty())
+            if (cont.isEmpty()) {
+                ERROParametroVazio(alerta, "Conteúdo");
                 return;
-        } catch (Exception e) {
+            }
+        } catch (NumberFormatException e) {
+                ERRONaoNumerico(alerta, "Posição");
+                return;
+            }
+        if (pos > this.LS.size() || pos >= 55) {
+            ERROForaDeEscopo(alerta, "adicionar", pos+1);
             return;
         }
-        if (pos > this.LS.size() || pos >= 55)
+        if (!this.LS.insert(cont, pos)) {
+            ERROFalhou(alerta, "Adicionar");
             return;
-        if (!this.LS.insert(cont, pos))
-            return;
+        }
         TFAdicionarPosicao.setText("");
         TFAdicionarValor.setText("");
         TFNumeroDeElementos.setText(String.valueOf(this.LS.size()));
@@ -217,13 +269,23 @@ public class ControllerListaSeq implements Initializable {
     void buscarPorPosicao(MouseEvent event) {
         int pos;
 
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("ERRO");
+
+        if (this.LS == null) {
+            ERROSemLista(alerta);
+            return;
+        }
+
         try {
             pos = Integer.parseInt(TFPosicao.getText()) - 1;
         } catch (Exception e) {
+            ERRONaoNumerico(alerta, "Posição");
             return;
         }
 
         if (pos >= this.LS.size() || pos < 0) {
+            ERROForaDeEscopo(alerta, "buscar", pos+1);
             return;
         }
 
@@ -237,16 +299,29 @@ public class ControllerListaSeq implements Initializable {
         String val;
         int pos;
 
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("ERRO");
+
+        if (this.LS == null) {
+            ERROSemLista(alerta);
+            return;
+        }
+
         try {
             int teste = Integer.parseInt(TFValor.getText());
             val = String.valueOf(teste);
         } catch (Exception e) {
+            ERRONaoNumerico(alerta, "Valor");
             return;
         }
 
         pos = this.LS.indexOf(val);
 
         if (pos == -1) {
+            alerta.setHeaderText("NÃO ENCONTRADO");
+            alerta.setContentText("O valor não existe na lista!");
+
+            alerta.showAndWait();
             return;
         }
 
@@ -258,7 +333,14 @@ public class ControllerListaSeq implements Initializable {
     @FXML
     void criarListaSequencial(MouseEvent event) {
 
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("ERRO");
+
         if (this.LS != null) {
+            alerta.setHeaderText("JÁ EXISTE");
+            alerta.setContentText("A lista já existe!");
+
+            alerta.showAndWait();
             return;
         }
 
@@ -266,10 +348,25 @@ public class ControllerListaSeq implements Initializable {
         try {
             amount = Integer.parseInt(TFCriar.getText());
         } catch (Exception e) {
+            ERRONaoNumerico(alerta, "Tamanho");
             return;
         }
 
-        if (amount > 55) return;
+        if (amount > 55) {
+            alerta.setHeaderText("MUITO GRANDE");
+            alerta.setContentText("O tamanho desejado não é suportado. Por favor insira um valor menor que 56!");
+
+            alerta.showAndWait();
+            return;
+        }
+
+        if (amount < 1) {
+            alerta.setHeaderText("MUITO PEQUENO");
+            alerta.setContentText("Por favor, insira um tamanho maior que 0!");
+
+            alerta.showAndWait();
+            return;
+        }
 
         this.LS = new SeqList<>(amount);
         this.totalDeElementos = amount;
@@ -288,6 +385,15 @@ public class ControllerListaSeq implements Initializable {
 
     @FXML
     void apagarLista(MouseEvent event) {
+
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("ERROR");
+
+        if (this.LS == null) {
+            ERROSemLista(alerta);
+            return;
+        }
+
         this.LS = null;
 
         for (int i = 0; i < this.totalDeElementos; i++) {
@@ -301,46 +407,34 @@ public class ControllerListaSeq implements Initializable {
     @FXML
     void removerPorPosicao(MouseEvent event) {
         int pos;
-        try {
-            pos = Integer.parseInt(TFPosicao.getText()) - 1;
-        } catch (Exception e) {
+
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("ERRO");
+
+        if (this.LS == null) {
+            ERROSemLista(alerta);
             return;
         }
 
-        if (pos >= this.LS.size() || pos < 0)
+        try {
+            pos = Integer.parseInt(TFPosicao.getText()) - 1;
+        } catch (Exception e) {
+            ERRONaoNumerico(alerta, "Posição");
             return;
-        if (this.LS.remove(pos) == null)
+        }
+
+        if (pos >= this.LS.size() || pos < 0) {
+            ERROForaDeEscopo(alerta, "remover", pos+1);
             return;
+        }
+        if (this.LS.remove(pos) == null) {
+            ERROFalhou(alerta, "Remover");
+            return;
+        }
         TFPosicao.setText("");
         TFNumeroDeElementos.setText(String.valueOf(this.LS.size()));
 
         alteracaoEmSequenciaIda(pos, this.LS.size());
-    }
-
-    @FXML
-    void removerPorValor(MouseEvent event) {
-        String val;
-        int pos;
-
-        try {
-            int teste = Integer.parseInt(TFValor.getText());
-            val = String.valueOf(teste);
-        } catch (Exception e) {
-            return;
-        }
-
-        pos = this.LS.indexOf(val);
-        this.LS.remove(pos);
-
-        if (pos == -1) {
-            return;
-        }
-
-        this.TFValor.setText("");
-
-        alteracaoEmSequenciaIda(pos, this.LS.size());
-
-        TFNumeroDeElementos.setText(String.valueOf(this.LS.size()));
     }
 
     @FXML

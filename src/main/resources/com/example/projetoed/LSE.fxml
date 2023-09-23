@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -13,15 +14,15 @@
    <children>
       <HBox alignment="CENTER" layoutX="160.0" layoutY="13.0" prefHeight="68.0" prefWidth="770.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
          <children>
-            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="72.0" prefWidth="321.0" style="-fx-background-radius: 10 10 10 10;" styleClass="profile-layout" stylesheets="@style.css">
+            <VBox alignment="CENTER" prefHeight="72.0" prefWidth="321.0" style="-fx-background-radius: 10 10 10 10;" styleClass="profile-layout" stylesheets="@style.css">
                <children>
-                  <Text fill="WHITE" layoutX="61.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lista Simplesmente Encadeada" textAlignment="CENTER" wrappingWidth="200.0">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Lista Simplesmente Encadeada" textAlignment="CENTER" wrappingWidth="200.0">
                      <font>
                         <Font name="Consolas" size="20.0" />
                      </font>
                   </Text>
                </children>
-            </AnchorPane>
+            </VBox>
          </children>
       </HBox>
       <Button fx:id="BotaoVoltar" layoutX="43.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#EventoVoltar" styleClass="profile-button" stylesheets="@style.css" text="Voltar" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
@@ -29,25 +30,25 @@
             <Font name="Consolas" size="15.0" />
          </font>
       </Button>
-      <AnchorPane layoutX="663.0" layoutY="18.85986328125" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+      <VBox alignment="CENTER" layoutX="603.0" layoutY="42.0" prefHeight="82.0" prefWidth="91.0" spacing="10.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
          <children>
-            <Text layoutY="8.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Número de Elementos" textAlignment="CENTER" wrappingWidth="91.0" AnchorPane.rightAnchor="0.0">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Número de Elementos" textAlignment="CENTER" wrappingWidth="91.0">
                <font>
                   <Font name="Consolas" size="15.0" />
                </font>
             </Text>
-            <TextField fx:id="TFNumeroDeElementos" alignment="CENTER" editable="false" layoutY="41.14013671875" prefHeight="40.0" prefWidth="91.0" styleClass="profile-text-field" stylesheets="@style.css" text="0">
+            <TextField fx:id="TFNumeroDeElementos" alignment="CENTER" editable="false" prefHeight="0.0" prefWidth="91.0" styleClass="profile-text-field" stylesheets="@style.css" text="0">
                <font>
                   <Font size="15.0" />
                </font>
             </TextField>
          </children>
-      </AnchorPane>
+      </VBox>
       <HBox alignment="CENTER" layoutY="115.0" prefHeight="56.0" prefWidth="800.0" spacing="20.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="110.0">
          <children>
             <AnchorPane maxHeight="75.0" maxWidth="209.0" minHeight="75.0" minWidth="209.0" prefHeight="75.0" prefWidth="209.0">
                <children>
-                  <Button layoutX="70.0" mnemonicParsing="false" onMouseClicked="#EventoInserir" styleClass="profile-button" stylesheets="@style.css" text="Inserir" textAlignment="CENTER" textFill="WHITE">
+                  <Button layoutX="72.0" mnemonicParsing="false" onMouseClicked="#EventoInserir" styleClass="profile-button" stylesheets="@style.css" text="Inserir" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Consolas" size="15.0" />
                      </font>

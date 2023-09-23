@@ -8,67 +8,35 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" styleClass="style.css" stylesheets="@style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetoed.ControllerListaSeq">
    <children>
-      <VBox layoutX="23.0" layoutY="260.0" prefHeight="329.0" prefWidth="754.0" styleClass="profile-vbox" stylesheets="@style.css">
+      <AnchorPane styleClass="cabecalho" stylesheets="@style.css" AnchorPane.leftAnchor="270.0" AnchorPane.rightAnchor="270.0" AnchorPane.topAnchor="23.0">
          <children>
-            <HBox fx:id="HBoxLinha1" fillHeight="false" prefHeight="49.0" prefWidth="771.0" spacing="5.0">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding></HBox>
-            <HBox fx:id="HBoxLinha2" fillHeight="false" layoutX="17.0" layoutY="17.0" prefHeight="49.0" prefWidth="771.0" spacing="5.0">
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding></HBox>
-            <HBox fx:id="HBoxLinha3" fillHeight="false" layoutX="17.0" layoutY="75.0" prefHeight="49.0" prefWidth="771.0" spacing="5.0">
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding></HBox>
-            <HBox fx:id="HBoxLinha4" fillHeight="false" layoutX="17.0" layoutY="132.0" prefHeight="49.0" prefWidth="771.0" spacing="5.0">
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding></HBox>
-            <HBox fx:id="HBoxLinha5" fillHeight="false" layoutX="17.0" layoutY="190.0" prefHeight="49.0" prefWidth="771.0" spacing="5.0">
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding></HBox>
+            <StackPane layoutX="33.0" layoutY="5.0" prefHeight="42.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.200000000000003" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="27.0" AnchorPane.topAnchor="5.0">
+               <children>
+                  
+                                                                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Lista Sequencial" textAlignment="CENTER">
+                     <font>
+                        <Font name="Consolas Bold" size="19.0" />
+                     </font>
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </Text>
+               </children>
+            </StackPane>
          </children>
-      </VBox>
-      <AnchorPane fx:id="paneBuscar" layoutX="419.0" layoutY="128.0" prefHeight="92.0" prefWidth="169.0" stylesheets="@style.css">
-         <children>
-            <TextField fx:id="TFPosicao" alignment="CENTER" layoutX="12.0" layoutY="56.0" promptText="Posição" styleClass="profile-text-field" stylesheets="@style.css" />
-            <Button alignment="CENTER" layoutX="6.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#buscarPorPosicao" prefHeight="27.0" prefWidth="78.0" styleClass="profile-button" stylesheets="@style.css" text="Buscar" textFill="WHITE">
-               <font>
-                  <Font name="Consolas Bold" size="14.0" />
-               </font></Button>
-            <Button alignment="CENTER" layoutX="87.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#removerPorPosicao" styleClass="profile-button" stylesheets="@style.css" text="Remover" textFill="WHITE">
-               <font>
-                  <Font name="Consolas Bold" size="14.0" />
-               </font></Button>
-         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
       </AnchorPane>
-      <AnchorPane layoutX="277.0" layoutY="23.0" prefHeight="55.0" prefWidth="284.0" styleClass="cabecalho" stylesheets="@style.css">
-         <children>
-            
-                                    <Text fill="WHITE" layoutX="20.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lista Sequencial" textAlignment="CENTER" wrappingWidth="243.62890625">
-               <font>
-                  <Font name="Consolas Bold" size="19.0" />
-               </font>
-               <effect>
-                  <Bloom />
-               </effect>
-            </Text>
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="635.0" layoutY="14.0" prefHeight="72.0" prefWidth="200.0">
+      <AnchorPane layoutX="600.0" layoutY="15.0" prefHeight="72.0" prefWidth="200.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
          <children>
             <Text layoutX="36.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Número de Elementos" wrappingWidth="129.55078125">
                <font>
@@ -77,46 +45,12 @@
             <TextField fx:id="TFNumeroDeElementos" alignment="CENTER" layoutX="32.0" layoutY="24.0" prefHeight="25.0" prefWidth="136.0" styleClass="profile-text-field" stylesheets="@style.css" text="0" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="paneBuscarValor" layoutX="613.0" layoutY="128.0" prefHeight="92.0" prefWidth="174.0" stylesheets="@style.css">
-         <children>
-            <TextField fx:id="TFValor" alignment="CENTER" layoutX="12.0" layoutY="56.0" promptText="valor" styleClass="profile-text-field" stylesheets="@style.css" />
-            <Button alignment="CENTER" layoutX="51.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#buscarPorValor" prefHeight="27.0" prefWidth="72.0" styleClass="profile-button" stylesheets="@style.css" text="Buscar" textFill="WHITE">
-               <font>
-                  <Font name="Consolas Bold" size="14.0" />
-               </font></Button>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="paneAdicionar" layoutX="222.0" layoutY="128.0" prefHeight="92.0" prefWidth="171.0" stylesheets="@style.css">
-         <children>
-            <TextField fx:id="TFAdicionarValor" alignment="CENTER" layoutX="3.0" layoutY="55.0" prefHeight="26.0" prefWidth="78.0" promptText="valor" styleClass="profile-text-field" stylesheets="@style.css" />
-            <TextField fx:id="TFAdicionarPosicao" alignment="CENTER" layoutX="86.0" layoutY="55.0" prefHeight="26.0" prefWidth="78.0" promptText="Posição" styleClass="profile-text-field" stylesheets="@style.css" />
-            <Button alignment="CENTER" layoutX="37.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#adicionar" prefHeight="23.0" prefWidth="88.0" styleClass="profile-button" stylesheets="@style.css" text="Adicionar" textFill="WHITE">
-               <font>
-                  <Font name="Consolas Bold" size="14.0" />
-               </font>
-            </Button>
-         </children>
-      </AnchorPane>
-      <Button fx:id="BotaoVoltar" layoutX="72.0" layoutY="23.0" mnemonicParsing="false" onMouseClicked="#voltar" prefHeight="55.0" prefWidth="78.0" rotate="180.0" styleClass="profile-voltar" stylesheets="@style.css" textAlignment="JUSTIFY">
+      <Button fx:id="BotaoVoltar" layoutX="72.0" layoutY="23.0" mnemonicParsing="false" onMouseClicked="#voltar" prefHeight="55.0" prefWidth="78.0" rotate="180.0" styleClass="profile-voltar" stylesheets="@style.css" textAlignment="JUSTIFY" AnchorPane.leftAnchor="72.0" AnchorPane.topAnchor="23.0">
          <font>
             <Font name="Consolas Bold" size="39.0" />
          </font></Button>
-      <Separator layoutX="33.0" layoutY="239.0" prefHeight="2.0" prefWidth="754.0" />
-      <AnchorPane fx:id="paneCriarLista" layoutX="33.0" layoutY="128.0" prefHeight="92.0" prefWidth="156.0" stylesheets="@style.css">
-         <children>
-            <TextField fx:id="TFCriar" alignment="CENTER" layoutX="26.0" layoutY="52.0" prefHeight="26.0" prefWidth="105.0" promptText="Tamanho" styleClass="profile-text-field" stylesheets="@style.css">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </TextField>
-            <Button alignment="CENTER" layoutX="26.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#criarListaSequencial" prefHeight="27.0" prefWidth="105.0" styleClass="profile-button" stylesheets="@style.css" text="Criar lista" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font name="Consolas Bold" size="14.0" />
-               </font>
-            </Button>
-         </children>
-      </AnchorPane>
-      <Button alignment="CENTER" layoutX="667.0" layoutY="78.0" mnemonicParsing="false" onMouseClicked="#apagarLista" prefHeight="27.0" prefWidth="136.0" styleClass="apagar-lista" stylesheets="@style.css" text="Apagar lista" textFill="WHITE">
+      <Separator layoutX="33.0" layoutY="239.0" prefHeight="2.0" prefWidth="754.0" AnchorPane.bottomAnchor="357.8" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="27.600000000000023" AnchorPane.topAnchor="239.0" />
+      <Button alignment="CENTER" layoutX="632.0" layoutY="73.0" mnemonicParsing="false" onMouseClicked="#apagarLista" prefHeight="27.0" prefWidth="136.0" styleClass="apagar-lista" stylesheets="@style.css" text="Apagar lista" textFill="WHITE" AnchorPane.rightAnchor="47.0" AnchorPane.topAnchor="73.0">
          <font>
             <Font name="Consolas" size="14.0" />
          </font>
@@ -126,5 +60,63 @@
             <Image url="@../../../../../../../../../Users/luizg/Downloads/userlmn_33a9b3cb10248b98fa68ffcc3c1ce0a7.png" />
          </image>
       </ImageView>
+      <FlowPane fx:id="FPPrincipal" hgap="5.0" layoutX="33.0" layoutY="249.0" prefHeight="329.0" prefWidth="754.0" vgap="5.0" AnchorPane.bottomAnchor="21.399999999999977" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="249.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets></FlowPane>
+      <HBox alignment="CENTER" layoutX="65.0" layoutY="131.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="64.60000000000002" AnchorPane.topAnchor="131.0">
+         <children>
+            <AnchorPane fx:id="paneBuscarValor" stylesheets="@style.css">
+               <children>
+                  <TextField fx:id="TFValor" alignment="CENTER" layoutX="12.0" layoutY="56.0" promptText="valor" styleClass="profile-text-field" stylesheets="@style.css" />
+                  <Button alignment="CENTER" layoutX="51.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#buscarPorValor" prefHeight="27.0" prefWidth="72.0" styleClass="profile-button" stylesheets="@style.css" text="Buscar" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="paneBuscar" stylesheets="@style.css">
+               <children>
+                  <TextField fx:id="TFPosicao" alignment="CENTER" layoutX="12.0" layoutY="56.0" promptText="Posição" styleClass="profile-text-field" stylesheets="@style.css" />
+                  <Button alignment="CENTER" layoutX="6.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#buscarPorPosicao" prefHeight="27.0" prefWidth="78.0" styleClass="profile-button" stylesheets="@style.css" text="Buscar" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" layoutX="87.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#removerPorPosicao" styleClass="profile-button" stylesheets="@style.css" text="Remover" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="paneAdicionar" stylesheets="@style.css">
+               <children>
+                  <TextField fx:id="TFAdicionarValor" alignment="CENTER" layoutX="3.0" layoutY="55.0" prefHeight="26.0" prefWidth="78.0" promptText="valor" styleClass="profile-text-field" stylesheets="@style.css" />
+                  <TextField fx:id="TFAdicionarPosicao" alignment="CENTER" layoutX="86.0" layoutY="55.0" prefHeight="26.0" prefWidth="78.0" promptText="Posição" styleClass="profile-text-field" stylesheets="@style.css" />
+                  <Button alignment="CENTER" layoutX="9.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#adicionar" prefHeight="27.0" prefWidth="150.0" styleClass="profile-button" stylesheets="@style.css" text="Adicionar" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="paneCriarLista" stylesheets="@style.css">
+               <children>
+                  <TextField fx:id="TFCriar" alignment="CENTER" layoutX="26.0" layoutY="52.0" prefHeight="26.0" prefWidth="105.0" promptText="Tamanho" styleClass="profile-text-field" stylesheets="@style.css">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </TextField>
+                  <Button alignment="CENTER" layoutX="26.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#criarListaSequencial" prefHeight="27.0" prefWidth="105.0" styleClass="profile-button" stylesheets="@style.css" text="Criar lista" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

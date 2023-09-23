@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -22,31 +23,16 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 
 public class ControllerListaSeq implements Initializable {
     @FXML
+    private FlowPane FPPrincipal;
+
+    @FXML
     private Button BotaoVoltar;
-
-    @FXML
-    private HBox HBoxLinha1;
-
-    @FXML
-    private HBox HBoxLinha2;
-
-    @FXML
-    private HBox HBoxLinha3;
-
-    @FXML
-    private HBox HBoxLinha4;
-
-    @FXML
-    private HBox HBoxLinha5;
 
     @FXML
     private TextField TFAdicionarPosicao;
@@ -69,8 +55,6 @@ public class ControllerListaSeq implements Initializable {
     private int totalDeElementos;
 
     private SeqList<String> LS;
-
-    private HBox[] linhas = new HBox[5];
 
     @FXML
     private AnchorPane paneAdicionar;
@@ -120,7 +104,7 @@ public class ControllerListaSeq implements Initializable {
     }
 
     private FillTransition animacao(int contIndex, int cycles, double time) {
-        HBox auxHBox = (HBox) linhas[contIndex / 11].getChildren().get(contIndex % 11);
+        HBox auxHBox = (HBox) FPPrincipal.getChildren().get(contIndex);
         StackPane auxSP = (StackPane) auxHBox.getChildren().get(0);
         Rectangle auxRec = (Rectangle) auxSP.getChildren().get(0);
 
@@ -131,19 +115,6 @@ public class ControllerListaSeq implements Initializable {
         transition.setCycleCount(cycles);
         transition.setDuration(Duration.seconds(time));
         return transition;
-    }
-
-    private void animacaoSequencia(int contIndex, int cycles, double time, int max) {
-        if (contIndex > max)
-            return;
-        FillTransition aux = animacao(contIndex, cycles, time);
-        aux.setAutoReverse(true);
-
-        aux.setOnFinished(event -> {
-            animacaoSequencia(contIndex + 1, cycles, time, max);
-        });
-
-        aux.play();
     }
 
     private HBox bloco(String conteudo, String style) {
@@ -172,20 +143,11 @@ public class ControllerListaSeq implements Initializable {
     }
 
     void adicionarBloco(String cont, int pos, String style) {
-        linhas[pos / 11].getChildren().add(pos % 11, bloco(cont, style));
-            for (int i = 0; i < 5; i++) {
-                if (linhas[i].getChildren().size() > 11) {
-                    linhas[i + 1].getChildren().add(0, linhas[i].getChildren().get(11));
-                }
-            }
+        FPPrincipal.getChildren().add(pos, bloco(cont, style));
     }
 
     void removerBloco(int pos) {
-        linhas[pos / 11].getChildren().remove(pos % 11);
-        for (int i = pos / 11; i < 4; i++){
-            if (this.LS.size() >= (i + 1) * 11)
-                linhas[i].getChildren().add(10, linhas[i + 1].getChildren().get(0));
-        }
+        FPPrincipal.getChildren().remove(pos);
     }
 
     void alteracaoEmSequenciaVolta(int i, int objetivo) {
@@ -352,13 +314,13 @@ public class ControllerListaSeq implements Initializable {
             return;
         }
 
-        if (amount > 55) {
+        /*if (amount > 70) {
             alerta.setHeaderText("MUITO GRANDE");
             alerta.setContentText("O tamanho desejado não é suportado. Por favor insira um valor menor que 56!");
 
             alerta.showAndWait();
             return;
-        }
+        }*/
 
         if (amount < 1) {
             alerta.setHeaderText("MUITO PEQUENO");
@@ -374,12 +336,7 @@ public class ControllerListaSeq implements Initializable {
         TFCriar.setText("");
 
         for (int i = 0; i < amount; i++) {
-            linhas[i / 11].getChildren().add(i % 11, bloco("", "profile-boxes-black"));
-        }
-        for (int i = 0; i < 5; i++) {
-            if (linhas[i].getChildren().size() > 11) {
-                linhas[i + 1].getChildren().add(0, linhas[i].getChildren().get(8));
-            }
+            FPPrincipal.getChildren().add(i, bloco("", "profile-boxes-black"));
         }
     }
 
@@ -397,7 +354,7 @@ public class ControllerListaSeq implements Initializable {
         this.LS = null;
 
         for (int i = 0; i < this.totalDeElementos; i++) {
-            linhas[i / 11].getChildren().remove(0);
+            FPPrincipal.getChildren().remove(0);
         }
 
         this.totalDeElementos = 0;
@@ -453,20 +410,17 @@ public class ControllerListaSeq implements Initializable {
         dropShadow.setOffsetX(3.0); // Configurar o deslocamento horizontal da sombra
         dropShadow.setOffsetY(3.0); // Configurar o deslocamento vertical da sombra
         dropShadow.setColor(javafx.scene.paint.Color.BLACK); // Configurar a cor da sombra
+
+        Rectangle clip = new Rectangle();
+        clip.widthProperty().bind(FPPrincipal.widthProperty());
+        clip.heightProperty().bind(FPPrincipal.heightProperty());
+        FPPrincipal.setClip(clip);
+
         // Aplicar o efeito de sombra ao rótulo
         paneAdicionar.setEffect(dropShadow);
         paneBuscar.setEffect(dropShadow);
         paneBuscarValor.setEffect(dropShadow);
         paneCriarLista.setEffect(dropShadow);
         TFNumeroDeElementos.setText("0");
-
-        linhas[0] = HBoxLinha1;
-        linhas[1] = HBoxLinha2;
-        linhas[2] = HBoxLinha3;
-        linhas[3] = HBoxLinha4;
-        linhas[4] = HBoxLinha5;
-
-
-
     }
 }

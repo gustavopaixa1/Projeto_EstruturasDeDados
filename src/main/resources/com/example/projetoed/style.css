@@ -12,7 +12,7 @@
         -fx-background-radius: 10 10 10 10;
 }
 
-.profile-vbox{
+.profile-flowpane{
     -fx-border-color: #008B8B;
     -fx-border-width: 7;
     -fx-border-radius: 10 10 10 10;
@@ -25,6 +25,14 @@
     -fx-stroke-width: 3;
 }
 
+.profile-boxes-black{
+    -fx-arc-height: 10;
+    -fx-arc-width: 10;
+    -fx-stroke: #00194D;
+    -fx-fill: #008B8B;
+    -fx-stroke-width: 3;
+}
+
 
 .choice-box {
   -fx-background-color: white;
@@ -32,6 +40,3 @@
   -fx-border-color: #4682B4;
   -fx-border-radius: 10 10 10 10;
 }
-
-// Selected item text color on the control itself
-.choice-box > .label { -fx-text-fill: #8B0000; }

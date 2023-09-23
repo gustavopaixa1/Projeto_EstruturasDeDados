@@ -1,437 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Ellipse?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FFF5EE;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetoed.ControllerListaSeq">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" styleClass="style.css" stylesheets="@style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetoed.ControllerListaSeq">
    <children>
-      
-      <Text layoutX="319.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lista Sequencial" textAlignment="CENTER" wrappingWidth="162.62890625">
-         <font>
-            <Font name="Yu Mincho Demibold" size="19.0" />
-         </font>
-      </Text>
-      <Text layoutX="82.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Text>
-      <Ellipse fill="DODGERBLUE" layoutX="429.0" layoutY="137.0" radiusX="29.0" radiusY="28.0" stroke="BLACK" strokeType="INSIDE" />
-      <Ellipse fill="DODGERBLUE" layoutX="570.0" layoutY="137.0" radiusX="29.0" radiusY="28.0" stroke="BLACK" strokeType="INSIDE" />
-      <Ellipse fill="DODGERBLUE" layoutX="692.0" layoutY="137.0" radiusX="29.0" radiusY="28.0" stroke="BLACK" strokeType="INSIDE" />
-      <Text layoutX="650.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Número de Elemetos" />
-      <Text layoutX="47.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Voltar" wrappingWidth="42.0">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Text>
-      <VBox layoutX="47.0" layoutY="235.0" prefHeight="315.0" prefWidth="340.0">
+      <VBox layoutX="23.0" layoutY="260.0" prefHeight="329.0" prefWidth="754.0" styleClass="profile-vbox" stylesheets="@style.css">
          <children>
-            <HBox fillHeight="false" prefHeight="105.0" prefWidth="766.0">
-               <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <HBox prefHeight="100.0" prefWidth="87.0">
-                           <children>
-                              <AnchorPane prefHeight="40.0" prefWidth="59.0">
-                                 <children>
-                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d3adad" height="56.0" stroke="#b22727" strokeLineJoin="BEVEL" strokeType="OUTSIDE" width="58.0" />
-                                    <Text fx:id="t" layoutX="26.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
-                                 </children>
-                              </AnchorPane>
-                              <ImageView fitHeight="33.0" fitWidth="42.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                                 <image>
-                                    <Image url="@../../../../../../../../../Users/luizg/Downloads/arrow_left_small_icon_213145.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets top="10.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="100.0" prefWidth="87.0">
-                           <children>
-                              <AnchorPane prefHeight="40.0" prefWidth="59.0">
-                                 <children>
-                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d3adad" height="56.0" stroke="#b22727" strokeLineJoin="BEVEL" strokeType="OUTSIDE" width="58.0" />
-                                    <Text layoutX="26.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
-                                 </children>
-                              </AnchorPane>
-                              <ImageView fitHeight="33.0" fitWidth="42.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                                 <image>
-                                    <Image url="@../../../../../../../../../Users/luizg/Downloads/arrow_left_small_icon_213145.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets top="10.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="100.0" prefWidth="87.0">
-                           <children>
-                              <AnchorPane prefHeight="40.0" prefWidth="59.0">
-                                 <children>
-                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d3adad" height="56.0" stroke="#b22727" strokeLineJoin="BEVEL" strokeType="OUTSIDE" width="58.0" />
-                                    <Text layoutX="26.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
-                                 </children>
-                              </AnchorPane>
-                              <ImageView fitHeight="33.0" fitWidth="42.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                                 <image>
-                                    <Image url="@../../../../../../../../../Users/luizg/Downloads/arrow_left_small_icon_213145.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets top="10.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="100.0" prefWidth="87.0">
-                           <children>
-                              <AnchorPane prefHeight="40.0" prefWidth="59.0">
-                                 <children>
-                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d3adad" height="56.0" stroke="#b22727" strokeLineJoin="BEVEL" strokeType="OUTSIDE" width="58.0" />
-                                    <Text layoutX="26.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
-                                 </children>
-                              </AnchorPane>
-                              <ImageView fitHeight="33.0" fitWidth="42.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                                 <image>
-                                    <Image url="@../../../../../../../../../Users/luizg/Downloads/arrow_left_small_icon_213145.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets top="10.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="100.0" prefWidth="87.0">
-                           <children>
-                              <AnchorPane prefHeight="40.0" prefWidth="59.0">
-                                 <children>
-                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d3adad" height="56.0" stroke="#b22727" strokeLineJoin="BEVEL" strokeType="OUTSIDE" width="58.0" />
-                                    <Text layoutX="26.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
-                                 </children>
-                              </AnchorPane>
-                              <ImageView fitHeight="33.0" fitWidth="42.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                                 <image>
-                                    <Image url="@../../../../../../../../../Users/luizg/Downloads/arrow_left_small_icon_213145.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets top="10.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="100.0" prefWidth="87.0">
-                           <children>
-                              <AnchorPane prefHeight="40.0" prefWidth="59.0">
-                                 <children>
-                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d3adad" height="56.0" stroke="#b22727" strokeLineJoin="BEVEL" strokeType="OUTSIDE" width="58.0" />
-                                    <Text layoutX="26.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
-                                 </children>
-                              </AnchorPane>
-                              <ImageView fitHeight="33.0" fitWidth="42.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                                 <image>
-                                    <Image url="@../../../../../../../../../Users/luizg/Downloads/arrow_left_small_icon_213145.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets top="10.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="100.0" prefWidth="87.0">
-                           <children>
-                              <AnchorPane prefHeight="40.0" prefWidth="59.0">
-                                 <children>
-                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d3adad" height="56.0" stroke="#b22727" strokeLineJoin="BEVEL" strokeType="OUTSIDE" width="58.0" />
-                                    <Text layoutX="26.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
-                                 </children>
-                              </AnchorPane>
-                              <ImageView fitHeight="33.0" fitWidth="42.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                                 <image>
-                                    <Image url="@../../../../../../../../../Users/luizg/Downloads/arrow_left_small_icon_213145.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets top="10.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="100.0" prefWidth="87.0">
-                           <children>
-                              <AnchorPane prefHeight="40.0" prefWidth="59.0">
-                                 <children>
-                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d3adad" height="56.0" stroke="#b22727" strokeLineJoin="BEVEL" strokeType="OUTSIDE" width="58.0" />
-                                    <Text layoutX="26.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
-                                 </children>
-                              </AnchorPane>
-                              <ImageView fitHeight="33.0" fitWidth="42.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                                 <image>
-                                    <Image url="@../../../../../../../../../Users/luizg/Downloads/arrow_left_small_icon_213145.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets top="10.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                     </children>
-                  </HBox>
-               </children>
-            </HBox>
-            <HBox fillHeight="false" prefHeight="105.0" prefWidth="766.0">
-               <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <HBox prefHeight="100.0" prefWidth="87.0">
-                           <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d3adad" height="56.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
-                              <ImageView fitHeight="33.0" fitWidth="42.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                                 <image>
-                                    <Image url="@../../../../../../../../../Users/luizg/Downloads/arrow_left_small_icon_213145.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets top="10.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="100.0" prefWidth="87.0">
-                           <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d39b9b" height="56.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
-                              <ImageView fitHeight="33.0" fitWidth="42.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                                 <image>
-                                    <Image url="@../../../../../../../../../Users/luizg/Downloads/arrow_left_small_icon_213145.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets top="10.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="100.0" prefWidth="87.0">
-                           <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d39b9b" height="56.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
-                              <ImageView fitHeight="33.0" fitWidth="42.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                                 <image>
-                                    <Image url="@../../../../../../../../../Users/luizg/Downloads/arrow_left_small_icon_213145.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets top="10.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="100.0" prefWidth="87.0">
-                           <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d39b9b" height="56.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
-                              <ImageView fitHeight="33.0" fitWidth="42.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                                 <image>
-                                    <Image url="@../../../../../../../../../Users/luizg/Downloads/arrow_left_small_icon_213145.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets top="10.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="100.0" prefWidth="87.0">
-                           <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d39b9b" height="56.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
-                              <ImageView fitHeight="33.0" fitWidth="42.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                                 <image>
-                                    <Image url="@../../../../../../../../../Users/luizg/Downloads/arrow_left_small_icon_213145.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets top="10.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="100.0" prefWidth="87.0">
-                           <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d39b9b" height="56.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
-                              <ImageView fitHeight="33.0" fitWidth="42.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                                 <image>
-                                    <Image url="@../../../../../../../../../Users/luizg/Downloads/arrow_left_small_icon_213145.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets top="10.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="100.0" prefWidth="87.0">
-                           <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d39b9b" height="56.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
-                              <ImageView fitHeight="33.0" fitWidth="42.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                                 <image>
-                                    <Image url="@../../../../../../../../../Users/luizg/Downloads/arrow_left_small_icon_213145.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets top="10.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="100.0" prefWidth="87.0">
-                           <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d39b9b" height="56.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
-                              <ImageView fitHeight="33.0" fitWidth="42.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                                 <image>
-                                    <Image url="@../../../../../../../../../Users/luizg/Downloads/arrow_left_small_icon_213145.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets top="10.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                     </children>
-                  </HBox>
-               </children>
-            </HBox>
-            <HBox fillHeight="false" prefHeight="105.0" prefWidth="766.0">
-               <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <HBox prefHeight="100.0" prefWidth="87.0">
-                           <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d3adad" height="56.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
-                              <ImageView fitHeight="33.0" fitWidth="42.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                                 <image>
-                                    <Image url="@../../../../../../../../../Users/luizg/Downloads/arrow_left_small_icon_213145.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets top="10.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="100.0" prefWidth="87.0">
-                           <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d39b9b" height="56.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
-                              <ImageView fitHeight="33.0" fitWidth="42.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                                 <image>
-                                    <Image url="@../../../../../../../../../Users/luizg/Downloads/arrow_left_small_icon_213145.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets top="10.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="100.0" prefWidth="87.0">
-                           <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d39b9b" height="56.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
-                              <ImageView fitHeight="33.0" fitWidth="42.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                                 <image>
-                                    <Image url="@../../../../../../../../../Users/luizg/Downloads/arrow_left_small_icon_213145.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets top="10.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="100.0" prefWidth="87.0">
-                           <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d39b9b" height="56.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
-                              <ImageView fitHeight="33.0" fitWidth="42.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                                 <image>
-                                    <Image url="@../../../../../../../../../Users/luizg/Downloads/arrow_left_small_icon_213145.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets top="10.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="100.0" prefWidth="87.0">
-                           <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d39b9b" height="56.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
-                              <ImageView fitHeight="33.0" fitWidth="42.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                                 <image>
-                                    <Image url="@../../../../../../../../../Users/luizg/Downloads/arrow_left_small_icon_213145.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets top="10.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="100.0" prefWidth="87.0">
-                           <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d39b9b" height="56.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
-                              <ImageView fitHeight="33.0" fitWidth="42.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                                 <image>
-                                    <Image url="@../../../../../../../../../Users/luizg/Downloads/arrow_left_small_icon_213145.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets top="10.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="100.0" prefWidth="87.0">
-                           <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d39b9b" height="56.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
-                              <ImageView fitHeight="33.0" fitWidth="42.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                                 <image>
-                                    <Image url="@../../../../../../../../../Users/luizg/Downloads/arrow_left_small_icon_213145.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets top="10.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="100.0" prefWidth="87.0">
-                           <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d39b9b" height="56.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
-                              <ImageView fitHeight="33.0" fitWidth="42.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                                 <image>
-                                    <Image url="@../../../../../../../../../Users/luizg/Downloads/arrow_left_small_icon_213145.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets top="10.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                     </children>
-                  </HBox>
-               </children>
-            </HBox>
+            <HBox fx:id="HBoxLinha1" fillHeight="false" prefHeight="49.0" prefWidth="771.0" spacing="5.0">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding></HBox>
+            <HBox fx:id="HBoxLinha2" fillHeight="false" layoutX="17.0" layoutY="17.0" prefHeight="49.0" prefWidth="771.0" spacing="5.0">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding></HBox>
+            <HBox fx:id="HBoxLinha3" fillHeight="false" layoutX="17.0" layoutY="75.0" prefHeight="49.0" prefWidth="771.0" spacing="5.0">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding></HBox>
+            <HBox fx:id="HBoxLinha4" fillHeight="false" layoutX="17.0" layoutY="132.0" prefHeight="49.0" prefWidth="771.0" spacing="5.0">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding></HBox>
+            <HBox fx:id="HBoxLinha5" fillHeight="false" layoutX="17.0" layoutY="190.0" prefHeight="49.0" prefWidth="771.0" spacing="5.0">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding></HBox>
          </children>
       </VBox>
-      <Text layoutX="128.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adicionar" wrappingWidth="67.0">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Text>
-      <Text layoutX="257.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Remover" wrappingWidth="67.0">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Text>
-      <Text layoutX="408.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buscar" wrappingWidth="67.0">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Text>
-      <Text layoutX="537.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Remover" wrappingWidth="67.0">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Text>
+      <AnchorPane layoutX="14.0" layoutY="116.0" prefHeight="56.0" prefWidth="86.0">
+         <children>
+            <TextField fx:id="TFCriar" alignment="CENTER" layoutY="43.0" prefHeight="26.0" prefWidth="86.0" promptText="Tamanho" styleClass="profile-text-field" stylesheets="@style.css" />
+            <Button alignment="CENTER" layoutY="1.0" mnemonicParsing="false" onMouseClicked="#criarListaSequencial" prefHeight="26.0" prefWidth="86.0" styleClass="profile-button" stylesheets="@style.css" text="Criar" textAlignment="CENTER" textFill="WHITE" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="119.0" layoutY="145.0" prefHeight="78.0" prefWidth="174.0">
+         <children>
+            <TextField fx:id="TFPosicao" alignment="CENTER" layoutX="12.0" layoutY="56.0" promptText="Posição" styleClass="profile-text-field" stylesheets="@style.css" />
+            <Button alignment="CENTER" layoutX="22.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#buscarPorPosicao" prefHeight="26.0" prefWidth="63.0" styleClass="profile-button" stylesheets="@style.css" text="Buscar" textFill="WHITE" />
+            <Button alignment="CENTER" layoutX="87.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#removerPorPosicao" styleClass="profile-button" stylesheets="@style.css" text="Remover" textFill="WHITE" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="294.0" prefHeight="72.0" prefWidth="200.0" styleClass="profile-layout" stylesheets="@style.css">
+         <children>
+            
+                                    <Text fill="WHITE" layoutX="19.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lista Sequencial" textAlignment="CENTER" wrappingWidth="162.62890625">
+               <font>
+                  <Font name="Yu Mincho Demibold" size="19.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="600.0" prefHeight="72.0" prefWidth="200.0">
+         <children>
+            <Text layoutX="44.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Número de Elemetos" wrappingWidth="111.55078125" />
+            <TextField fx:id="TFNumeroDeElementos" alignment="CENTER" layoutX="25.0" layoutY="36.0" styleClass="profile-text-field" stylesheets="@style.css" text="0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="313.0" layoutY="145.0" prefHeight="78.0" prefWidth="174.0">
+         <children>
+            <TextField fx:id="TFValor" alignment="CENTER" layoutX="12.0" layoutY="56.0" promptText="valor" styleClass="profile-text-field" stylesheets="@style.css" />
+            <Button alignment="CENTER" layoutX="22.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#buscarPorValor" prefHeight="26.0" prefWidth="63.0" styleClass="profile-button" stylesheets="@style.css" text="Buscar" textFill="WHITE" />
+            <Button alignment="CENTER" layoutX="87.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#removerPorValor" styleClass="profile-button" stylesheets="@style.css" text="Remover" textFill="WHITE" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="494.0" layoutY="158.0" prefHeight="62.0" prefWidth="157.0">
+         <children>
+            <TextField fx:id="TFAdicionarValor" alignment="CENTER" layoutY="42.0" prefHeight="26.0" prefWidth="78.0" promptText="valor" styleClass="profile-text-field" stylesheets="@style.css" />
+            <Button alignment="CENTER" layoutX="45.0" mnemonicParsing="false" onMouseClicked="#adicionar" styleClass="profile-button" stylesheets="@style.css" text="Adicionar" textFill="WHITE" />
+            <TextField fx:id="TFAdicionarPosicao" alignment="CENTER" layoutX="78.0" layoutY="42.0" prefHeight="26.0" prefWidth="78.0" promptText="Posição" styleClass="profile-text-field" stylesheets="@style.css" />
+         </children>
+      </AnchorPane>
+      <Button fx:id="BotaoVoltar" layoutX="25.0" layoutY="25.0" mnemonicParsing="false" onMouseClicked="#voltar" prefHeight="26.0" prefWidth="67.0" styleClass="profile-button" stylesheets="@style.css" text="Voltar" textFill="WHITE" />
+      <Button alignment="CENTER" layoutX="697.0" layoutY="234.0" mnemonicParsing="false" onMouseClicked="#apagarLista" styleClass="profile-button" stylesheets="@style.css" text="Apagar lista" textFill="WHITE" />
    </children>
 </AnchorPane>

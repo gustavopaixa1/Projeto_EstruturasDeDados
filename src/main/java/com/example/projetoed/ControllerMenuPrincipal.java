@@ -1,6 +1,5 @@
 package com.example.projetoed;
 
-import com.sun.javafx.stage.EmbeddedWindow;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,7 +15,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class HelloController implements Initializable {
+public class ControllerMenuPrincipal implements Initializable {
 
     @FXML
     private Button botaoDeEscolha;
@@ -24,20 +23,21 @@ public class HelloController implements Initializable {
     @FXML
     private ChoiceBox<String> opcoes;
 
-
     @FXML
     private Text opcaoEscolhida;
-    private EmbeddedWindow stage;
 
     @FXML
     void getOpcoes(MouseEvent event) throws IOException {
         String opcao = opcoes.getSelectionModel().getSelectedItem();
 
         if (opcao.equals("Lista Sequencial")){
+            Scene scene;
             Stage stage = (Stage)botaoDeEscolha.getScene().getWindow();
             Parent root = FXMLLoader.load(getClass().getResource("listaSeq.fxml"));
             stage.setTitle("Lista Sequencial");
-            stage.setScene(new Scene(root));
+            scene = new Scene(root);
+            scene.getStylesheets().add("style.css");
+            stage.setScene(scene);
         }
         else if(opcao.equals("Lista Simplesmente Encadeada")){
             Stage stage = (Stage)botaoDeEscolha.getScene().getWindow();

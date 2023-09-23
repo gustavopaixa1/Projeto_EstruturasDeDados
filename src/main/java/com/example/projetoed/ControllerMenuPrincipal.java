@@ -23,16 +23,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ControllerMenuPrincipal implements Initializable {
-
-    @FXML
-    private ChoiceBox<String> opcoes;
-
-    @FXML
-    private Text opcaoEscolhida;
-
-    @FXML
-    private Text textoDeEscolha;
-
     @FXML
     private Button botaoLDE;
 
@@ -41,10 +31,6 @@ public class ControllerMenuPrincipal implements Initializable {
 
     @FXML
     private Button botaoLSE;
-
-    @FXML
-    private Text tituloDaPane;
-
 
     @FXML
     void abrirLDE(MouseEvent event) throws IOException {

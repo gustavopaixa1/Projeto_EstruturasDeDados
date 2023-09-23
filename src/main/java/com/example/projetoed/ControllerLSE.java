@@ -1,5 +1,6 @@
 package com.example.projetoed;
 
+import com.example.projetoed.implementations.SingleLinkedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,7 +21,7 @@ import javafx.util.Duration;
 import java.util.ResourceBundle;
 import java.io.IOException;
 import java.net.URL;
-import com.example.projetoed.implementations.SingleLinkedList;
+
 
 public class ControllerLSE implements Initializable {
     private SingleLinkedList<String> LSE;

@@ -1,29 +1,27 @@
 package com.example.projetoed;
 
-import javafx.animation.FillTransition;
+import com.example.projetoed.implementations.DoubleLinkedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.animation.FillTransition;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import java.util.ResourceBundle;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ResourceBundle;
-import com.example.projetoed.implementations.DoubleLinkedList;
-import javafx.util.Duration;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+
 
 public class ControllerLDE implements Initializable {
     private DoubleLinkedList<String> LDE;
@@ -31,18 +29,6 @@ public class ControllerLDE implements Initializable {
 
     @FXML
     private Button BotaoVoltar;
-
-    @FXML
-    private Button BotaoInserir;
-
-    @FXML
-    private Button BotaoRemover;
-
-    @FXML
-    private Button BotaoConsultaValor;
-
-    @FXML
-    private Button BotaoConsultaPosicao;
 
     @FXML
     private TextField TFNumeroDeElementos;
@@ -92,7 +78,7 @@ public class ControllerLDE implements Initializable {
         int pos;
         String cont;
 
-        Alert alerta = new Alert(AlertType.ERROR);
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
         alerta.setTitle("ERRO");
 
         try {
@@ -200,7 +186,7 @@ public class ControllerLDE implements Initializable {
     void EventoRemover(MouseEvent event) throws IOException {
         int pos;
 
-        Alert alerta = new Alert(AlertType.ERROR);
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
         alerta.setTitle("ERRO!");
 
         try {
@@ -285,7 +271,7 @@ public class ControllerLDE implements Initializable {
     @FXML
     void EventoConsultaValor(MouseEvent event) throws IOException {
         String cont = TFConsultaValorConteudo.getText();
-        Alert alerta = new Alert(AlertType.ERROR);
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
         alerta.setTitle("ERRO!");
 
         if (cont.isEmpty()) {
@@ -311,7 +297,7 @@ public class ControllerLDE implements Initializable {
     @FXML
     void EventoConsultaPosicao(MouseEvent event) throws IOException {
         int contIndex;
-        Alert alerta = new Alert(AlertType.ERROR);
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
         alerta.setTitle("ERRO!");
 
         try {

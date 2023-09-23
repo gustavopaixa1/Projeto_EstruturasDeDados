@@ -5,4 +5,4 @@ Repositório referente ao primeiro projeto da disciplina Estrutura de Dados, na 
 - [ ] Menu
 - [ ] Lista Sequencial
 - [x] Lista Simplesmente Encadeada
-- [ ] Lista Duplamente Encadeada
+- [x] Lista Duplamente Encadeada

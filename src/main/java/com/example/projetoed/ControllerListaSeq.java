@@ -9,6 +9,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -17,6 +18,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -70,6 +73,18 @@ public class ControllerListaSeq implements Initializable {
 
     private HBox[] linhas = new HBox[5];
 
+    @FXML
+    private AnchorPane paneAdicionar;
+
+    @FXML
+    private AnchorPane paneBuscar;
+
+    @FXML
+    private AnchorPane paneBuscarValor;
+
+    @FXML
+    private AnchorPane paneCriarLista;
+
     private FillTransition animacao(int contIndex, int cycles, double time) {
         HBox auxHBox = (HBox) linhas[contIndex / 11].getChildren().get(contIndex % 11);
         StackPane auxSP = (StackPane) auxHBox.getChildren().get(0);
@@ -106,8 +121,8 @@ public class ControllerListaSeq implements Initializable {
         sp.setPrefHeight(50);
         sp.setAlignment(Pos.CENTER);
 
-        Rectangle retangulo = new Rectangle(60,50);
-        retangulo.getStyleClass().add(style);
+        Rectangle retangulo = new Rectangle(50,50);
+        retangulo.getStyleClass().add("profile-boxes-black");
         sp.getChildren().add(retangulo);
 
         Text texto = new Text(conteudo);
@@ -341,6 +356,16 @@ public class ControllerListaSeq implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.totalDeElementos = 0;
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setRadius(5.0); // Configurar o raio da sombra
+        dropShadow.setOffsetX(3.0); // Configurar o deslocamento horizontal da sombra
+        dropShadow.setOffsetY(3.0); // Configurar o deslocamento vertical da sombra
+        dropShadow.setColor(javafx.scene.paint.Color.BLACK); // Configurar a cor da sombra
+        // Aplicar o efeito de sombra ao rótulo
+        paneAdicionar.setEffect(dropShadow);
+        paneBuscar.setEffect(dropShadow);
+        paneBuscarValor.setEffect(dropShadow);
+        paneCriarLista.setEffect(dropShadow);
         TFNumeroDeElementos.setText("0");
 
         linhas[0] = HBoxLinha1;
@@ -348,5 +373,8 @@ public class ControllerListaSeq implements Initializable {
         linhas[2] = HBoxLinha3;
         linhas[3] = HBoxLinha4;
         linhas[4] = HBoxLinha5;
+
+
+
     }
 }

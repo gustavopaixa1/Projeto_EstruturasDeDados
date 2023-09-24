@@ -1,46 +1,38 @@
 package com.example.projetoed;
 
 import com.example.projetoed.implementations.SeqList;
+import javafx.animation.FillTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.animation.FillTransition;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.*;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import java.util.ResourceBundle;
 import java.io.IOException;
 import java.net.URL;
-import javafx.scene.effect.DropShadow;
-
+import java.util.ResourceBundle;
+import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
+import javafx.util.Duration;
 
 public class ControllerListaSeq implements Initializable {
     @FXML
+    private FlowPane FPPrincipal;
+
+    @FXML
     private Button BotaoVoltar;
-
-    @FXML
-    private HBox HBoxLinha1;
-
-    @FXML
-    private HBox HBoxLinha2;
-
-    @FXML
-    private HBox HBoxLinha3;
-
-    @FXML
-    private HBox HBoxLinha4;
-
-    @FXML
-    private HBox HBoxLinha5;
 
     @FXML
     private TextField TFAdicionarPosicao;
@@ -64,8 +56,6 @@ public class ControllerListaSeq implements Initializable {
 
     private SeqList<String> LS;
 
-    private HBox[] linhas = new HBox[5];
-
     @FXML
     private AnchorPane paneAdicionar;
 
@@ -78,8 +68,43 @@ public class ControllerListaSeq implements Initializable {
     @FXML
     private AnchorPane paneCriarLista;
 
+    private void ERROForaDeEscopo(Alert alerta, String acao, int valor) {
+        alerta.setHeaderText("FORA DE ESCOPO");
+        alerta.setContentText(String.format("não é possível %s o elemento na posição (%d)!", acao, valor));
+
+        alerta.showAndWait();
+    }
+
+    private void ERROParametroVazio(Alert alerta, String campo) {
+        alerta.setHeaderText("VAZIO!");
+        alerta.setContentText(String.format("Preencha o campo '%s' com um valor numérico!", campo));
+
+        alerta.showAndWait();
+    }
+
+    private void ERRONaoNumerico(Alert alerta, String campo) {
+        alerta.setHeaderText("NÃO NUMÉRICO");
+        alerta.setContentText(String.format("Preencha o campo '%s' com um valor numérico!", campo));
+
+        alerta.showAndWait();
+    }
+
+    private void ERROFalhou(Alert alerta, String nomeDoComando) {
+        alerta.setHeaderText("FALHOU");
+        alerta.setContentText(String.format("Não foi possível efetuar o comando '%s'", nomeDoComando));
+
+        alerta.showAndWait();
+    }
+
+    private void ERROSemLista(Alert alerta) {
+        alerta.setHeaderText("SEM LISTA");
+        alerta.setContentText("Você ainda não criou uma nova lista!");
+
+        alerta.showAndWait();
+    }
+
     private FillTransition animacao(int contIndex, int cycles, double time) {
-        HBox auxHBox = (HBox) linhas[contIndex / 11].getChildren().get(contIndex % 11);
+        HBox auxHBox = (HBox) FPPrincipal.getChildren().get(contIndex);
         StackPane auxSP = (StackPane) auxHBox.getChildren().get(0);
         Rectangle auxRec = (Rectangle) auxSP.getChildren().get(0);
 
@@ -90,19 +115,6 @@ public class ControllerListaSeq implements Initializable {
         transition.setCycleCount(cycles);
         transition.setDuration(Duration.seconds(time));
         return transition;
-    }
-
-    private void animacaoSequencia(int contIndex, int cycles, double time, int max) {
-        if (contIndex > max)
-            return;
-        FillTransition aux = animacao(contIndex, cycles, time);
-        aux.setAutoReverse(true);
-
-        aux.setOnFinished(event -> {
-            animacaoSequencia(contIndex + 1, cycles, time, max);
-        });
-
-        aux.play();
     }
 
     private HBox bloco(String conteudo, String style) {
@@ -131,20 +143,11 @@ public class ControllerListaSeq implements Initializable {
     }
 
     void adicionarBloco(String cont, int pos, String style) {
-        linhas[pos / 11].getChildren().add(pos % 11, bloco(cont, style));
-            for (int i = 0; i < 5; i++) {
-                if (linhas[i].getChildren().size() > 11) {
-                    linhas[i + 1].getChildren().add(0, linhas[i].getChildren().get(11));
-                }
-            }
+        FPPrincipal.getChildren().add(pos, bloco(cont, style));
     }
 
     void removerBloco(int pos) {
-        linhas[pos / 11].getChildren().remove(pos % 11);
-        for (int i = pos / 11; i < 4; i++){
-            if (this.LS.size() >= (i + 1) * 11)
-                linhas[i].getChildren().add(10, linhas[i + 1].getChildren().get(0));
-        }
+        FPPrincipal.getChildren().remove(pos);
     }
 
     void alteracaoEmSequenciaVolta(int i, int objetivo) {
@@ -189,18 +192,34 @@ public class ControllerListaSeq implements Initializable {
     void adicionar(MouseEvent event) throws IOException{
         int pos;
         String cont;
+
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("ERRO");
+
+        if (this.LS == null) {
+            ERROSemLista(alerta);
+            return;
+        }
+
         try {
             pos = Integer.parseInt(TFAdicionarPosicao.getText()) - 1;
             cont = TFAdicionarValor.getText();
-            if (cont.isEmpty())
+            if (cont.isEmpty()) {
+                ERROParametroVazio(alerta, "Conteúdo");
                 return;
-        } catch (Exception e) {
+            }
+        } catch (NumberFormatException e) {
+            ERRONaoNumerico(alerta, "Posição");
             return;
         }
-        if (pos > this.LS.size() || pos >= 55)
+        if (pos > this.LS.size() || pos >= 55) {
+            ERROForaDeEscopo(alerta, "adicionar", pos+1);
             return;
-        if (!this.LS.insert(cont, pos))
+        }
+        if (!this.LS.insert(cont, pos)) {
+            ERROFalhou(alerta, "Adicionar");
             return;
+        }
         TFAdicionarPosicao.setText("");
         TFAdicionarValor.setText("");
         TFNumeroDeElementos.setText(String.valueOf(this.LS.size()));
@@ -212,13 +231,23 @@ public class ControllerListaSeq implements Initializable {
     void buscarPorPosicao(MouseEvent event) {
         int pos;
 
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("ERRO");
+
+        if (this.LS == null) {
+            ERROSemLista(alerta);
+            return;
+        }
+
         try {
             pos = Integer.parseInt(TFPosicao.getText()) - 1;
         } catch (Exception e) {
+            ERRONaoNumerico(alerta, "Posição");
             return;
         }
 
         if (pos >= this.LS.size() || pos < 0) {
+            ERROForaDeEscopo(alerta, "buscar", pos+1);
             return;
         }
 
@@ -232,16 +261,29 @@ public class ControllerListaSeq implements Initializable {
         String val;
         int pos;
 
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("ERRO");
+
+        if (this.LS == null) {
+            ERROSemLista(alerta);
+            return;
+        }
+
         try {
             int teste = Integer.parseInt(TFValor.getText());
             val = String.valueOf(teste);
         } catch (Exception e) {
+            ERRONaoNumerico(alerta, "Valor");
             return;
         }
 
         pos = this.LS.indexOf(val);
 
         if (pos == -1) {
+            alerta.setHeaderText("NÃO ENCONTRADO");
+            alerta.setContentText("O valor não existe na lista!");
+
+            alerta.showAndWait();
             return;
         }
 
@@ -253,7 +295,14 @@ public class ControllerListaSeq implements Initializable {
     @FXML
     void criarListaSequencial(MouseEvent event) {
 
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("ERRO");
+
         if (this.LS != null) {
+            alerta.setHeaderText("JÁ EXISTE");
+            alerta.setContentText("A lista já existe!");
+
+            alerta.showAndWait();
             return;
         }
 
@@ -261,10 +310,25 @@ public class ControllerListaSeq implements Initializable {
         try {
             amount = Integer.parseInt(TFCriar.getText());
         } catch (Exception e) {
+            ERRONaoNumerico(alerta, "Tamanho");
             return;
         }
 
-        if (amount > 55) return;
+        /*if (amount > 70) {
+            alerta.setHeaderText("MUITO GRANDE");
+            alerta.setContentText("O tamanho desejado não é suportado. Por favor insira um valor menor que 56!");
+
+            alerta.showAndWait();
+            return;
+        }*/
+
+        if (amount < 1) {
+            alerta.setHeaderText("MUITO PEQUENO");
+            alerta.setContentText("Por favor, insira um tamanho maior que 0!");
+
+            alerta.showAndWait();
+            return;
+        }
 
         this.LS = new SeqList<>(amount);
         this.totalDeElementos = amount;
@@ -272,21 +336,25 @@ public class ControllerListaSeq implements Initializable {
         TFCriar.setText("");
 
         for (int i = 0; i < amount; i++) {
-            linhas[i / 11].getChildren().add(i % 11, bloco("", "profile-boxes-black"));
-        }
-        for (int i = 0; i < 5; i++) {
-            if (linhas[i].getChildren().size() > 11) {
-                linhas[i + 1].getChildren().add(0, linhas[i].getChildren().get(8));
-            }
+            FPPrincipal.getChildren().add(i, bloco("", "profile-boxes-black"));
         }
     }
 
     @FXML
     void apagarLista(MouseEvent event) {
+
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("ERROR");
+
+        if (this.LS == null) {
+            ERROSemLista(alerta);
+            return;
+        }
+
         this.LS = null;
 
         for (int i = 0; i < this.totalDeElementos; i++) {
-            linhas[i / 11].getChildren().remove(0);
+            FPPrincipal.getChildren().remove(0);
         }
 
         this.totalDeElementos = 0;
@@ -296,46 +364,34 @@ public class ControllerListaSeq implements Initializable {
     @FXML
     void removerPorPosicao(MouseEvent event) {
         int pos;
-        try {
-            pos = Integer.parseInt(TFPosicao.getText()) - 1;
-        } catch (Exception e) {
+
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("ERRO");
+
+        if (this.LS == null) {
+            ERROSemLista(alerta);
             return;
         }
 
-        if (pos >= this.LS.size() || pos < 0)
+        try {
+            pos = Integer.parseInt(TFPosicao.getText()) - 1;
+        } catch (Exception e) {
+            ERRONaoNumerico(alerta, "Posição");
             return;
-        if (this.LS.remove(pos) == null)
+        }
+
+        if (pos >= this.LS.size() || pos < 0) {
+            ERROForaDeEscopo(alerta, "remover", pos+1);
             return;
+        }
+        if (this.LS.remove(pos) == null) {
+            ERROFalhou(alerta, "Remover");
+            return;
+        }
         TFPosicao.setText("");
         TFNumeroDeElementos.setText(String.valueOf(this.LS.size()));
 
         alteracaoEmSequenciaIda(pos, this.LS.size());
-    }
-
-    @FXML
-    void removerPorValor(MouseEvent event) {
-        String val;
-        int pos;
-
-        try {
-            int teste = Integer.parseInt(TFValor.getText());
-            val = String.valueOf(teste);
-        } catch (Exception e) {
-            return;
-        }
-
-        pos = this.LS.indexOf(val);
-        this.LS.remove(pos);
-
-        if (pos == -1) {
-            return;
-        }
-
-        this.TFValor.setText("");
-
-        alteracaoEmSequenciaIda(pos, this.LS.size());
-
-        TFNumeroDeElementos.setText(String.valueOf(this.LS.size()));
     }
 
     @FXML
@@ -354,20 +410,17 @@ public class ControllerListaSeq implements Initializable {
         dropShadow.setOffsetX(3.0); // Configurar o deslocamento horizontal da sombra
         dropShadow.setOffsetY(3.0); // Configurar o deslocamento vertical da sombra
         dropShadow.setColor(javafx.scene.paint.Color.BLACK); // Configurar a cor da sombra
+
+        Rectangle clip = new Rectangle();
+        clip.widthProperty().bind(FPPrincipal.widthProperty());
+        clip.heightProperty().bind(FPPrincipal.heightProperty());
+        FPPrincipal.setClip(clip);
+
         // Aplicar o efeito de sombra ao rótulo
         paneAdicionar.setEffect(dropShadow);
         paneBuscar.setEffect(dropShadow);
         paneBuscarValor.setEffect(dropShadow);
         paneCriarLista.setEffect(dropShadow);
         TFNumeroDeElementos.setText("0");
-
-        linhas[0] = HBoxLinha1;
-        linhas[1] = HBoxLinha2;
-        linhas[2] = HBoxLinha3;
-        linhas[3] = HBoxLinha4;
-        linhas[4] = HBoxLinha5;
-
-
-
     }
 }

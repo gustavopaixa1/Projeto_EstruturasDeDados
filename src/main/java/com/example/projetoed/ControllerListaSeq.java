@@ -269,12 +269,10 @@ public class ControllerListaSeq implements Initializable {
             return;
         }
 
-        try {
-            int teste = Integer.parseInt(TFValor.getText());
-            val = String.valueOf(teste);
-        } catch (Exception e) {
-            ERRONaoNumerico(alerta, "Valor");
-            return;
+        val = TFValor.getText();
+
+        if (val.isEmpty()) {
+            ERROParametroVazio(alerta, "Valor");
         }
 
         pos = this.LS.indexOf(val);
@@ -287,7 +285,7 @@ public class ControllerListaSeq implements Initializable {
             return;
         }
 
-        this.TFPosicao.setText("");
+        this.TFValor.setText("");
 
         this.animacao(pos, 1, 0.5).play();
     }

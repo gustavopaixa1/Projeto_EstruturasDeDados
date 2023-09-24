@@ -212,7 +212,7 @@ public class ControllerListaSeq implements Initializable {
             ERRONaoNumerico(alerta, "Posição");
             return;
         }
-        if (pos > this.LS.size() || pos >= 55) {
+        if (pos > this.LS.size() || pos < 0) {
             ERROForaDeEscopo(alerta, "adicionar", pos+1);
             return;
         }

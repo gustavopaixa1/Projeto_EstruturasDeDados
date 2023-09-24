@@ -152,12 +152,12 @@ public class ControllerLDE implements Initializable {
                 VBox setas = new VBox();
                 setas.setAlignment(Pos.CENTER_LEFT);
 
-                ImageView img1 = new ImageView("imagens/seta.png");
+                ImageView img1 = new ImageView("seta.png");
                 img1.setFitWidth(30);
                 img1.setFitHeight(30);
                 img1.setOpacity(0);
 
-                ImageView img2 = new ImageView("imagens/seta.png");
+                ImageView img2 = new ImageView("seta.png");
                 img2.setFitWidth(30);
                 img2.setFitHeight(30);
                 img2.setRotate(180);
@@ -225,12 +225,12 @@ public class ControllerLDE implements Initializable {
                 VBox setas = new VBox();
                 setas.setAlignment(Pos.CENTER_LEFT);
 
-                ImageView img1 = new ImageView("imagens/seta.png");
+                ImageView img1 = new ImageView("seta.png");
                 img1.setFitWidth(30);
                 img1.setFitHeight(30);
                 img1.setOpacity(0);
 
-                ImageView img2 = new ImageView("imagens/seta.png");
+                ImageView img2 = new ImageView("seta.png");
                 img2.setFitWidth(30);
                 img2.setFitHeight(30);
                 img2.setRotate(180);
@@ -336,12 +336,12 @@ public class ControllerLDE implements Initializable {
             VBox setas = new VBox();
             setas.setAlignment(Pos.CENTER_LEFT);
 
-            ImageView img1 = new ImageView("imagens/seta.png");
+            ImageView img1 = new ImageView("seta.png");
             img1.setFitWidth(30);
             img1.setFitHeight(30);
             img1.setOpacity(0);
 
-            ImageView img2 = new ImageView("imagens/seta.png");
+            ImageView img2 = new ImageView("seta.png");
             img2.setFitWidth(30);
             img2.setFitHeight(30);
             img2.setRotate(180);
@@ -372,11 +372,11 @@ public class ControllerLDE implements Initializable {
         VBox setas = new VBox();
         setas.setAlignment(Pos.CENTER_LEFT);
 
-        ImageView img1 = new ImageView("imagens/seta.png");
+        ImageView img1 = new ImageView("seta.png");
         img1.setFitWidth(30);
         img1.setFitHeight(30);
 
-        ImageView img2 = new ImageView("imagens/seta.png");
+        ImageView img2 = new ImageView("seta.png");
         img2.setFitWidth(30);
         img2.setFitHeight(30);
         img2.setRotate(180);

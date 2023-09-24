@@ -218,7 +218,7 @@ public class ControllerLSE implements Initializable {
 
         novoNo.getChildren().add(sp);
 
-        ImageView img = new ImageView("imagens/seta.png");
+        ImageView img = new ImageView("seta.png");
         img.setFitWidth(30);
         img.setFitHeight(30);
         novoNo.getChildren().add(img);

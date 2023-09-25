@@ -25,7 +25,6 @@ import java.net.URL;
 
 public class ControllerLDE implements Initializable {
     private DoubleLinkedList<String> LDE;
-    private int numeroDeElementos;
 
     @FXML
     private Button BotaoVoltar;
@@ -49,21 +48,7 @@ public class ControllerLDE implements Initializable {
     private TextField TFConsultaIndicePosicao;
 
     @FXML
-    private HBox HBoxLinha1;
-
-    @FXML
-    private HBox HBoxLinha2;
-
-    @FXML
-    private HBox HBoxLinha3;
-
-    @FXML
-    private HBox HBoxLinha4;
-
-    @FXML
-    private HBox HBoxLinha5;
-
-    private HBox[] linhas = new HBox[5];
+    private FlowPane FPDados;
 
     @FXML
     void EventoVoltar(MouseEvent event) throws IOException {
@@ -77,286 +62,157 @@ public class ControllerLDE implements Initializable {
     void EventoInserir(MouseEvent event) throws IOException {
         int pos;
         String cont;
-
         Alert alerta = new Alert(Alert.AlertType.ERROR);
         alerta.setTitle("ERRO");
-
         try {
-            pos = Integer.parseInt(TFInserirPosicao.getText()) - 1;
-            cont = TFInserirConteudo.getText();
-            if (cont.isEmpty()) {
-
-                alerta.setHeaderText("VAZIO!");
-                alerta.setContentText("Preencha o campo do conteudo com um valor que exista na lista!");
-
-                alerta.showAndWait();
-                return;
-            }
+            pos = Integer.parseInt(TFInserirPosicao.getText().trim()) - 1;
+            cont = TFInserirConteudo.getText().trim();
+            if (pos < 0 || pos > this.LDE.size())
+                throw new NumberFormatException();
+            if (cont.isEmpty())
+                throw new Exception();
+        } catch (NumberFormatException e) {
+            alerta.setHeaderText("Valor inválido.");
+            if (this.LDE.isEmpty())
+                alerta.setContentText("Por favor, preencha o campo da posição com o valor 1 para adicionar o primeiro elemento da lista.");
+            else
+                alerta.setContentText(String.format("Por favor, preencha o campo da posição com um número inteiro entre 1 e %d.", this.LDE.size() + 1));
+            alerta.showAndWait();
+            return;
         } catch (Exception e) {
-                alerta.setHeaderText("PRECISA DE UM NUMERO INTEIRO!");
-            alerta.setContentText("Preencha o campo da posicao com uma posicao que exista na lista!");
-
+            alerta.setHeaderText("Conteúdo inválido.");
+            alerta.setContentText("Por favor, preencha o campo de conteúdo com algo para ser armazenado (apenas espaços não são caracteres válidos).");
             alerta.showAndWait();
             return;
         }
 
-        if (pos > LDE.size() || pos < 0) {
-
-            alerta.setHeaderText("NAO EXISTE!");
-            alerta.setContentText("Preencha o campo da posicao com uma posicao que possa existir na lista!");
-
-            alerta.showAndWait();
-            return;
-        }
-
-        if (this.LDE.size() == 40)
-            return;
-        if (!this.LDE.insert(cont, pos))
-            return;
+        this.LDE.insert(cont, pos);
         TFInserirPosicao.setText("");
         TFInserirConteudo.setText("");
-        TFNumeroDeElementos.setText(String.valueOf(++numeroDeElementos));
-
-        // Reajustar a Opacidade da seta esquerda esquerda
-        if (pos % 8 > 0) {
-            HBox hSeta = (HBox) linhas[pos / 8].getChildren().get((pos - 1) % 8);
-            VBox vSeta;
-            if (pos % 8 == 1)
-                 vSeta = (VBox) hSeta.getChildren().get(2); // No primeiro no, o VBox direito estara na terceira posicao, o indice 2
-            else
-                vSeta = (VBox) hSeta.getChildren().get(1); // Nos outros nos, o Vbox direito estara na segunda posiçao, no indice 1
-            ImageView setaFinal = (ImageView) vSeta.getChildren().get(1);
-            setaFinal.setOpacity(1);
-        }
-
-        // Remover o VBox esquerdo do No que era a antiga cabeça
-        if (pos % 8 <= (this.LDE.size() - 2) % 8 && pos % 8 == 0) {
-            HBox hSeta = (HBox) linhas[pos / 8].getChildren().get(pos % 8);
-            hSeta.getChildren().remove(0);
-        }
-
-
-
+        TFNumeroDeElementos.setText(String.valueOf(this.LDE.size()));
 
         // Criar os Blocos
-        linhas[pos / 8].getChildren().add(pos % 8, bloco(pos, cont, this.LDE.size() - 1)); //  -1 porque ja foi acrescentado mais um No na LDE
-        for (int i = 0; i < 5; i++) {
-            if (linhas[i].getChildren().size() > 8) {
-                HBox carryBox = (HBox) linhas[i].getChildren().get(8);
-                HBox apagaHBox = (HBox) linhas[i].getChildren().get(7);
+        FPDados.getChildren().add(pos, bloco(cont));
 
-                VBox apagaVBox = (VBox) apagaHBox.getChildren().get(1);
-                ImageView apagaSeta = (ImageView) apagaVBox.getChildren().get(1);
-                apagaSeta.setOpacity(0);
-
-                VBox setas = new VBox();
-                setas.setAlignment(Pos.CENTER_LEFT);
-
-                ImageView img1 = new ImageView("seta.png");
-                img1.setFitWidth(30);
-                img1.setFitHeight(30);
-                img1.setOpacity(0);
-
-                ImageView img2 = new ImageView("seta.png");
-                img2.setFitWidth(30);
-                img2.setFitHeight(30);
-                img2.setRotate(180);
-
-                setas.getChildren().add(img1);
-                setas.getChildren().add(img2);
-                carryBox.getChildren().add(0, setas);
-
-                if (linhas[i + 1].getChildren().size() > 0) {
-                    HBox removerVBox = (HBox) linhas[i + 1].getChildren().get(0);
-                    removerVBox.getChildren().remove(0);
-                    VBox acenderVBox = (VBox) carryBox.getChildren().get(2);
-                    ImageView acenderSeta = (ImageView) acenderVBox.getChildren().get(1);
-                    acenderSeta.setOpacity(1);
-                }
-
-                linhas[i + 1].getChildren().add(0, carryBox);
-            }
-        }
-
-        this.animacaoSequencia(0, 1, 0.1, pos - 1, this.LDE.size() - 1, LDE);
-        this.animacao(pos, 1 + pos / 5, 0.5).play();
+        this.animacaoSequencia(0, 1, 0.1, "#8b0000", "#008B8B", pos - 1, LDE.size() - 1, LDE);
+        this.animacao(pos, 1 + pos / 5, 0.5, "#73ee81", "#008B8B").play();
     }
 
     @FXML
     void EventoRemover(MouseEvent event) throws IOException {
         int pos;
-
         Alert alerta = new Alert(Alert.AlertType.ERROR);
-        alerta.setTitle("ERRO!");
-
+        alerta.setTitle("ERRO");
         try {
-            pos = Integer.parseInt(TFRemoverPosicao.getText()) - 1;
+            pos = Integer.parseInt(TFRemoverPosicao.getText().trim()) - 1;
+            if (pos < 0 || pos >= this.LDE.size())
+                throw new Exception();
         } catch (Exception e) {
-            alerta.setHeaderText("PRECISA DE UM NUMERO INTEIRO!");
-            alerta.setContentText("Preencha o campo da posicao com uma posicao que exista na lista!");
-
+            if (this.LDE.isEmpty()) {
+                alerta.setHeaderText("Lista vazia.");
+                alerta.setContentText("A lista está vazia, não existem itens para serem removidos.");
+            } else if (this.LDE.size() == 1) {
+                alerta.setHeaderText("Valor inválido.");
+                alerta.setContentText("Por favor, preencha o campo da posição com o valor 1 para remover o único elemento da lista.");
+            } else {
+                alerta.setHeaderText("Valor inválido.");
+                alerta.setContentText(String.format("Por favor, preencha o campo da posição com um número inteiro entre 1 e %d.", this.LDE.size()));
+            }
             alerta.showAndWait();
             return;
         }
 
-        if (pos > LDE.size() || pos < 0) {
-
-            alerta.setHeaderText("NAO EXISTE!");
-            alerta.setContentText("Preencha o campo da posicao com uma posicao que exista na lista!");
-
-            alerta.showAndWait();
-            return;
-        }
-
-        String cont = this.LDE.remove(pos);
-        if (cont == null)
-            return;
+        this.LDE.remove(pos);
         TFRemoverPosicao.setText("");
-        TFNumeroDeElementos.setText(String.valueOf(--numeroDeElementos));
+        TFNumeroDeElementos.setText(String.valueOf(this.LDE.size()));
 
         // Remover os Blocos
-        this.animacaoSequencia(0, 1, 0.1, pos - 1, this.LDE.size() - 1, this.LDE);
-        FillTransition aux = this.animacao(pos, 1 + pos / 5, 0.5);
+        this.animacaoSequencia(0, 1, 0.1, "#8b0000", "#008B8B", pos - 1, LDE.size(), LDE);
+        FillTransition aux = this.animacao(pos, 1 + pos / 5, 0.5, "#008B8B", "#ffffff");
 
         aux.setOnFinished(evento -> {
-
-            if (pos % 8 == 0 && LDE.size() != 0) {
-                HBox No = (HBox) linhas[pos / 8].getChildren().get((pos + 1) % 8);
-                VBox setas = new VBox();
-                setas.setAlignment(Pos.CENTER_LEFT);
-
-                ImageView img1 = new ImageView("seta.png");
-                img1.setFitWidth(30);
-                img1.setFitHeight(30);
-                img1.setOpacity(0);
-
-                ImageView img2 = new ImageView("seta.png");
-                img2.setFitWidth(30);
-                img2.setFitHeight(30);
-                img2.setRotate(180);
-
-                setas.getChildren().add(img1);
-                setas.getChildren().add(img2);
-                No.getChildren().add(0, setas);
-            }
-
-            linhas[pos / 8].getChildren().remove(pos % 8);
-
-            for (int i = pos / 8; i < 4; i++)
-                if (this.LDE.size() >= (i + 1) * 8) {
-                    HBox novoVizinho = (HBox) linhas[i].getChildren().get(6);
-                    HBox bound = (HBox)  linhas[i + 1].getChildren().get(0);
-                    if (this.LDE.size() > (i + 1) * 8) {
-                        HBox vizinho = (HBox) linhas[i + 1].getChildren().get(1);
-
-                        vizinho.getChildren().add(0, bound.getChildren().get(0));
-                    } else {
-                        bound.getChildren().remove(0);
-                    }
-
-                    VBox iluminarNovo = (VBox) novoVizinho.getChildren().get(1);
-                    ImageView iluminarSeta = (ImageView) iluminarNovo.getChildren().get(1);
-                    iluminarSeta.setOpacity(1);
-
-                    VBox apagarSetaBound = (VBox) bound.getChildren().get(1);
-                    ImageView apagarSeta = (ImageView) apagarSetaBound.getChildren().get(1);
-                    apagarSeta.setOpacity(0);
-
-                    linhas[i].getChildren().add(7, bound);
-                }
+            FPDados.getChildren().remove(pos);
         });
         aux.play();
     }
 
     @FXML
     void EventoConsultaValor(MouseEvent event) throws IOException {
-        String cont = TFConsultaValorConteudo.getText();
+        String cont;
+        int contIndex;
         Alert alerta = new Alert(Alert.AlertType.ERROR);
-        alerta.setTitle("ERRO!");
-
-        if (cont.isEmpty()) {
-            alerta.setHeaderText("VAZIO!");
-            alerta.setContentText("Preencha o campo do conteudo com um valor que exista na lista!");
-
+        alerta.setTitle("ERRO");
+        try {
+            cont = TFConsultaValorConteudo.getText().trim();
+            if (cont.isEmpty())
+                throw new Exception();
+            contIndex = this.LDE.indexOf(cont);
+            if (contIndex == -1)
+                throw new NumberFormatException();
+        } catch (NumberFormatException e) {
+            alerta.setHeaderText("Conteúdo não encontrado.");
+            alerta.setContentText("O conteúdo buscado não se encontra na lista atualmente.");
+            alerta.showAndWait();
+            return;
+        } catch (Exception e) {
+            alerta.setHeaderText("Conteúdo inválido.");
+            alerta.setContentText("Por favor, preencha o campo de conteúdo com algo para ser buscado (apenas espaços não são caracteres válidos).");
             alerta.showAndWait();
             return;
         }
-        int contIndex = this.LDE.indexOf(cont);
-        if (contIndex == -1) {
-            alerta.setHeaderText("NAO EXISTE!");
-            alerta.setContentText("Preencha o campo do conteudo com um valor que exista na lista!");
 
-            alerta.showAndWait();
-            return;
-        }
         TFConsultaValorConteudo.setText("");
 
         // Consultar os Blocos por Valor
-        this.animacao(contIndex, 2, 1).play();
+        this.animacao(contIndex, 2, 1, "#8b0000", "#008B8B").play();
     }
     @FXML
-    void EventoConsultaPosicao(MouseEvent event) throws IOException {
+    void EventoConsultaIndice(MouseEvent event) throws IOException {
         int contIndex;
         Alert alerta = new Alert(Alert.AlertType.ERROR);
-        alerta.setTitle("ERRO!");
-
+        alerta.setTitle("ERRO");
         try {
-            contIndex = Integer.parseInt(TFConsultaIndicePosicao.getText()) - 1;
+            contIndex = Integer.parseInt(TFConsultaIndicePosicao.getText().trim()) - 1;
+            if (contIndex < 0 || contIndex >= this.LDE.size())
+                throw new Exception();
         } catch (Exception e) {
-            alerta.setHeaderText("PRECISA DE UM NUMERO INTEIRO!");
-            alerta.setContentText("Preencha o campo da posicao com uma posicao que exista na lista!");
-
+            if (this.LDE.isEmpty()) {
+                alerta.setHeaderText("Lista vazia.");
+                alerta.setContentText("A lista está vazia, não existem itens para serem buscados.");
+            } else if (this.LDE.size() == 1) {
+                alerta.setHeaderText("Valor inválido.");
+                alerta.setContentText("Por favor, preencha o campo da posição com o valor 1 para buscar o único elemento da lista.");
+            } else {
+                alerta.setHeaderText("Valor inválido.");
+                alerta.setContentText(String.format("Por favor, preencha o campo da posição com um número inteiro entre 1 e %d.", this.LDE.size()));
+            }
             alerta.showAndWait();
             return;
         }
 
-        if (contIndex > LDE.size() || contIndex < 0) {
-
-            alerta.setHeaderText("NAO EXISTE!");
-            alerta.setContentText("Preencha o campo da posicao com uma posicao que exista na lista!");
-
-            alerta.showAndWait();
-            return;
-        }
-
-        String cont = this.LDE.get(contIndex);
-        if (cont == null)
-            return;
         TFConsultaIndicePosicao.setText("");
 
         // Consultar os Blocos por Indice
-        this.animacao(contIndex, 2, 1).play();
+        this.animacao(contIndex, 2, 1, "#8b0000", "#008B8B").play();
     }
 
-    private HBox bloco(int pos, String conteudo, int tamanho) {
+    private HBox bloco(String conteudo) {
         HBox novoNo = new HBox();
         novoNo.setAlignment(Pos.CENTER);
 
-        if (pos % 8 == 0) {
-            VBox setas = new VBox();
-            setas.setAlignment(Pos.CENTER_LEFT);
-
-            ImageView img1 = new ImageView("seta.png");
-            img1.setFitWidth(30);
-            img1.setFitHeight(30);
-            img1.setOpacity(0);
-
-            ImageView img2 = new ImageView("seta.png");
-            img2.setFitWidth(30);
-            img2.setFitHeight(30);
-            img2.setRotate(180);
-
-            setas.getChildren().add(img1);
-            setas.getChildren().add(img2);
-            novoNo.getChildren().add(setas);
-        }
+        ImageView img = new ImageView("seta.png");
+        img.setFitWidth(30);
+        img.setFitHeight(30);
+        img.setScaleX(-1);
+        novoNo.getChildren().add(img);
+        img.setTranslateY(15);
 
         StackPane sp = new StackPane();
-        sp.setPrefWidth(50);
+        sp.setPrefWidth(60);
         sp.setPrefHeight(50);
         sp.setAlignment(Pos.CENTER);
 
-        Rectangle retangulo = new Rectangle(50,50);
+        Rectangle retangulo = new Rectangle(60,50);
         retangulo.getStyleClass().add("profile-boxes");
         sp.getChildren().add(retangulo);
 
@@ -369,72 +225,50 @@ public class ControllerLDE implements Initializable {
 
         novoNo.getChildren().add(sp);
 
-        VBox setas = new VBox();
-        setas.setAlignment(Pos.CENTER_LEFT);
-
-        ImageView img1 = new ImageView("seta.png");
-        img1.setFitWidth(30);
-        img1.setFitHeight(30);
-
-        ImageView img2 = new ImageView("seta.png");
-        img2.setFitWidth(30);
-        img2.setFitHeight(30);
-        img2.setRotate(180);
-        if (pos == tamanho)
-            img2.setOpacity(0);
-
-        setas.getChildren().add(img1);
-        setas.getChildren().add(img2);
-        novoNo.getChildren().add(setas);
-
+        img = new ImageView("seta.png");
+        img.setFitWidth(30);
+        img.setFitHeight(30);
+        novoNo.getChildren().add(img);
+        img.setTranslateY(-15);
 
         return novoNo;
     }
 
-    private FillTransition animacao(int contIndex, int cycles, double time) {
-        HBox auxHBox = (HBox) linhas[contIndex / 8].getChildren().get(contIndex % 8);
-        StackPane auxSP;
-        if (contIndex % 8 != 0)
-            auxSP = (StackPane) auxHBox.getChildren().get(0);
-        else
-            auxSP = (StackPane) auxHBox.getChildren().get(1);
+    private FillTransition animacao(int contIndex, int cycles, double time, String fromColor, String toColor) {
+        HBox auxHBox = (HBox) FPDados.getChildren().get(contIndex);
+        StackPane auxSP = (StackPane) auxHBox.getChildren().get(1);
         Rectangle auxRec = (Rectangle) auxSP.getChildren().get(0);
 
         FillTransition transition = new FillTransition();
         transition.setShape(auxRec);
-        transition.setFromValue(Color.web("#8b0000"));
-        transition.setToValue(Color.web("#008B8B"));
+        transition.setFromValue(Color.web(fromColor));
+        transition.setToValue(Color.web(toColor));
         transition.setCycleCount(cycles);
         transition.setDuration(Duration.seconds(time));
         return transition;
     }
 
-    private void animacaoSequencia(int contIndex, int cycles, double time, int selecionado, int max, DoubleLinkedList LDE) {
+    private void animacaoSequencia(int contIndex, int cycles, double time, String fromColor, String toColor, int selecionado, int max, DoubleLinkedList LDE) {
+
 
         FillTransition aux;
 
 
-        if (selecionado < (LDE.size())/2) {
+        if (selecionado < LDE.size()/2) {
             if (contIndex > selecionado)
                 return;
-
-            aux = animacao(contIndex, cycles, time);
+            aux = animacao(contIndex, cycles, time, fromColor, toColor);
             aux.setAutoReverse(true);
-
-
             aux.setOnFinished(event -> {
-                animacaoSequencia(contIndex + 1, cycles, time, selecionado, max, LDE);
+                animacaoSequencia(contIndex + 1, cycles, time, fromColor, toColor, selecionado, max, LDE);
             });
         } else {
             if (max <= selecionado)
                 return;
-
-            aux = animacao(max, cycles, time);
+            aux = animacao(max, cycles, time, fromColor, toColor);
             aux.setAutoReverse(true);
-
-
             aux.setOnFinished(event -> {
-                        animacaoSequencia(contIndex, cycles, time, selecionado, max - 1, LDE);
+                animacaoSequencia(contIndex, cycles, time, fromColor, toColor, selecionado, max - 1, LDE);
             });
         }
 
@@ -444,14 +278,12 @@ public class ControllerLDE implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.LDE = new DoubleLinkedList<>();
-        this.numeroDeElementos = 0;
         TFNumeroDeElementos.setText("0");
+        FPDados.setHgap(-30);
 
-        linhas[0] = HBoxLinha1;
-        linhas[1] = HBoxLinha2;
-        linhas[2] = HBoxLinha3;
-        linhas[3] = HBoxLinha4;
-        linhas[4] = HBoxLinha5;
+        Rectangle clip = new Rectangle();
+        clip.widthProperty().bind(FPDados.widthProperty());
+        clip.heightProperty().bind(FPDados.heightProperty());
+        FPDados.setClip(clip);
     }
 }
-

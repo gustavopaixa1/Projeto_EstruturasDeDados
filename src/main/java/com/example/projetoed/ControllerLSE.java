@@ -8,6 +8,7 @@ import javafx.animation.FillTransition;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -49,6 +50,18 @@ public class ControllerLSE implements Initializable {
 
     @FXML
     private FlowPane FPDados;
+
+    @FXML
+    private AnchorPane paneConsultar1;
+
+    @FXML
+    private AnchorPane paneConsultar2;
+
+    @FXML
+    private AnchorPane paneInserir;
+
+    @FXML
+    private AnchorPane paneRemover;
 
     @FXML
     void EventoVoltar(MouseEvent event) throws IOException {
@@ -257,6 +270,16 @@ public class ControllerLSE implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.LSE = new SingleLinkedList<>();
         TFNumeroDeElementos.setText("0");
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setRadius(5.0); // Configurar o raio da sombra
+        dropShadow.setOffsetX(3.0); // Configurar o deslocamento horizontal da sombra
+        dropShadow.setOffsetY(3.0); // Configurar o deslocamento vertical da sombra
+        dropShadow.setColor(javafx.scene.paint.Color.BLACK); // Configurar a cor da sombra
+
+        paneConsultar1.setEffect(dropShadow);
+        paneInserir.setEffect(dropShadow);
+        paneConsultar2.setEffect(dropShadow);
+        paneRemover.setEffect(dropShadow);
 
         Rectangle clip = new Rectangle();
         clip.widthProperty().bind(FPDados.widthProperty());

@@ -12,6 +12,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -31,6 +32,9 @@ public class ControllerMenuPrincipal implements Initializable {
 
     @FXML
     private Button botaoLSE;
+
+    @FXML
+    private HBox paneMenu;
 
     @FXML
     void abrirLDE(MouseEvent event) throws IOException {

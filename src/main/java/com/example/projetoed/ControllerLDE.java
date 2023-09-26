@@ -61,6 +61,7 @@ public class ControllerLDE implements Initializable {
     @FXML
     void EventoInserir(MouseEvent event) throws IOException {
         int pos;
+        char inserir = 'i';
         String cont;
         Alert alerta = new Alert(Alert.AlertType.ERROR);
         alerta.setTitle("ERRO");
@@ -94,13 +95,14 @@ public class ControllerLDE implements Initializable {
         // Criar os Blocos
         FPDados.getChildren().add(pos, bloco(cont));
 
-        this.animacaoSequencia(0, 1, 0.1, "#8b0000", "#008B8B", pos - 1, LDE.size() - 1, LDE);
+        this.animacaoSequencia(0, 1, 0.1, "#8b0000", "#008B8B", pos - 1, LDE.size() - 1, inserir, LDE);
         this.animacao(pos, 1 + pos / 5, 0.5, "#73ee81", "#008B8B").play();
     }
 
     @FXML
     void EventoRemover(MouseEvent event) throws IOException {
         int pos;
+        char remove = 'r';
         Alert alerta = new Alert(Alert.AlertType.ERROR);
         alerta.setTitle("ERRO");
         try {
@@ -127,7 +129,7 @@ public class ControllerLDE implements Initializable {
         TFNumeroDeElementos.setText(String.valueOf(this.LDE.size()));
 
         // Remover os Blocos
-        this.animacaoSequencia(0, 1, 0.1, "#8b0000", "#008B8B", pos - 1, LDE.size(), LDE);
+        this.animacaoSequencia(0, 1, 0.1, "#8b0000", "#008B8B", pos - 1, LDE.size(), remove, LDE);
         FillTransition aux = this.animacao(pos, 1 + pos / 5, 0.5, "#008B8B", "#ffffff");
 
         aux.setOnFinished(evento -> {
@@ -248,19 +250,19 @@ public class ControllerLDE implements Initializable {
         return transition;
     }
 
-    private void animacaoSequencia(int contIndex, int cycles, double time, String fromColor, String toColor, int selecionado, int max, DoubleLinkedList LDE) {
+    private void animacaoSequencia(int contIndex, int cycles, double time, String fromColor, String toColor, int selecionado, int max, char operation, DoubleLinkedList LDE) {
 
 
         FillTransition aux;
 
 
-        if (selecionado < LDE.size()/2) {
+        if ((selecionado + 1 < LDE.size()/2 && operation == 'i') || (selecionado < LDE.size()/2 && operation == 'r')) {
             if (contIndex > selecionado)
                 return;
             aux = animacao(contIndex, cycles, time, fromColor, toColor);
             aux.setAutoReverse(true);
             aux.setOnFinished(event -> {
-                animacaoSequencia(contIndex + 1, cycles, time, fromColor, toColor, selecionado, max, LDE);
+                animacaoSequencia(contIndex + 1, cycles, time, fromColor, toColor, selecionado, max, operation, LDE);
             });
         } else {
             if (max <= selecionado)
@@ -268,7 +270,7 @@ public class ControllerLDE implements Initializable {
             aux = animacao(max, cycles, time, fromColor, toColor);
             aux.setAutoReverse(true);
             aux.setOnFinished(event -> {
-                animacaoSequencia(contIndex, cycles, time, fromColor, toColor, selecionado, max - 1, LDE);
+                animacaoSequencia(contIndex, cycles, time, fromColor, toColor, selecionado, max - 1, operation, LDE);
             });
         }
 

@@ -202,8 +202,8 @@ public class ControllerListaSeq implements Initializable {
         }
 
         try {
-            pos = Integer.parseInt(TFAdicionarPosicao.getText()) - 1;
-            cont = TFAdicionarValor.getText();
+            pos = Integer.parseInt(TFAdicionarPosicao.getText().trim()) - 1;
+            cont = TFAdicionarValor.getText().trim();
             if (cont.isEmpty()) {
                 ERROParametroVazio(alerta, "Conteúdo");
                 return;
@@ -240,7 +240,7 @@ public class ControllerListaSeq implements Initializable {
         }
 
         try {
-            pos = Integer.parseInt(TFPosicao.getText()) - 1;
+            pos = Integer.parseInt(TFPosicao.getText().trim()) - 1;
         } catch (Exception e) {
             ERRONaoNumerico(alerta, "Posição");
             return;
@@ -269,7 +269,7 @@ public class ControllerListaSeq implements Initializable {
             return;
         }
 
-        val = TFValor.getText();
+        val = TFValor.getText().trim();
 
         if (val.isEmpty()) {
             ERROParametroVazio(alerta, "Valor");
@@ -306,7 +306,7 @@ public class ControllerListaSeq implements Initializable {
 
         int amount;
         try {
-            amount = Integer.parseInt(TFCriar.getText());
+            amount = Integer.parseInt(TFCriar.getText().trim());
         } catch (Exception e) {
             ERRONaoNumerico(alerta, "Tamanho");
             return;
@@ -372,7 +372,7 @@ public class ControllerListaSeq implements Initializable {
         }
 
         try {
-            pos = Integer.parseInt(TFPosicao.getText()) - 1;
+            pos = Integer.parseInt(TFPosicao.getText().trim()) - 1;
         } catch (Exception e) {
             ERRONaoNumerico(alerta, "Posição");
             return;

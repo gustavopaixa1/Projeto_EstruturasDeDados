@@ -103,3 +103,7 @@
         -fx-content: "\2190";
         -fx-padding-right: 5px;
 }
+
+.profile-voltar:hover{
+-fx-background-color: #8b0000;
+}

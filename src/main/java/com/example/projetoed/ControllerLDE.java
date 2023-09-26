@@ -8,6 +8,7 @@ import javafx.animation.FillTransition;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -49,6 +50,18 @@ public class ControllerLDE implements Initializable {
 
     @FXML
     private FlowPane FPDados;
+
+    @FXML
+    private AnchorPane paneConsultar1;
+
+    @FXML
+    private AnchorPane paneConsultar2;
+
+    @FXML
+    private AnchorPane paneInserir;
+
+    @FXML
+    private AnchorPane paneRemover;
 
     @FXML
     void EventoVoltar(MouseEvent event) throws IOException {
@@ -214,7 +227,7 @@ public class ControllerLDE implements Initializable {
         sp.setPrefHeight(50);
         sp.setAlignment(Pos.CENTER);
 
-        Rectangle retangulo = new Rectangle(60,50);
+        Rectangle retangulo = new Rectangle(50,50);
         retangulo.getStyleClass().add("profile-boxes");
         sp.getChildren().add(retangulo);
 
@@ -282,6 +295,17 @@ public class ControllerLDE implements Initializable {
         this.LDE = new DoubleLinkedList<>();
         TFNumeroDeElementos.setText("0");
         FPDados.setHgap(-30);
+
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setRadius(5.0); // Configurar o raio da sombra
+        dropShadow.setOffsetX(3.0); // Configurar o deslocamento horizontal da sombra
+        dropShadow.setOffsetY(3.0); // Configurar o deslocamento vertical da sombra
+        dropShadow.setColor(javafx.scene.paint.Color.BLACK); // Configurar a cor da sombra
+        paneConsultar1.setEffect(dropShadow);
+        paneInserir.setEffect(dropShadow);
+        paneConsultar2.setEffect(dropShadow);
+        paneRemover.setEffect(dropShadow);
+
 
         Rectangle clip = new Rectangle();
         clip.widthProperty().bind(FPDados.widthProperty());

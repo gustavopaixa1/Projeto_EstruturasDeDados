@@ -1,11 +1,40 @@
-.profile-layout{
-    -fx-background-color:  #008B8B;
-    -fx-background-radius: 0 0 20 20;
+
+.profile-box{
+  -fx-background-color: white;
+  -fx-mark-color: #008B8B; // arrow color
+  -fx-border-color: #ff7474;
+  -fx-border-radius: 10 10 10 10;
 }
 
+/* Cria um elemento azul arredondado na borda*/
+.cabecalho{
+    -fx-background-color:  #008B8B;
+    -fx-background-radius: 10 10 10 10;
+    -fx-stroke: #8b0000;
+    -fx-stroke-width: 5;
+    -fx-border-radius: 10 10 10 10;
+    -fx-border-width: 2;
+}
+
+.profile-layout{
+    -fx-background-color:  #008B8B;
+    -fx-background-radius: 20 20 20 20;
+}
+
+.profile-border-pane{
+    -fx-background-color:  #008B8B;
+    -fx-background-radius: 10 10 10 10;
+}
+
+/* Adiciona o fundo azul aos botoes*/
 .profile-button{
-        -fx-background-color: #8B0000;
+        -fx-background-color: #008B8B;
         -fx-background-radius: 10 10 10 10;
+        -fx-text-fill: white;
+}
+
+.profile-button:hover {
+    -fx-background-color: #8b0000; /* Cor de fundo alterada */
 }
 
 .profile-text-field{
@@ -17,18 +46,64 @@
     -fx-border-width: 7;
     -fx-border-radius: 10 10 10 10;
 }
+
 .profile-boxes{
     -fx-arc-height: 10;
     -fx-arc-width: 10;
     -fx-stroke: #003B6F;
-    -fx-fill: #008B8B;
-    -fx-stroke-width: 3;
+/*    -fx-fill: #008B8B;*/
+    -fx-stroke-width: 2;
 }
 
+.profile-boxes-ls{
+    -fx-arc-height: 10;
+    -fx-arc-width: 10;
+    -fx-fill-color: #008B8B;
+    -fx-border-color:#000000;
+    -fx-border-width: 1;
+}
 
+.profile-boxes-black{
+    -fx-arc-height: 10;
+    -fx-arc-width: 10;
+    -fx-stroke: #000000;
+    -fx-fill: #008B8B;
+    -fx-stroke-width: 1;
+}
+
+/* Cria uma caixinha na cor verma ao redor da pane*/
 .choice-box {
-  -fx-background-color: white;
-  -fx-mark-color: #4682B4; // arrow color
-  -fx-border-color: #4682B4;
+  -fx-background-color: #808080;
+  -fx-mark-color: #8b0000; // arrow color
+  -fx-border-color: #8b0000;
   -fx-border-radius: 10 10 10 10;
+}
+
+/* altera o conjunto de botoes e textfields do projeto*/
+.choice-buttons{
+  -fx-background-color: transparent;
+  -fx-mark-color: #DCDCDC; // arrow color;
+  -fx-border-color: #8b0000;
+  -fx-border-radius: 10 10 10 10;
+
+}
+
+/* Botão de apagar a lista sequencial*/
+.apagar-lista{
+        -fx-background-color: #8b0000;
+        -fx-background-radius: 10 10 10 10;
+}
+
+/*Botao de voltar*/
+.profile-voltar{
+        -fx-background-color: #008B8B;
+        -fx-background-radius: 10 10 10 10;
+        -fx-text-fill: white;
+        -fx-font-size: 20px;
+        -fx-content: "\2190";
+        -fx-padding-right: 5px;
+}
+
+.profile-voltar:hover{
+-fx-background-color: #8b0000;
 }

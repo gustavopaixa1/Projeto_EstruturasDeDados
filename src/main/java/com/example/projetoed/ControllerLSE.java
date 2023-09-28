@@ -1,30 +1,31 @@
 package com.example.projetoed;
 
-import javafx.animation.FillTransition;
+import com.example.projetoed.implementations.SingleLinkedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.animation.FillTransition;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.ImageView;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import java.util.ResourceBundle;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ResourceBundle;
-import com.example.projetoed.implementations.SingleLinkedList;
-import javafx.util.Duration;
+
 
 public class ControllerLSE implements Initializable {
     private SingleLinkedList<String> LSE;
-    private int numeroDeElementos;
 
     @FXML
     private Button BotaoVoltar;
@@ -51,6 +52,18 @@ public class ControllerLSE implements Initializable {
     private FlowPane FPDados;
 
     @FXML
+    private AnchorPane paneConsultar1;
+
+    @FXML
+    private AnchorPane paneConsultar2;
+
+    @FXML
+    private AnchorPane paneInserir;
+
+    @FXML
+    private AnchorPane paneRemover;
+
+    @FXML
     void EventoVoltar(MouseEvent event) throws IOException {
         Stage stage = (Stage) BotaoVoltar.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("menuPrincipal.fxml"));
@@ -67,16 +80,16 @@ public class ControllerLSE implements Initializable {
         try {
             pos = Integer.parseInt(TFInserirPosicao.getText().trim()) - 1;
             cont = TFInserirConteudo.getText().trim();
-            if (pos < 0 || pos > this.numeroDeElementos)
+            if (pos < 0 || pos > this.LSE.size())
                 throw new NumberFormatException();
             if (cont.isEmpty())
                 throw new Exception();
         } catch (NumberFormatException e) {
             alerta.setHeaderText("Valor inválido.");
-            if (this.numeroDeElementos == 0)
+            if (this.LSE.isEmpty())
                 alerta.setContentText("Por favor, preencha o campo da posição com o valor 1 para adicionar o primeiro elemento da lista.");
             else
-                alerta.setContentText(String.format("Por favor, preencha o campo da posição com um número inteiro entre 1 e %d.", this.numeroDeElementos + 1));
+                alerta.setContentText(String.format("Por favor, preencha o campo da posição com um número inteiro entre 1 e %d.", this.LSE.size() + 1));
             alerta.showAndWait();
             return;
         } catch (Exception e) {
@@ -89,7 +102,7 @@ public class ControllerLSE implements Initializable {
         this.LSE.insert(cont, pos);
         TFInserirPosicao.setText("");
         TFInserirConteudo.setText("");
-        TFNumeroDeElementos.setText(String.valueOf(++numeroDeElementos));
+        TFNumeroDeElementos.setText(String.valueOf(this.LSE.size()));
 
         // Criar os Blocos
         FPDados.getChildren().add(pos, bloco(cont));
@@ -105,18 +118,18 @@ public class ControllerLSE implements Initializable {
         alerta.setTitle("ERRO");
         try {
             pos = Integer.parseInt(TFRemoverPosicao.getText().trim()) - 1;
-            if (pos < 0 || pos >= this.numeroDeElementos)
+            if (pos < 0 || pos >= this.LSE.size())
                 throw new Exception();
         } catch (Exception e) {
-            if (this.numeroDeElementos == 0) {
+            if (this.LSE.isEmpty()) {
                 alerta.setHeaderText("Lista vazia.");
                 alerta.setContentText("A lista está vazia, não existem itens para serem removidos.");
-            } else if (this.numeroDeElementos == 1) {
+            } else if (this.LSE.size() == 1) {
                 alerta.setHeaderText("Valor inválido.");
                 alerta.setContentText("Por favor, preencha o campo da posição com o valor 1 para remover o único elemento da lista.");
             } else {
                 alerta.setHeaderText("Valor inválido.");
-                alerta.setContentText(String.format("Por favor, preencha o campo da posição com um número inteiro entre 1 e %d.", this.numeroDeElementos));
+                alerta.setContentText(String.format("Por favor, preencha o campo da posição com um número inteiro entre 1 e %d.", this.LSE.size()));
             }
             alerta.showAndWait();
             return;
@@ -124,7 +137,7 @@ public class ControllerLSE implements Initializable {
 
         this.LSE.remove(pos);
         TFRemoverPosicao.setText("");
-        TFNumeroDeElementos.setText(String.valueOf(--numeroDeElementos));
+        TFNumeroDeElementos.setText(String.valueOf(this.LSE.size()));
 
         // Remover os Blocos
         this.animacaoSequencia(0, 1, 0.1, "#8b0000", "#008B8B", pos - 1);
@@ -173,18 +186,18 @@ public class ControllerLSE implements Initializable {
         alerta.setTitle("ERRO");
         try {
             contIndex = Integer.parseInt(TFConsultaIndicePosicao.getText().trim()) - 1;
-            if (contIndex < 0 || contIndex >= this.numeroDeElementos)
+            if (contIndex < 0 || contIndex >= this.LSE.size())
                 throw new Exception();
         } catch (Exception e) {
-            if (this.numeroDeElementos == 0) {
+            if (this.LSE.isEmpty()) {
                 alerta.setHeaderText("Lista vazia.");
                 alerta.setContentText("A lista está vazia, não existem itens para serem buscados.");
-            } else if (this.numeroDeElementos == 1) {
+            } else if (this.LSE.size() == 1) {
                 alerta.setHeaderText("Valor inválido.");
                 alerta.setContentText("Por favor, preencha o campo da posição com o valor 1 para buscar o único elemento da lista.");
             } else {
                 alerta.setHeaderText("Valor inválido.");
-                alerta.setContentText(String.format("Por favor, preencha o campo da posição com um número inteiro entre 1 e %d.", this.numeroDeElementos));
+                alerta.setContentText(String.format("Por favor, preencha o campo da posição com um número inteiro entre 1 e %d.", this.LSE.size()));
             }
             alerta.showAndWait();
             return;
@@ -273,8 +286,17 @@ public class ControllerLSE implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.LSE = new SingleLinkedList<>();
-        this.numeroDeElementos = 0;
         TFNumeroDeElementos.setText("0");
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setRadius(5.0); // Configurar o raio da sombra
+        dropShadow.setOffsetX(3.0); // Configurar o deslocamento horizontal da sombra
+        dropShadow.setOffsetY(3.0); // Configurar o deslocamento vertical da sombra
+        dropShadow.setColor(javafx.scene.paint.Color.BLACK); // Configurar a cor da sombra
+
+        paneConsultar1.setEffect(dropShadow);
+        paneInserir.setEffect(dropShadow);
+        paneConsultar2.setEffect(dropShadow);
+        paneRemover.setEffect(dropShadow);
 
         Rectangle clip = new Rectangle();
         clip.widthProperty().bind(FPDados.widthProperty());

@@ -1,50 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetoed.ControllerMenuPrincipal">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetoed.ControllerMenuPrincipal">
    <children>
-      <HBox alignment="CENTER" layoutX="50.0" layoutY="114.0" prefHeight="99.0" prefWidth="200.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="0.0">
+      <HBox alignment="CENTER" layoutX="-68.0" layoutY="-9.0" prefHeight="53.0" prefWidth="770.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
          <children>
-            <Pane prefHeight="99.0" prefWidth="413.0" styleClass="profile-layout" stylesheets="@style.css">
+            <Pane prefHeight="53.0" prefWidth="703.0" styleClass="cabecalho" stylesheets="@style.css">
                <children>
-                  <Text fill="WHITE" fontSmoothingType="LCD" layoutX="27.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estrutura de Dados" textAlignment="CENTER" wrappingWidth="357.3333282470703">
+                  <Text fill="WHITE" layoutX="173.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estrutura de Dados" textAlignment="CENTER" wrappingWidth="357.3333282470703">
                      <font>
-                        <Font name="Consolas Bold" size="36.0" />
+                        <Font name="Consolas" size="33.0" />
                      </font>
+                     <effect>
+                        <DropShadow height="21.99" radius="10.1275" spread="0.28" width="20.52" />
+                     </effect>
                   </Text>
                </children>
             </Pane>
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="122.0" layoutY="237.0" prefHeight="22.0" prefWidth="200.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="237.0">
+      <HBox alignment="CENTER" layoutX="19.0" layoutY="174.0" prefHeight="19.0" prefWidth="200.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="173.0">
          <children>
-            <Text fx:id="textoDeEscolha" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="html {  font-size: 10px;}h1 {  font-size: 5rem;  text-transform: capitalize;  text-shadow:    1px 1px 1px red,    2px 2px 1px red;  text-align: center;}h1 + p {  font-weight: bold;}p {  font-size: 1.5rem;  color: red;  font-family: Helvetica, Arial, sans-serif;}" text="Por favor, selecione uma opção:">
+            <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="html {  font-size: 10px;}h1 {  font-size: 5rem;  text-transform: capitalize;  text-shadow:    1px 1px 1px red,    2px 2px 1px red;  text-align: center;}h1 + p {  font-weight: bold;}p {  font-size: 1.5rem;  color: red;  font-family: Helvetica, Arial, sans-serif;}" text="Por favor, selecione uma opção:" textAlignment="CENTER">
                <font>
-                  <Font name="Consolas" size="22.0" />
+                  <Font name="Consolas Bold" size="19.0" />
                </font>
             </Text>
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="54.0" layoutY="341.0" prefHeight="37.0" prefWidth="200.0" spacing="20.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="341.0">
+      <HBox alignment="CENTER" layoutX="15.0" layoutY="209.0" prefHeight="183.0" prefWidth="200.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="209.0">
          <children>
-            <Button fx:id="botaoDeEscolha" mnemonicParsing="false" onMouseClicked="#getOpcoes" prefHeight="28.0" prefWidth="104.0" styleClass="profile-button" stylesheets="@style.css" text="Selecionar" textFill="WHITE">
-               <font>
-                  <Font name="Consolas" size="13.0" />
-               </font>
-            </Button>
-            <ChoiceBox fx:id="opcoes" blendMode="SRC_ATOP" centerShape="false" prefHeight="37.0" prefWidth="199.0">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </ChoiceBox>
+            <VBox alignment="CENTER" prefHeight="183.0" prefWidth="351.0" spacing="15.0" styleClass="choice-buttons" stylesheets="@style.css">
+               <children>
+                  <Button fx:id="botaoLS" mnemonicParsing="false" onMouseClicked="#abrirLS" prefHeight="33.0" prefWidth="173.0" styleClass="profile-button" stylesheets="@style.css" text="Lista Sequencial" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas" size="17.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="botaoLSE" mnemonicParsing="false" onMouseClicked="#abrirLSE" styleClass="profile-button" stylesheets="@style.css" text="Lista Simplesmente Encadeada" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas" size="17.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="botaoLDE" mnemonicParsing="false" onMouseClicked="#abrirLDE" prefHeight="25.0" styleClass="profile-button" text="Lista Duplamente Encadeada" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas" size="17.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="-21.0" layoutY="522.0" prefHeight="53.0" prefWidth="200.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="53.0" prefWidth="581.0">
+               <children>
+                  <Separator prefHeight="4.0" prefWidth="581.0" />
+                  <Label text="Universidade Federal da Paraíba" textOverrun="WORD_ELLIPSIS">
+                     <font>
+                        <Font name="Consolas Bold" size="17.0" />
+                     </font>
+                  </Label>
+                  <Label text="Centro de Informática" textOverrun="WORD_ELLIPSIS">
+                     <font>
+                        <Font name="Consolas Bold" size="17.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
          </children>
       </HBox>
    </children>

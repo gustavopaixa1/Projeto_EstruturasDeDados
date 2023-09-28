@@ -18,7 +18,7 @@
          <children>
             <VBox alignment="CENTER" prefHeight="72.0" prefWidth="321.0" style="-fx-background-radius: 10 10 10 10;" styleClass="profile-layout" stylesheets="@style.css">
                <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Lista Duplamente Encadeada" textAlignment="CENTER" wrappingWidth="200.0">
+                  <Text fill="WHITE" onDragDetected="#EventoDebugEncher" onMouseClicked="#EventoDebugEsvaziar" strokeType="OUTSIDE" strokeWidth="0.0" text="Lista Duplamente Encadeada" textAlignment="CENTER" wrappingWidth="200.0">
                      <font>
                         <Font name="Consolas Bold" size="19.0" />
                      </font>

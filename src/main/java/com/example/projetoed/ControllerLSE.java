@@ -220,7 +220,7 @@ public class ControllerLSE implements Initializable {
 
     @FXML
     void EventoDebugEsvaziar(MouseEvent event) throws IOException {
-        for (int i = this.numeroDeElementos; i >= 1; i--) {
+        for (int i = this.LSE.size(); i >= 1; i--) {
             this.TFRemoverPosicao.setText("1");
             this.EventoRemover(event);
         }

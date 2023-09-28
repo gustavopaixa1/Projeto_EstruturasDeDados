@@ -18,7 +18,7 @@
             <AnchorPane prefHeight="55.0" prefWidth="284.0" styleClass="cabecalho" stylesheets="@style.css">
                <children>
                   
-                                          <Text fill="WHITE" layoutX="20.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lista Sequencial" textAlignment="CENTER" wrappingWidth="243.62890625">
+                                          <Text fill="WHITE" layoutX="20.0" layoutY="34.0" onDragDetected="#EventoDebugEncher" onMouseClicked="#EventoDebugEsvaziar" strokeType="OUTSIDE" strokeWidth="0.0" text="Lista Sequencial" textAlignment="CENTER" wrappingWidth="243.62890625">
                      <font>
                         <Font name="Consolas Bold" size="19.0" />
                      </font>

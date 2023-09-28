@@ -400,6 +400,27 @@ public class ControllerListaSeq implements Initializable {
         stage.setScene(new Scene(root));
     }
 
+    @FXML
+    void EventoDebugEncher(MouseEvent event) throws IOException {
+        for (int i = 1; i <= 40; i++) {
+            this.TFAdicionarPosicao.setText(Integer.toString(i));
+            this.TFAdicionarValor.setText(Integer.toString(i));
+            this.adicionar(event);
+        }
+    }
+
+    @FXML
+    void EventoDebugEsvaziar(MouseEvent event) throws IOException {
+        if (this.LS == null)
+            return;
+
+        for (int i = this.LS.size(); i >= 1; i--) {
+            this.TFPosicao.setText("1");
+            this.removerPorPosicao(event);
+        }
+    }
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.totalDeElementos = 0;

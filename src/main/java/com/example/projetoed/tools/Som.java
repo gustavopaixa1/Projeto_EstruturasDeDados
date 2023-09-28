@@ -16,8 +16,6 @@ public class Som {
     private Clip escolherTela;
 
     public Som() {
-        String caminhoSonsDb = FolderFinder.findAbsolutePath(System.getProperty("user.dir"), "resources")
-                + "\\sonsDB\\";
         try {
             this.inserir = AudioSystem.getClip();
             this.remover = AudioSystem.getClip();
@@ -32,35 +30,35 @@ public class Som {
 
         AudioInputStream tmp;
         try {
-            tmp = AudioSystem.getAudioInputStream(new File(caminhoSonsDb + "inserir.wav"));
+            tmp = AudioSystem.getAudioInputStream(new File(getClass().getClassLoader().getResource("inserir.wav").getFile()));
             this.inserir.open(tmp);
             tmp.close();
 
-            tmp = AudioSystem.getAudioInputStream(new File(caminhoSonsDb + "remover.wav"));
+            tmp = AudioSystem.getAudioInputStream(new File(getClass().getClassLoader().getResource("remover.wav").getFile()));
             this.remover.open(tmp);
             tmp.close();
 
-            tmp = AudioSystem.getAudioInputStream(new File(caminhoSonsDb + "consultarValor.wav"));
+            tmp = AudioSystem.getAudioInputStream(new File(getClass().getClassLoader().getResource("consultarValor.wav").getFile()));
             this.consultarValor.open(tmp);
             tmp.close();
 
-            tmp = AudioSystem.getAudioInputStream(new File(caminhoSonsDb + "consultarPosicao.wav"));
+            tmp = AudioSystem.getAudioInputStream(new File(getClass().getClassLoader().getResource("consultarPosicao.wav").getFile()));
             this.consultarPosicao.open(tmp);
             tmp.close();
 
-            tmp = AudioSystem.getAudioInputStream(new File(caminhoSonsDb + "voltar.wav"));
+            tmp = AudioSystem.getAudioInputStream(new File(getClass().getClassLoader().getResource("voltar.wav").getFile()));
             this.voltar.open(tmp);
             tmp.close();
 
-            tmp = AudioSystem.getAudioInputStream(new File(caminhoSonsDb + "criarLista.wav"));
+            tmp = AudioSystem.getAudioInputStream(new File(getClass().getClassLoader().getResource("criarLista.wav").getFile()));
             this.criarLista.open(tmp);
             tmp.close();
 
-            tmp = AudioSystem.getAudioInputStream(new File(caminhoSonsDb + "apagarLista.wav"));
+            tmp = AudioSystem.getAudioInputStream(new File(getClass().getClassLoader().getResource("apagarLista.wav").getFile()));
             this.apagarLista.open(tmp);
             tmp.close();
 
-            tmp = AudioSystem.getAudioInputStream(new File(caminhoSonsDb + "escolherTela.wav"));
+            tmp = AudioSystem.getAudioInputStream(new File(getClass().getClassLoader().getResource("escolherTela.wav").getFile()));
             this.escolherTela.open(tmp);
             tmp.close();
         } catch (Exception e) {

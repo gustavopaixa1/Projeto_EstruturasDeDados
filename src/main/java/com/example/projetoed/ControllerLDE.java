@@ -1,6 +1,7 @@
 package com.example.projetoed;
 
 import com.example.projetoed.implementations.DoubleLinkedList;
+import com.example.projetoed.tools.Som;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,6 +27,7 @@ import java.net.URL;
 
 public class ControllerLDE implements Initializable {
     private DoubleLinkedList<String> LDE;
+    private Som som;
 
     @FXML
     private Button BotaoVoltar;
@@ -65,6 +67,7 @@ public class ControllerLDE implements Initializable {
 
     @FXML
     void EventoVoltar(MouseEvent event) throws IOException {
+        this.som.voltar();
         Stage stage = (Stage) BotaoVoltar.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("menuPrincipal.fxml"));
         stage.setTitle("Estrutura de Dados");
@@ -101,6 +104,7 @@ public class ControllerLDE implements Initializable {
         }
 
         this.LDE.insert(cont, pos);
+        this.som.inserir();
         TFInserirPosicao.setText("");
         TFInserirConteudo.setText("");
         TFNumeroDeElementos.setText(String.valueOf(this.LDE.size()));
@@ -138,6 +142,7 @@ public class ControllerLDE implements Initializable {
         }
 
         this.LDE.remove(pos);
+        this.som.remover();
         TFRemoverPosicao.setText("");
         TFNumeroDeElementos.setText(String.valueOf(this.LDE.size()));
 
@@ -176,6 +181,7 @@ public class ControllerLDE implements Initializable {
             return;
         }
 
+        this.som.consultarValor();
         TFConsultaValorConteudo.setText("");
 
         // Consultar os Blocos por Valor
@@ -205,6 +211,7 @@ public class ControllerLDE implements Initializable {
             return;
         }
 
+        this.som.consultarPosicao();
         TFConsultaIndicePosicao.setText("");
 
         // Consultar os Blocos por Indice
@@ -293,6 +300,7 @@ public class ControllerLDE implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.LDE = new DoubleLinkedList<>();
+        this.som = new Som();
         TFNumeroDeElementos.setText("0");
         FPDados.setHgap(-30);
 

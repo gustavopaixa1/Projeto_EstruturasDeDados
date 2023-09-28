@@ -1,6 +1,7 @@
 package com.example.projetoed;
 
 import com.example.projetoed.implementations.SeqList;
+import com.example.projetoed.tools.Som;
 import javafx.animation.FillTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -55,6 +56,7 @@ public class ControllerListaSeq implements Initializable {
     private int totalDeElementos;
 
     private SeqList<String> LS;
+    private Som som;
 
     @FXML
     private AnchorPane paneAdicionar;
@@ -220,6 +222,7 @@ public class ControllerListaSeq implements Initializable {
             ERROFalhou(alerta, "Adicionar");
             return;
         }
+        this.som.inserir();
         TFAdicionarPosicao.setText("");
         TFAdicionarValor.setText("");
         TFNumeroDeElementos.setText(String.valueOf(this.LS.size()));
@@ -251,6 +254,7 @@ public class ControllerListaSeq implements Initializable {
             return;
         }
 
+        this.som.consultarPosicao();
         this.TFPosicao.setText("");
 
         this.animacao(pos, 1, 0.5).play();
@@ -285,6 +289,7 @@ public class ControllerListaSeq implements Initializable {
             return;
         }
 
+        this.som.consultarValor();
         this.TFValor.setText("");
 
         this.animacao(pos, 1, 0.5).play();
@@ -331,6 +336,7 @@ public class ControllerListaSeq implements Initializable {
         this.LS = new SeqList<>(amount);
         this.totalDeElementos = amount;
 
+        this.som.criarLista();
         TFCriar.setText("");
 
         for (int i = 0; i < amount; i++) {
@@ -356,6 +362,7 @@ public class ControllerListaSeq implements Initializable {
         }
 
         this.totalDeElementos = 0;
+        this.som.apagarLista();
         TFNumeroDeElementos.setText("0");
     }
 
@@ -386,6 +393,7 @@ public class ControllerListaSeq implements Initializable {
             ERROFalhou(alerta, "Remover");
             return;
         }
+        this.som.remover();
         TFPosicao.setText("");
         TFNumeroDeElementos.setText(String.valueOf(this.LS.size()));
 
@@ -394,6 +402,7 @@ public class ControllerListaSeq implements Initializable {
 
     @FXML
     void voltar(MouseEvent event) throws IOException{
+        this.som.voltar();
         Stage stage = (Stage) BotaoVoltar.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("menuPrincipal.fxml"));
         stage.setTitle("Estrutura de Dados");
@@ -403,6 +412,7 @@ public class ControllerListaSeq implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.totalDeElementos = 0;
+        this.som = new Som();
         DropShadow dropShadow = new DropShadow();
         dropShadow.setRadius(5.0); // Configurar o raio da sombra
         dropShadow.setOffsetX(3.0); // Configurar o deslocamento horizontal da sombra

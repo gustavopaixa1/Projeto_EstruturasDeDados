@@ -1,29 +1,22 @@
 package com.example.projetoed;
 
-import javafx.animation.TranslateTransition;
+import com.example.projetoed.tools.Som;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ControllerMenuPrincipal implements Initializable {
+    private Som som;
     @FXML
     private Button botaoLDE;
 
@@ -38,6 +31,7 @@ public class ControllerMenuPrincipal implements Initializable {
 
     @FXML
     void abrirLDE(MouseEvent event) throws IOException {
+        this.som.escolherTela();
         Stage stage = (Stage) botaoLDE.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("LDE.fxml"));
         stage.setTitle("Lista Duplamente Encadeada");
@@ -46,6 +40,7 @@ public class ControllerMenuPrincipal implements Initializable {
 
     @FXML
     void abrirLS(MouseEvent event) throws IOException {
+        this.som.escolherTela();
         Scene scene;
         Stage stage = (Stage) botaoLS.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("listaSeq.fxml"));
@@ -57,6 +52,7 @@ public class ControllerMenuPrincipal implements Initializable {
 
     @FXML
     void abrirLSE(MouseEvent event) throws IOException {
+        this.som.escolherTela();
         Stage stage = (Stage) botaoLSE.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("LSE.fxml"));
         stage.setTitle("Lista Simplesmente Encadeada");
@@ -66,6 +62,6 @@ public class ControllerMenuPrincipal implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        this.som = new Som();
     }
 }

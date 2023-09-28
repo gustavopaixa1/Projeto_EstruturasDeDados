@@ -1,6 +1,7 @@
 package com.example.projetoed;
 
 import com.example.projetoed.implementations.SingleLinkedList;
+import com.example.projetoed.tools.Som;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,6 +27,7 @@ import java.net.URL;
 
 public class ControllerLSE implements Initializable {
     private SingleLinkedList<String> LSE;
+    private Som som;
 
     @FXML
     private Button BotaoVoltar;
@@ -65,6 +67,7 @@ public class ControllerLSE implements Initializable {
 
     @FXML
     void EventoVoltar(MouseEvent event) throws IOException {
+        this.som.voltar();
         Stage stage = (Stage) BotaoVoltar.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("menuPrincipal.fxml"));
         stage.setTitle("Estrutura de Dados");
@@ -100,6 +103,7 @@ public class ControllerLSE implements Initializable {
         }
 
         this.LSE.insert(cont, pos);
+        this.som.inserir();
         TFInserirPosicao.setText("");
         TFInserirConteudo.setText("");
         TFNumeroDeElementos.setText(String.valueOf(this.LSE.size()));
@@ -136,6 +140,7 @@ public class ControllerLSE implements Initializable {
         }
 
         this.LSE.remove(pos);
+        this.som.remover();
         TFRemoverPosicao.setText("");
         TFNumeroDeElementos.setText(String.valueOf(this.LSE.size()));
 
@@ -174,6 +179,7 @@ public class ControllerLSE implements Initializable {
             return;
         }
 
+        this.som.consultarValor();
         TFConsultaValorConteudo.setText("");
 
         // Consultar os Blocos por Valor
@@ -203,6 +209,7 @@ public class ControllerLSE implements Initializable {
             return;
         }
 
+        this.som.consultarPosicao();
         TFConsultaIndicePosicao.setText("");
 
         // Consultar os Blocos por Indice
@@ -269,6 +276,7 @@ public class ControllerLSE implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.LSE = new SingleLinkedList<>();
+        this.som = new Som();
         TFNumeroDeElementos.setText("0");
         DropShadow dropShadow = new DropShadow();
         dropShadow.setRadius(5.0); // Configurar o raio da sombra

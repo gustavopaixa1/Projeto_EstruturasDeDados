@@ -7,6 +7,8 @@ public interface DEQueue<T> {
 
     public T front();
 
+    public T end();
+
     public void push(T v);
 
     public T pop();

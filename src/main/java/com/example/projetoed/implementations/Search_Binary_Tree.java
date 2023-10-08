@@ -37,8 +37,8 @@ public class Search_Binary_Tree<T extends Comparable<T>> implements DEBinary_Tre
         }
     }
 
-    Node root;
-    int numberOfElements;
+    private Node root;
+    private int numberOfElements;
 
     public  Search_Binary_Tree() {
         this.numberOfElements = 0;
@@ -54,6 +54,23 @@ public class Search_Binary_Tree<T extends Comparable<T>> implements DEBinary_Tre
 
     public T root() {
         return this.root.getContent();
+    }
+
+    public void preOrder_Traversal() {
+        preOrder_Traversal(this.root);
+    }
+
+    public void postOrder_Traversal() {
+        postOrder_Traversal(this.root);
+    }
+
+    public void inOrder_Traversal() {
+        inOrder_Traversal(this.root);
+    }
+
+    public T remove(T v) {
+        if (!isEmpty()) this.numberOfElements--;
+        return remove(this.root, v).getContent();
     }
 
     public boolean search(T v) {
@@ -72,70 +89,6 @@ public class Search_Binary_Tree<T extends Comparable<T>> implements DEBinary_Tre
         }
 
         return false;
-    }
-
-    private void privateInsert(Node node, Node aux) {
-        if (node.getContent().compareTo(aux.getContent()) < 0 && aux.getLeft() == null) {
-            aux.setLeft(node);
-            return;
-        }
-
-        if (node.getContent().compareTo(aux.getContent()) > 0 && aux.getRight() == null) {
-            aux.setRight(aux);
-            return;
-        }
-
-        if (node.getContent().compareTo(aux.getContent()) < 0) {
-            privateInsert(node, aux.getLeft());
-        } else {
-            privateInsert(node, aux.getRight());
-        }
-    }
-
-    private Node getNodeByValue(T v, Node aux) {
-        if (aux == null) {
-            return null;
-        }
-
-        if (aux.getContent().compareTo(v) == 0) {
-            return aux;
-        }
-
-        if (aux.getContent().compareTo(v) < 0) {
-            return getNodeByValue(v, aux.getLeft());
-        } else {
-            return getNodeByValue(v, aux.getRight());
-        }
-    }
-
-    private T removeRoot() {
-        Node aux;
-        aux = this.root;
-
-        if (this.root.getLeft() == null && this.root.getRight() == null) {
-            this.root = null;
-
-            return aux.getContent();
-        }
-
-        if (this.root.getLeft() != null) {
-            this.root = aux.getLeft();
-            aux.setLeft(null);
-
-            return aux.getContent();
-        }
-
-        if (this.root.getRight() != null) {
-            this.root = aux.getRight();
-            aux.setLeft(null);
-
-            return aux.getContent();
-        }
-
-        Node sucessor = findSucessor(aux);
-        int valorAux;
-
-        valorAux
     }
 
     public void insert(T v) {
@@ -157,16 +110,88 @@ public class Search_Binary_Tree<T extends Comparable<T>> implements DEBinary_Tre
         privateInsert(newNode, aux);
         this.numberOfElements++;
     }
-    public T remove(T v) {
-        Node aux = getNodeByValue(v, this.root);
 
-        if (aux == null) {
-            return null;
+    private void privateInsert(Node node, Node aux) {
+        if (node.getContent().compareTo(aux.getContent()) < 0 && aux.getLeft() == null) {
+            aux.setLeft(node);
+            return;
         }
 
-        if (aux.getContent().compareTo(this.root.getContent()) == 0) {
-            return removeRoot();
+        if (node.getContent().compareTo(aux.getContent()) > 0 && aux.getRight() == null) {
+            aux.setRight(aux);
+            return;
+        }
+
+        if (node.getContent().compareTo(aux.getContent()) < 0) {
+            privateInsert(node, aux.getLeft());
+        } else {
+            privateInsert(node, aux.getRight());
         }
     }
-    public void clear();
+
+    private Node findMin(Node node) {
+        if (node.getLeft() == null) {
+            return node;
+        }
+
+        return findMin(node.getLeft());
+    }
+
+    private Node remove(Node node, T v) {
+        if (node == null) return null;
+        else if (v.compareTo(node.getContent()) < 0) node.setLeft(remove(node.getLeft(), v));
+        else if (v.compareTo(node.getContent()) > 0) node.setRight(remove(node.getRight(), v));
+        else if (node.getRight() == null && node.getLeft() == null) {
+            node = null;
+            return node;
+        }
+        else if (node.getLeft() == null) {
+            Node aux = node.getRight();
+            node = null;
+
+            return aux;
+        }
+        else {
+            Node aux = findMin(node.getRight());
+            node.setContent(aux.getContent());
+            remove(node.getRight(), node.getContent());
+        }
+        return node;
+    }
+
+    private void preOrder_Traversal(Node node) {
+        if (node == null) {
+            return;
+        }
+
+        System.out.println(node.getContent());
+
+        preOrder_Traversal(node.getLeft());
+        preOrder_Traversal(node.getRight());
+    }
+
+    private void inOrder_Traversal(Node node) {
+        if (node == null) {
+            return;
+        }
+
+        inOrder_Traversal(node.getLeft());
+        System.out.println(node.getContent());
+        inOrder_Traversal(node.getRight());
+    }
+
+    private void postOrder_Traversal(Node node) {
+        if (node == null) {
+            return;
+        }
+
+        postOrder_Traversal(node.getLeft());
+        postOrder_Traversal(node.getRight());
+
+        System.out.println(node.getContent());
+    }
+
+    public void clear() {
+        while (!isEmpty()) remove(this.root, this.root.getContent());
+    }
 }

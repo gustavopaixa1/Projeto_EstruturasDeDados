@@ -4,8 +4,8 @@ public interface DEBinary_Tree<T> {
     public boolean isEmpty();
     public int size();
     public T root();
-    public bool search(T v);
-    public void push(T v);
-    public T pop();
+    public boolean search(T v);
+    public void insert(T v);
+    public T remove(T v);
     public void clear();
 }

@@ -45,7 +45,7 @@ public class Linked_Stack<T> implements DEStack<T> {
     }
 
     public T top() {
-        return this.top.content;
+        return this.top.getContent();
     }
 
     public T push(T v) {
@@ -58,7 +58,7 @@ public class Linked_Stack<T> implements DEStack<T> {
 
         this.numberOfElements++;
 
-        return this.top.content;
+        return this.top.getContent();
     }
 
     public T pop() {
@@ -74,7 +74,7 @@ public class Linked_Stack<T> implements DEStack<T> {
 
         this.numberOfElements--;
 
-        return aux.content;
+        return aux.getContent();
     }
 
     public void clear() {

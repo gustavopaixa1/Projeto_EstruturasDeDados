@@ -58,14 +58,17 @@ public class Search_Binary_Tree<T extends Comparable<T>> implements DEBinary_Tre
 
     public void preOrder_Traversal() {
         preOrder_Traversal(this.root);
+        System.out.println();
     }
 
     public void postOrder_Traversal() {
         postOrder_Traversal(this.root);
+        System.out.println();
     }
 
     public void inOrder_Traversal() {
         inOrder_Traversal(this.root);
+        System.out.println();
     }
 
     public T remove(T v) {
@@ -164,7 +167,7 @@ public class Search_Binary_Tree<T extends Comparable<T>> implements DEBinary_Tre
             return;
         }
 
-        System.out.println(node.getContent());
+        System.out.print(node.getContent() + " ");
 
         preOrder_Traversal(node.getLeft());
         preOrder_Traversal(node.getRight());
@@ -176,7 +179,7 @@ public class Search_Binary_Tree<T extends Comparable<T>> implements DEBinary_Tre
         }
 
         inOrder_Traversal(node.getLeft());
-        System.out.println(node.getContent());
+        System.out.print(node.getContent() + " ");
         inOrder_Traversal(node.getRight());
     }
 
@@ -188,7 +191,7 @@ public class Search_Binary_Tree<T extends Comparable<T>> implements DEBinary_Tre
         postOrder_Traversal(node.getLeft());
         postOrder_Traversal(node.getRight());
 
-        System.out.println(node.getContent());
+        System.out.print(node.getContent() + " ");
     }
 
     public void clear() {

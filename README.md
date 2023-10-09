@@ -10,7 +10,7 @@ O projeto consiste em representar as estruturas de dados (lista sequencial, list
 - [x] Lista Duplamente Encadeada
 
 # Projeto_2_EstruturasDeDados
-Repositório referente ao primeiro projeto da disciplina Estrutura de Dados, na UFPB.
+Repositório referente ao segundo projeto da disciplina Estrutura de Dados, na UFPB.
 O projeto consiste em representar as estruturas de dados (lista sequencial, lista simplesmente encadeada e lista duplamente encadeada) de forma visual. A linguagem utilizada foi java, em conjunto com o JavaFx, SceneBuilder e CSS.
 
 

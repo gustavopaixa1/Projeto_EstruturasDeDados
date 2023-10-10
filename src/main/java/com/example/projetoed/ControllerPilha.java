@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -41,12 +42,6 @@ public class ControllerPilha implements Initializable {
     private TextField TopoConteudo;
 
     @FXML
-    private TextField TFConsultaIndicePosicao;
-
-    @FXML
-    private TextField TFConsultaValorConteudo;
-
-    @FXML
     private TextField TFInserirConteudo;
 
     @FXML
@@ -59,7 +54,7 @@ public class ControllerPilha implements Initializable {
     private TextField TFRemoverPosicao;
 
     @FXML
-    private AnchorPane paneConsultar1;
+    private Button ConsultarTopo;
 
     @FXML
     private AnchorPane paneConsultar2;
@@ -71,14 +66,22 @@ public class ControllerPilha implements Initializable {
     private AnchorPane paneRemover;
 
     @FXML
-    void EventoConsultaIndice(MouseEvent event) {
+    void EventoConsultaTopo(MouseEvent event) {
+
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("ERRO");
+
+        if (PE.isEmpty()) {
+            alerta.setHeaderText("VAZIO");
+            alerta.setContentText("A pilha ja esta vazia, por isso nao tem como consultar topo!");
+            alerta.showAndWait();
+            return;
+        }
+
+        this.animacao(0, 2, 1, "#8b0000", "#008B8B").play();
 
     }
 
-    @FXML
-    void EventoConsultaValor(MouseEvent event) {
-
-    }
 
     @FXML
     void EventoInserir(MouseEvent event) {
@@ -112,6 +115,29 @@ public class ControllerPilha implements Initializable {
     @FXML
     void EventoRemover(MouseEvent event) {
 
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("ERRO");
+
+        if (PE.isEmpty()) {
+            alerta.setHeaderText("VAZIO");
+            alerta.setContentText("A pilha ja esta vazia, por isso nao tem como remover mais!");
+            alerta.showAndWait();
+            return;
+        }
+
+        PE.pop();
+        TFNumeroDeElementos.setText(String.valueOf(PE.size()));
+        TopoConteudo.setText(PE.top());
+        if (PE.isEmpty())
+            TopoConteudo.setText("Nao tem!");
+
+        FillTransition aux = this.animacao(0, 1, 0.5, "#008B8B", "#ffffff");
+        aux.play();
+
+        aux.setOnFinished(evento -> {
+            FPDados.getChildren().remove(0);
+        });
+
     }
 
     @FXML
@@ -141,11 +167,13 @@ public class ControllerPilha implements Initializable {
     private VBox bloco(String conteudo) {
         VBox novoNo = new VBox();
         novoNo.setAlignment(Pos.CENTER);
+        novoNo.getStyleClass().add("vbox-pilha");
 
         StackPane sp = new StackPane();
-        sp.setPrefWidth(50);
+        sp.setPrefWidth(90);
         sp.setPrefHeight(60);
         sp.setAlignment(Pos.CENTER);
+
 
         Rectangle retangulo = new Rectangle(50,50);
         retangulo.getStyleClass().add("profile-boxes");
@@ -179,9 +207,8 @@ public class ControllerPilha implements Initializable {
         dropShadow.setOffsetY(3.0); // Configurar o deslocamento vertical da sombra
         dropShadow.setColor(javafx.scene.paint.Color.BLACK); // Configurar a cor da sombra
 
-        paneConsultar1.setEffect(dropShadow);
+        ConsultarTopo.setEffect(dropShadow);
         paneInserir.setEffect(dropShadow);
-        paneConsultar2.setEffect(dropShadow);
         paneRemover.setEffect(dropShadow);
 
         Rectangle clip = new Rectangle();
@@ -189,7 +216,10 @@ public class ControllerPilha implements Initializable {
         clip.heightProperty().bind(FPDados.heightProperty());
         FPDados.setClip(clip);
         FPDados.setOrientation(Orientation.VERTICAL);
-        FPDados.setHgap(80);
+        //FPDados.setRotate(180);
+        FPDados.setAlignment(Pos.BOTTOM_LEFT);
+        FPDados.setRowValignment(VPos.BOTTOM);
+        //FPDados.setHgap(80);
     }
 
 }

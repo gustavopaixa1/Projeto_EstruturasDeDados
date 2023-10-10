@@ -37,7 +37,7 @@
             </Button>
          </children>
       </HBox>
-      <VBox alignment="CENTER" layoutX="116.0" layoutY="76.0" prefHeight="82.0" prefWidth="172.0" spacing="10.0" AnchorPane.bottomAnchor="107.0" AnchorPane.leftAnchor="116.0">
+      <VBox alignment="CENTER" layoutX="116.0" layoutY="76.0" prefHeight="277.0" prefWidth="172.0" spacing="60.0" AnchorPane.bottomAnchor="107.0" AnchorPane.leftAnchor="116.0">
          <children>
             <VBox alignment="CENTER" prefHeight="82.0" prefWidth="172.0" spacing="10.0">
                <children>
@@ -49,12 +49,23 @@
                   <TextField fx:id="TFNumeroDeElementos" alignment="CENTER" editable="false" prefHeight="25.0" prefWidth="130.0" styleClass="profile-text-field" stylesheets="@style.css" text="0" />
                </children>
             </VBox>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Topo (Conteudo)" textAlignment="CENTER" wrappingWidth="135.0">
-               <font>
-                  <Font name="Consolas" size="12.0" />
-               </font>
-            </Text>
-            <TextField fx:id="TopoConteudo" alignment="CENTER" editable="false" prefHeight="25.0" prefWidth="130.0" promptText="Ainda nao tem!" styleClass="profile-text-field" stylesheets="@style.css" />
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+               <children>
+                  <Button fx:id="ConsultarTopo" mnemonicParsing="false" onMouseClicked="#EventoConsultaTopo" prefHeight="28.0" prefWidth="172.0" styleClass="profile-button" stylesheets="@style.css" text="   Consultar Topo" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView disable="true" fitHeight="19.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../imagens/pesquisa.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <TextField fx:id="TopoConteudo" alignment="CENTER" editable="false" prefHeight="25.0" prefWidth="130.0" promptText="Ainda nao tem!" styleClass="profile-text-field" stylesheets="@style.css" />
+               </children>
+            </VBox>
             <AnchorPane fx:id="paneInserir" maxHeight="75.0" maxWidth="237.0" minHeight="75.0" minWidth="172.0" prefHeight="75.0" prefWidth="172.0">
                <children>
                   <Button layoutY="10.0" mnemonicParsing="false" onMouseClicked="#EventoInserir" prefHeight="28.0" prefWidth="172.0" styleClass="profile-button" stylesheets="@style.css" text="   Inserir" textAlignment="CENTER" textFill="WHITE">
@@ -88,44 +99,6 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="paneConsultar1" maxHeight="116.0" maxWidth="185.0" minHeight="75.0" minWidth="160.0" prefHeight="75.0" prefWidth="172.0">
-               <children>
-                  <Button layoutY="10.0" mnemonicParsing="false" onMouseClicked="#EventoConsultaValor" prefHeight="28.0" prefWidth="172.0" styleClass="profile-button" stylesheets="@style.css" text="   Consultar Valor" textAlignment="CENTER" textFill="WHITE">
-                     <font>
-                        <Font name="Consolas Bold" size="14.0" />
-                     </font>
-                  </Button>
-                  <TextField fx:id="TFConsultaValorConteudo" alignment="CENTER" layoutX="41.0" layoutY="48.0" prefHeight="26.0" prefWidth="91.0" promptText="Conteúdo" styleClass="profile-text-field" stylesheets="@style.css">
-                     <font>
-                        <Font size="11.0" />
-                     </font>
-                  </TextField>
-                  <ImageView disable="true" fitHeight="19.0" fitWidth="20.0" layoutX="9.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../imagens/pesquisa.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-            <AnchorPane fx:id="paneConsultar2" maxHeight="75.0" maxWidth="194.0" minHeight="75.0" minWidth="172.0" prefHeight="75.0" prefWidth="172.0">
-               <children>
-                  <Button layoutY="10.0" mnemonicParsing="false" onMouseClicked="#EventoConsultaIndice" prefHeight="28.0" prefWidth="172.0" styleClass="profile-button" stylesheets="@style.css" text="   Consultar Posição" textAlignment="CENTER" textFill="WHITE">
-                     <font>
-                        <Font name="Consolas Bold" size="14.0" />
-                     </font>
-                  </Button>
-                  <TextField fx:id="TFConsultaIndicePosicao" alignment="CENTER" layoutX="41.0" layoutY="48.0" prefHeight="26.0" prefWidth="91.0" promptText="Posição" styleClass="profile-text-field" stylesheets="@style.css">
-                     <font>
-                        <Font size="11.0" />
-                     </font>
-                  </TextField>
-                  <ImageView disable="true" fitHeight="19.0" fitWidth="20.0" layoutX="10.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../imagens/pesquisa.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
          </children>
       </VBox>
       <VBox alignment="CENTER" layoutX="41.0" layoutY="503.0" prefHeight="72.0" prefWidth="316.0" style="-fx-background-radius: 10 10 10 10;" styleClass="profile-layout" stylesheets="@style.css" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="41.0">
@@ -137,10 +110,7 @@
             </Text>
          </children>
       </VBox>
-      <FlowPane fx:id="FPDados" layoutX="375.0" layoutY="21.0" prefHeight="564.0" prefWidth="360.0" rowValignment="TOP" styleClass="profile-flowpane" stylesheets="@style.css" vgap="10.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="375.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
+      <FlowPane fx:id="FPDados" layoutX="375.0" layoutY="21.0" prefHeight="564.0" prefWidth="360.0" rowValignment="TOP" styleClass="profile-flowpane" stylesheets="@style.css" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="375.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
          <rotationAxis>
             <Point3D x="1.0" y="1.0" z="1.0" />
          </rotationAxis>

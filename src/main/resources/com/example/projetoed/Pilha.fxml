@@ -51,7 +51,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <TextField fx:id="TopoConteudo" alignment="CENTER" editable="false" prefHeight="25.0" prefWidth="130.0" promptText="Ainda nao tem!" styleClass="profile-text-field" stylesheets="@style.css" text="Ainda nao tem!" />
+                  <TextField fx:id="TopoConteudo" alignment="CENTER" editable="false" prefHeight="25.0" prefWidth="130.0" promptText="Ainda não tem!" styleClass="profile-text-field" stylesheets="@style.css" text="Ainda não tem!" />
                </children>
             </VBox>
             <AnchorPane fx:id="paneInserir" maxHeight="75.0" maxWidth="237.0" minHeight="75.0" minWidth="172.0" prefHeight="75.0" prefWidth="172.0">

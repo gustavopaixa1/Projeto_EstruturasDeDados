@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -28,7 +27,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ControllerPilha implements Initializable {
+public class ControllerPilha implements Initializable  {
 
     private Linked_Stack<String> PE;
 
@@ -44,26 +43,20 @@ public class ControllerPilha implements Initializable {
     @FXML
     private TextField TFInserirConteudo;
 
-    @FXML
-    private TextField TFInserirPosicao;
 
     @FXML
     private TextField TFNumeroDeElementos;
 
-    @FXML
-    private TextField TFRemoverPosicao;
 
     @FXML
     private Button ConsultarTopo;
-
-    @FXML
-    private AnchorPane paneConsultar2;
 
     @FXML
     private AnchorPane paneInserir;
 
     @FXML
     private AnchorPane paneRemover;
+
 
     @FXML
     void EventoConsultaTopo(MouseEvent event) {
@@ -78,14 +71,13 @@ public class ControllerPilha implements Initializable {
             return;
         }
 
-        this.animacao(0, 2, 1, "#8b0000", "#008B8B").play();
+        this.animacao(PE.size() - 1, 2, 1, "#008000", "#008B8B").play();
 
     }
 
 
     @FXML
     void EventoInserir(MouseEvent event) {
-
         String conteudo;
         Alert alerta = new Alert(Alert.AlertType.ERROR);
         alerta.setTitle("ERRO");
@@ -105,9 +97,9 @@ public class ControllerPilha implements Initializable {
 
         // O desafio eh criar os blocos
 
-        FPDados.getChildren().add(0, bloco(conteudo));
+        FPDados.getChildren().add(PE.size() - 1, bloco(conteudo));
 
-        this.animacao(0, 2, 1, "#8b0000", "#008B8B").play();
+        this.animacao(PE.size() - 1, 2, 1, "#8b0000", "#008B8B").play();
 
 
     }
@@ -127,15 +119,16 @@ public class ControllerPilha implements Initializable {
 
         PE.pop();
         TFNumeroDeElementos.setText(String.valueOf(PE.size()));
-        TopoConteudo.setText(PE.top());
-        if (PE.isEmpty())
+        if (!PE.isEmpty())
+            TopoConteudo.setText(PE.top());
+        else
             TopoConteudo.setText("Nao tem!");
 
-        FillTransition aux = this.animacao(0, 1, 0.5, "#008B8B", "#ffffff");
+        FillTransition aux = this.animacao(PE.size(), 1, 0.5, "#008B8B", "#ffffff");
         aux.play();
 
         aux.setOnFinished(evento -> {
-            FPDados.getChildren().remove(0);
+            FPDados.getChildren().remove(PE.size());
         });
 
     }
@@ -161,6 +154,8 @@ public class ControllerPilha implements Initializable {
         transition.setDuration(Duration.seconds(time));
         return transition;
     }
+
+
 
 
 
@@ -194,11 +189,13 @@ public class ControllerPilha implements Initializable {
         img.setRotate(90);
         novoNo.getChildren().add(img);
 
+        novoNo.setScaleY(-1); // Para inverter os nos dentro do ja invertido FlowPane
+
         return novoNo;
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize (URL url, ResourceBundle resourceBundle)  {
         this.PE = new Linked_Stack<>();
         TFNumeroDeElementos.setText("0");
         DropShadow dropShadow = new DropShadow();
@@ -211,15 +208,18 @@ public class ControllerPilha implements Initializable {
         paneInserir.setEffect(dropShadow);
         paneRemover.setEffect(dropShadow);
 
+
         Rectangle clip = new Rectangle();
         clip.widthProperty().bind(FPDados.widthProperty());
         clip.heightProperty().bind(FPDados.heightProperty());
         FPDados.setClip(clip);
         FPDados.setOrientation(Orientation.VERTICAL);
-        //FPDados.setRotate(180);
-        FPDados.setAlignment(Pos.BOTTOM_LEFT);
-        FPDados.setRowValignment(VPos.BOTTOM);
-        //FPDados.setHgap(80);
+        FPDados.setAlignment(Pos.TOP_LEFT);
+        FPDados.setScaleY(-1);
+
     }
+
+
+
 
 }

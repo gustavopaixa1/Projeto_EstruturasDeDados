@@ -1,6 +1,6 @@
 package com.example.projetoed.implementations;
 
-public interface DEList<T> {
+public interface DSList<T> {
     public boolean isEmpty();
 
     public int size();

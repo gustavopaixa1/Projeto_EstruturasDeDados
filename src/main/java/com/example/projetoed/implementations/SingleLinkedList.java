@@ -1,6 +1,6 @@
 package com.example.projetoed.implementations;
 
-public class SingleLinkedList<T> implements DEList<T> {
+public class SingleLinkedList<T> implements DSList<T> {
     class Node {
         private T content;
         private Node next;

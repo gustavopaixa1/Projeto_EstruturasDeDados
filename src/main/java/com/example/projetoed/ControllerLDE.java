@@ -246,6 +246,8 @@ public class ControllerLDE implements Initializable {
         novoNo.getChildren().add(img);
         img.setTranslateY(-15);
 
+
+
         return novoNo;
     }
 

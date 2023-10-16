@@ -107,3 +107,8 @@
 .profile-voltar:hover{
 -fx-background-color: #8b0000;
 }
+
+.vbox-pilha {
+    -fx-border-color: #008B8B;
+    -fx-border-width: 0 0.2 0 0;
+}

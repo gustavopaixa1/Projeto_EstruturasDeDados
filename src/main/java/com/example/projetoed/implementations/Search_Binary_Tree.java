@@ -1,6 +1,6 @@
 package com.example.projetoed.implementations;
 
-public class Search_Binary_Tree<T extends Comparable<T>> implements DEBinary_Tree<T>{
+public class Search_Binary_Tree<T extends Comparable<T>> implements DSBinary_Tree<T> {
     class Node {
         private T content;
         private Node left;
@@ -40,7 +40,7 @@ public class Search_Binary_Tree<T extends Comparable<T>> implements DEBinary_Tre
     private Node root;
     private int numberOfElements;
 
-    public  Search_Binary_Tree() {
+    public Search_Binary_Tree() {
         this.numberOfElements = 0;
         this.root = null;
     }
@@ -100,7 +100,7 @@ public class Search_Binary_Tree<T extends Comparable<T>> implements DEBinary_Tre
         }
 
         Node newNode = new Node();
-        newNode.content = v;
+        newNode.setContent(v);
 
         if (isEmpty()) {
             this.root = newNode;
@@ -121,7 +121,7 @@ public class Search_Binary_Tree<T extends Comparable<T>> implements DEBinary_Tre
         }
 
         if (node.getContent().compareTo(aux.getContent()) > 0 && aux.getRight() == null) {
-            aux.setRight(aux);
+            aux.setRight(node);
             return;
         }
 

@@ -14,7 +14,7 @@
 
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="300.0" minWidth="750.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetoed.ControllerFila">
    <children>
-      <HBox alignment="CENTER" layoutX="160.0" layoutY="13.0" prefHeight="68.0" prefWidth="770.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+      <HBox alignment="CENTER" layoutX="15.0" layoutY="25.0" prefHeight="68.0" prefWidth="770.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="25.0">
          <children>
             <VBox alignment="CENTER" prefHeight="72.0" prefWidth="321.0" style="-fx-background-radius: 10 10 10 10;" styleClass="profile-layout" stylesheets="@style.css">
                <children>
@@ -32,31 +32,31 @@
             <Font name="Consolas" size="15.0" />
          </font>
       </Button>
-      <VBox alignment="CENTER" layoutX="650.0" layoutY="-4.0" prefHeight="82.0" prefWidth="136.0" spacing="10.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="-4.0">
+      <VBox alignment="CENTER" layoutX="646.0" layoutY="5.0" prefHeight="68.0" prefWidth="119.0" spacing="5.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="5.0">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Número de Elementos" textAlignment="CENTER" wrappingWidth="135.0">
                <font>
                   <Font name="Consolas" size="12.0" />
                </font>
             </Text>
-            <TextField fx:id="TFNumeroDeElementos" alignment="CENTER" editable="false" prefHeight="25.0" prefWidth="130.0" styleClass="profile-text-field" stylesheets="@style.css" text="0" />
+            <TextField fx:id="TFNumeroDeElementos" alignment="CENTER" editable="false" prefHeight="25.0" prefWidth="114.0" styleClass="profile-text-field" stylesheets="@style.css" text="0" />
          </children>
       </VBox>
-      <HBox alignment="CENTER" layoutX="15.0" layoutY="112.0" prefHeight="56.0" prefWidth="800.0" spacing="20.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="112.0">
+      <HBox alignment="CENTER" layoutX="15.0" layoutY="128.0" prefHeight="56.0" prefWidth="800.0" spacing="50.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="128.0">
          <children>
             <AnchorPane fx:id="paneInserir" maxHeight="75.0" maxWidth="237.0" minHeight="75.0" minWidth="194.0" prefHeight="75.0" prefWidth="237.0">
                <children>
-                  <Button layoutX="37.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#EventoInserir" prefHeight="28.0" prefWidth="136.0" styleClass="profile-button" stylesheets="@style.css" text="   Inserir" textAlignment="CENTER" textFill="WHITE">
+                  <Button layoutX="70.0" layoutY="24.0" mnemonicParsing="false" onMouseClicked="#EventoInserir" prefHeight="28.0" prefWidth="136.0" styleClass="profile-button" stylesheets="@style.css" text="   Inserir" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Consolas Bold" size="14.0" />
                      </font>
                   </Button>
-                  <TextField fx:id="TFInserirConteudo" alignment="CENTER" layoutX="60.0" layoutY="48.0" prefHeight="26.0" prefWidth="91.0" promptText="Conteúdo" styleClass="profile-text-field" stylesheets="@style.css">
+                  <TextField fx:id="TFInserirConteudo" alignment="CENTER" layoutX="-8.0" layoutY="26.0" prefHeight="26.0" prefWidth="70.0" promptText="Conteúdo" styleClass="profile-text-field" stylesheets="@style.css">
                      <font>
                         <Font size="11.0" />
                      </font>
                   </TextField>
-                  <ImageView disable="true" fitHeight="25.0" fitWidth="20.0" layoutX="51.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView disable="true" fitHeight="25.0" fitWidth="20.0" layoutX="84.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../imagens/adicionar.png" />
                      </image>
@@ -65,12 +65,12 @@
             </AnchorPane>
             <AnchorPane fx:id="paneRemover" maxHeight="114.0" maxWidth="138.0" minHeight="75.0" minWidth="90.0" prefHeight="75.0" prefWidth="138.0">
                <children>
-                  <Button layoutX="-12.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#EventoRemover" prefHeight="28.0" prefWidth="136.0" styleClass="profile-button" stylesheets="@style.css" text="   Remover" textAlignment="CENTER" textFill="WHITE">
+                  <Button layoutX="1.0" layoutY="24.0" mnemonicParsing="false" onMouseClicked="#EventoRemover" prefHeight="28.0" prefWidth="136.0" styleClass="profile-button" stylesheets="@style.css" text="   Remover" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Consolas Bold" size="14.0" />
                      </font>
                   </Button>
-                  <ImageView disable="true" fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView disable="true" fitHeight="20.0" fitWidth="20.0" layoutX="23.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../imagens/lixeira.png" />
                      </image>
@@ -79,31 +79,12 @@
             </AnchorPane>
             <AnchorPane fx:id="paneConsultar1" maxHeight="116.0" maxWidth="185.0" minHeight="75.0" minWidth="160.0" prefHeight="75.0" prefWidth="177.0">
                <children>
-                  <Button layoutY="10.0" mnemonicParsing="false" onMouseClicked="#EventoConsultaValor" prefHeight="28.0" prefWidth="157.0" styleClass="profile-button" stylesheets="@style.css" text="   1º Elemento" textAlignment="CENTER" textFill="WHITE">
+                  <Button layoutX="20.0" layoutY="24.0" mnemonicParsing="false" onMouseClicked="#EventoConsultaValor" prefHeight="28.0" prefWidth="157.0" styleClass="profile-button" stylesheets="@style.css" text="   1º Elemento" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Consolas Bold" size="14.0" />
                      </font>
                   </Button>
-                  <ImageView disable="true" fitHeight="19.0" fitWidth="20.0" layoutX="9.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../imagens/pesquisa.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-            <AnchorPane fx:id="paneConsultar2" maxHeight="75.0" maxWidth="194.0" minHeight="75.0" minWidth="179.0" prefHeight="75.0" prefWidth="179.0">
-               <children>
-                  <Button layoutY="10.0" mnemonicParsing="false" onMouseClicked="#EventoConsultaIndice" prefHeight="28.0" prefWidth="172.0" styleClass="profile-button" stylesheets="@style.css" text="   Consultar Posição" textAlignment="CENTER" textFill="WHITE">
-                     <font>
-                        <Font name="Consolas Bold" size="14.0" />
-                     </font>
-                  </Button>
-                  <TextField fx:id="TFConsultaIndicePosicao" alignment="CENTER" layoutX="41.0" layoutY="48.0" prefHeight="26.0" prefWidth="91.0" promptText="Posição" styleClass="profile-text-field" stylesheets="@style.css">
-                     <font>
-                        <Font size="11.0" />
-                     </font>
-                  </TextField>
-                  <ImageView disable="true" fitHeight="19.0" fitWidth="20.0" layoutX="10.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView disable="true" fitHeight="19.0" fitWidth="20.0" layoutX="29.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../imagens/pesquisa.png" />
                      </image>
@@ -122,5 +103,15 @@
             <Image url="@../../../imagens/retorno.png" />
          </image>
       </ImageView>
+      <VBox alignment="CENTER" layoutX="647.0" layoutY="73.0" prefHeight="28.0" prefWidth="135.0" spacing="5.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="73.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1º Elemento" textAlignment="CENTER" wrappingWidth="135.0">
+               <font>
+                  <Font name="Consolas" size="12.0" />
+               </font>
+            </Text>
+            <TextField fx:id="TFCampoPrimeiroElemento" alignment="CENTER" editable="false" prefHeight="25.0" prefWidth="130.0" styleClass="profile-text-field" stylesheets="@style.css" text="Fila Vazia" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

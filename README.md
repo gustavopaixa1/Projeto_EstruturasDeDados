@@ -17,5 +17,5 @@ O projeto consiste em representar as estruturas de dados (fila encadeada, pilha 
 ## Progresso
 - [x] Menu
 - [x] Fila Encadeada
-- [ ] Pilha Encadeada
+- [x] Pilha Encadeada
 - [ ] Árvore Binária de Pesquisa

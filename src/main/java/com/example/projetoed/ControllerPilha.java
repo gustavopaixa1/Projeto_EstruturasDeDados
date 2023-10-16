@@ -66,7 +66,7 @@ public class ControllerPilha implements Initializable  {
 
         if (PE.isEmpty()) {
             alerta.setHeaderText("VAZIO");
-            alerta.setContentText("A pilha ja esta vazia, por isso nao tem como consultar topo!");
+            alerta.setContentText("A pilha já está vazia, por isso não tem como consultar topo!");
             alerta.showAndWait();
             return;
         }
@@ -84,8 +84,8 @@ public class ControllerPilha implements Initializable  {
         conteudo = TFInserirConteudo.getText().trim();
 
         if (conteudo.equalsIgnoreCase("")) {
-            alerta.setHeaderText("Sem Conteudo Valido");
-            alerta.setContentText("Por favor, preencha o campo de conteudo antes de apertar para inserir (apenas espaços nao sao validos)!");
+            alerta.setHeaderText("Sem Conteúdo Válido");
+            alerta.setContentText("Por favor, preencha o campo de conteúdo antes de apertar para inserir (apenas espaços não são válidos)!");
             alerta.showAndWait();
             return;
         }
@@ -112,7 +112,7 @@ public class ControllerPilha implements Initializable  {
 
         if (PE.isEmpty()) {
             alerta.setHeaderText("VAZIO");
-            alerta.setContentText("A pilha ja esta vazia, por isso nao tem como remover mais!");
+            alerta.setContentText("A pilha já está vazia, por isso não tem como remover mais!");
             alerta.showAndWait();
             return;
         }
@@ -122,7 +122,7 @@ public class ControllerPilha implements Initializable  {
         if (!PE.isEmpty())
             TopoConteudo.setText(PE.top());
         else
-            TopoConteudo.setText("Nao tem!");
+            TopoConteudo.setText("Não tem!");
 
         FillTransition aux = this.animacao(PE.size(), 1, 0.5, "#008B8B", "#ffffff");
         aux.play();

@@ -50,6 +50,9 @@ public class ControllerFila implements Initializable {
     private TextField TFNumeroDeElementos;
 
     @FXML
+    private TextField TFCampoPrimeiroElemento;
+
+    @FXML
     private AnchorPane paneConsultar1;
 
     @FXML
@@ -128,11 +131,15 @@ public class ControllerFila implements Initializable {
         this.Fila.push(cont);
         TFInserirConteudo.setText("");
         TFNumeroDeElementos.setText(String.valueOf(this.Fila.size()));
+        TFCampoPrimeiroElemento.setText(String.valueOf(this.Fila.front()));
+        System.out.println(this.Fila.size());
+        System.out.println(cont);
+        System.out.println(this.Fila.front());
 
-        FPDados.getChildren().add(0, bloco(cont));
+        FPDados.getChildren().add(this.Fila.size()-1, bloco(cont));
 
-        this.animacaoSequencia(0,1,0.1, "#8b0000", "#008B8B", 0);
-        this.animacao(0, 1 + 0 / 5, 0.5, "#73ee81", "#008B8B").play();
+        this.animacaoSequencia(this.Fila.size()-1,1,0.1, "#8b0000", "#008B8B", 0);
+        this.animacao(this.Fila.size()-1, 1 + 0 / 5, 0.5, "#73ee81", "#008B8B").play();
     }
 
     private void animacaoSequencia(int contIndex, int cycles, double time, String fromColor, String toColor, int max) {
@@ -153,6 +160,7 @@ public class ControllerFila implements Initializable {
         Alert alerta = new Alert(Alert.AlertType.ERROR);
         alerta.setTitle("ERRO");
         if (Fila.isEmpty()){
+            TFCampoPrimeiroElemento.setText("Fila vazia");
             alerta.setHeaderText("Fila vazia.");
             alerta.setContentText("A fila está vazia, não existem itens para serem removidos.");
             alerta.showAndWait();
@@ -161,6 +169,13 @@ public class ControllerFila implements Initializable {
 
         this.Fila.pop();
         TFNumeroDeElementos.setText(String.valueOf(this.Fila.size()));
+
+        if(this.Fila.size() == 0) {
+            TFCampoPrimeiroElemento.setText("Fila vazia");}
+        else {
+            TFCampoPrimeiroElemento.setText(String.valueOf(this.Fila.front()));
+        }
+
         this.animacaoSequencia(0, 1, 0.1, "#8b0000", "#008B8B", 0 - 1);
         FillTransition aux = this.animacao(0, 1 + 0 / 5, 0.5, "#008B8B", "#ffffff");
 
@@ -235,7 +250,6 @@ public class ControllerFila implements Initializable {
 
         paneConsultar1.setEffect(dropShadow);
         paneInserir.setEffect(dropShadow);
-        paneConsultar2.setEffect(dropShadow);
         paneRemover.setEffect(dropShadow);
 
         Rectangle clip = new Rectangle();

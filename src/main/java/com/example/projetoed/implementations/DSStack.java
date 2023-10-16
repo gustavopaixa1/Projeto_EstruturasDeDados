@@ -1,6 +1,6 @@
 package com.example.projetoed.implementations;
 
-public interface DEStack<T> {
+public interface DSStack<T> {
     public boolean isEmpty();
 
     public int size();

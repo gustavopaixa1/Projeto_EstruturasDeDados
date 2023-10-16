@@ -1,6 +1,6 @@
 package com.example.projetoed.implementations;
 
-public class Linked_Queue<T> implements DEQueue<T> {
+public class Linked_Queue<T> implements DSQueue<T> {
 
     class Node {
         private T content;

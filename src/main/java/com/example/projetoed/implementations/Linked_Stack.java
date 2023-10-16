@@ -1,6 +1,6 @@
 package com.example.projetoed.implementations;
 
-public class Linked_Stack<T> implements DEStack<T> {
+public class Linked_Stack<T> implements DSStack<T> {
 
     class Node {
         private T content;

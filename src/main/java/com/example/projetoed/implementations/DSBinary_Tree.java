@@ -1,6 +1,6 @@
 package com.example.projetoed.implementations;
 
-public interface DEBinary_Tree<T> {
+public interface DSBinary_Tree<T> {
     public boolean isEmpty();
     public int size();
     public T root();

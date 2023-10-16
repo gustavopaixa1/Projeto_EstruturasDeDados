@@ -1,6 +1,6 @@
 package com.example.projetoed.implementations;
 
-public interface DEQueue<T> {
+public interface DSQueue<T> {
     public boolean isEmpty();
 
     public int size();

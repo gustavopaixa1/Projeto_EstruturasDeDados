@@ -12,6 +12,7 @@ public class Search_Binary_Tree<T extends Comparable<T>> implements DSBinary_Tre
     public boolean isEmpty() {
         return this.numberOfElements == 0;
     }
+
     public int size() {
         return this.numberOfElements;
     }
@@ -120,8 +121,8 @@ public class Search_Binary_Tree<T extends Comparable<T>> implements DSBinary_Tre
         }
         else {
             SBTNode<T> aux = findMin(node.getRight());
+            remove(node, aux.getContent());
             node.setContent(aux.getContent());
-            remove(node.getRight(), node.getContent());
         }
         return node;
     }

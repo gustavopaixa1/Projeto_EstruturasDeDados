@@ -3,7 +3,7 @@ package com.example.projetoed.implementations;
 public interface DSBinary_Tree<T> {
     public boolean isEmpty();
     public int size();
-    public T root();
+    public SBTNode<T> root();
     public void preOrder_Traversal();
     public void postOrder_Traversal();
     public void inOrder_Traversal();

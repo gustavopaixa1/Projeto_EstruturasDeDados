@@ -1,43 +1,7 @@
 package com.example.projetoed.implementations;
 
 public class Search_Binary_Tree<T extends Comparable<T>> implements DSBinary_Tree<T> {
-    class Node {
-        private T content;
-        private Node left;
-        private Node right;
-
-        public Node() {
-            this.content = null;
-            this.left = null;
-            this.right = null;
-        }
-
-        public T getContent() {
-            return this.content;
-        }
-
-        public Node getLeft() {
-            return this.left;
-        }
-
-        public Node getRight() {
-            return this.right;
-        }
-
-        public void setContent(T content) {
-            this.content = content;
-        }
-
-        public void setLeft(Node left) {
-            this.left = left;
-        }
-
-        public void setRight(Node right) {
-            this.right = right;
-        }
-    }
-
-    private Node root;
+    private SBTNode<T> root;
     private int numberOfElements;
 
     public Search_Binary_Tree() {
@@ -52,8 +16,8 @@ public class Search_Binary_Tree<T extends Comparable<T>> implements DSBinary_Tre
         return this.numberOfElements;
     }
 
-    public T root() {
-        return this.root.getContent();
+    public SBTNode<T> root() {
+        return this.root;
     }
 
     public void preOrder_Traversal() {
@@ -77,7 +41,7 @@ public class Search_Binary_Tree<T extends Comparable<T>> implements DSBinary_Tre
     }
 
     public boolean search(T v) {
-        Node aux = this.root;
+        SBTNode<T> aux = this.root;
 
         while (aux != null) {
             if (v.compareTo(aux.getContent()) == 0) {
@@ -99,7 +63,7 @@ public class Search_Binary_Tree<T extends Comparable<T>> implements DSBinary_Tre
             return;
         }
 
-        Node newNode = new Node();
+        SBTNode<T> newNode = new SBTNode<T>();
         newNode.setContent(v);
 
         if (isEmpty()) {
@@ -108,13 +72,13 @@ public class Search_Binary_Tree<T extends Comparable<T>> implements DSBinary_Tre
             return;
         }
 
-        Node aux = this.root;
+        SBTNode<T> aux = this.root;
 
         privateInsert(newNode, aux);
         this.numberOfElements++;
     }
 
-    private void privateInsert(Node node, Node aux) {
+    private void privateInsert(SBTNode<T> node, SBTNode<T> aux) {
         if (node.getContent().compareTo(aux.getContent()) < 0 && aux.getLeft() == null) {
             aux.setLeft(node);
             return;
@@ -132,7 +96,7 @@ public class Search_Binary_Tree<T extends Comparable<T>> implements DSBinary_Tre
         }
     }
 
-    private Node findMin(Node node) {
+    private SBTNode<T> findMin(SBTNode<T> node) {
         if (node.getLeft() == null) {
             return node;
         }
@@ -140,7 +104,7 @@ public class Search_Binary_Tree<T extends Comparable<T>> implements DSBinary_Tre
         return findMin(node.getLeft());
     }
 
-    private Node remove(Node node, T v) {
+    private SBTNode<T> remove(SBTNode<T> node, T v) {
         if (node == null) return null;
         else if (v.compareTo(node.getContent()) < 0) node.setLeft(remove(node.getLeft(), v));
         else if (v.compareTo(node.getContent()) > 0) node.setRight(remove(node.getRight(), v));
@@ -149,20 +113,20 @@ public class Search_Binary_Tree<T extends Comparable<T>> implements DSBinary_Tre
             return node;
         }
         else if (node.getLeft() == null) {
-            Node aux = node.getRight();
+            SBTNode<T> aux = node.getRight();
             node = null;
 
             return aux;
         }
         else {
-            Node aux = findMin(node.getRight());
+            SBTNode<T> aux = findMin(node.getRight());
             node.setContent(aux.getContent());
             remove(node.getRight(), node.getContent());
         }
         return node;
     }
 
-    private void preOrder_Traversal(Node node) {
+    private void preOrder_Traversal(SBTNode<T> node) {
         if (node == null) {
             return;
         }
@@ -173,7 +137,7 @@ public class Search_Binary_Tree<T extends Comparable<T>> implements DSBinary_Tre
         preOrder_Traversal(node.getRight());
     }
 
-    private void inOrder_Traversal(Node node) {
+    private void inOrder_Traversal(SBTNode<T> node) {
         if (node == null) {
             return;
         }
@@ -183,7 +147,7 @@ public class Search_Binary_Tree<T extends Comparable<T>> implements DSBinary_Tre
         inOrder_Traversal(node.getRight());
     }
 
-    private void postOrder_Traversal(Node node) {
+    private void postOrder_Traversal(SBTNode<T> node) {
         if (node == null) {
             return;
         }

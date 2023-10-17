@@ -2,7 +2,7 @@ package com.example.projetoed;
 
 import com.example.projetoed.implementations.Search_Binary_Tree;
 import com.example.projetoed.implementations.SBTNode;
-import javafx.geometry.Insets;
+import javafx.beans.binding.DoubleBinding;
 import javafx.geometry.Pos;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -14,7 +14,6 @@ import javafx.scene.text.Text;
 public class ABPPane<T extends Comparable<T>> extends Pane {
     private Search_Binary_Tree<T> abp;
     private double raio = 15;
-    private double YDistancia = 50;
 
     public ABPPane(Search_Binary_Tree<T> tree) {
         this.abp = tree;
@@ -24,36 +23,52 @@ public class ABPPane<T extends Comparable<T>> extends Pane {
     public void atualizarVisualizacao() {
         this.getChildren().clear();
         if (!this.abp.isEmpty())
-            atualizarVisualizacao(this.abp.root(), this.getWidth() / 2, this.getWidth() / 4, 30, this.YDistancia, Color.web("#ff0000"));
+            atualizarVisualizacao(this.abp.root(), 1, this.widthProperty().divide(2), 40, 25, Color.web("#ff0000"));
     }
 
-    private void atualizarVisualizacao(SBTNode<T> raiz, double startX, double XDistancia, double startY, double YDistance, Color cor) {
-        if (raiz.getLeft() != null) {
-            this.getChildren().add(new Line(startX, startY, startX - XDistancia, startY + YDistance));
-            this.atualizarVisualizacao(raiz.getLeft(), startX - XDistancia, XDistancia / 2, startY + YDistance, YDistance, cor);
-        }
-
-        if (raiz.getRight() != null) {
-            this.getChildren().add(new Line(startX, startY, startX + XDistancia, startY + YDistance));
-            this.atualizarVisualizacao(raiz.getRight(), startX + XDistancia, XDistancia / 2, startY + YDistance, YDistance, cor);
-        }
-
+    private void atualizarVisualizacao(SBTNode<T> raiz, double profundidade, DoubleBinding startXPosition, double startY, double YDistancia, Color cor) {
         StackPane sp = new StackPane();
-        sp.setLayoutX(startX - this.raio);
-        sp.setLayoutY(startY - this.raio);
+        sp.layoutXProperty().bind(startXPosition.subtract(this.raio / Math.log(profundidade + 1)));
+        sp.setLayoutY(startY - this.raio / Math.log(profundidade + 1));
         sp.setAlignment(Pos.CENTER);
-//        sp.setBackground(new Background(new BackgroundFill(Color.web("#" + "40E0D0"), CornerRadii.EMPTY, Insets.EMPTY)));
-        this.getChildren().add(sp);
 
-        Circle circulo = new Circle(startX, startY, this.raio);
+        Circle circulo = new Circle(this.raio / Math.log(profundidade + 1));
         circulo.setStyle("-fx-arc-height: 10; -fx-arc-width: 10; -fx-stroke: #003B6F; -fx-fill: #008B8B; -fx-stroke-width: 2;");
         sp.getChildren().add(circulo);
 
-        Text texto = new Text((String) raiz.getContent());
+        Text texto = new Text(Integer.toString((Integer)raiz.getContent()));
         texto.setFont(Font.font("Consolas", 15));
         texto.setFill(Color.web("#ffffff"));
         texto.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+        texto.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 3, 2, 2, 2);");
         sp.getChildren().add(texto);
+
+
+        if (raiz.getLeft() != null) {
+            DoubleBinding endXPosition = startXPosition.subtract(this.widthProperty().divide(Math.pow(2, profundidade + 1)));
+            Line linha = new Line();
+            linha.startXProperty().bind(startXPosition);
+            linha.endXProperty().bind(endXPosition);
+            linha.setStartY(startY);
+            linha.setEndY(startY + YDistancia);
+
+            this.getChildren().add(linha);
+            this.atualizarVisualizacao(raiz.getLeft(), profundidade + 1, endXPosition, startY + YDistancia, YDistancia, cor);
+        }
+
+        if (raiz.getRight() != null) {
+            DoubleBinding endXPosition = startXPosition.add(this.widthProperty().divide(Math.pow(2, profundidade + 1)));
+            Line linha = new Line();
+            linha.startXProperty().bind(startXPosition);
+            linha.endXProperty().bind(endXPosition);
+            linha.setStartY(startY);
+            linha.setEndY(startY + YDistancia);
+
+            this.getChildren().add(linha);
+            this.atualizarVisualizacao(raiz.getRight(), profundidade + 1, endXPosition, startY + YDistancia, YDistancia, cor);
+        }
+
+        this.getChildren().add(sp);
     }
 }
 

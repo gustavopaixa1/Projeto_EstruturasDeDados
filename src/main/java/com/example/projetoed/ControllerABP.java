@@ -40,9 +40,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ControllerABP implements Initializable {
-    private Search_Binary_Tree<String> ABP;
+    private Search_Binary_Tree<Integer> ABP;
 
-    private ABPPane<String> PaneDaArvore;
+    private ABPPane<Integer> PaneDaArvore;
 
     @FXML
     private AnchorPane APTela;
@@ -84,14 +84,34 @@ public class ControllerABP implements Initializable {
 
     @FXML
     void EventoInserir(MouseEvent event) {
-        this.ABP.insert("4");
-        this.ABP.insert("2");
-        this.ABP.insert("1");
-//        this.ABP.insert("3");
-        this.ABP.insert("6");
-        this.ABP.insert("5");
-        this.ABP.insert("7");
+        int cont = 0;
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("ERRO");
+        try {
+            cont = Integer.parseInt(this.TFInserir.getText().trim());
+            if (this.ABP.search(cont))
+                throw new Exception();
+        } catch (NumberFormatException e) {
+            alerta.setHeaderText("Conteúdo inválido.");
+            alerta.setContentText("Por favor, preencha o campo de conteúdo com um valor numérico inteiro para ser armazenado (apenas espaços não são caracteres válidos).");
+            alerta.showAndWait();
+            return;
+        } catch (Exception e) {
+            alerta.setHeaderText("Conteúdo Já Existe.");
+            alerta.setContentText("Por favor, preencha o campo de conteúdo com um valor novo.");
+            alerta.showAndWait();
+            return;
+        }
+
+        this.ABP.insert(cont);
+        this.TFInserir.setText("");
+        this.TFNumeroDeElementos.setText(String.valueOf(this.ABP.size()));
+
+        // Adicionar os nós
         this.PaneDaArvore.atualizarVisualizacao();
+
+//        this.animacaoSequencia(0, 1, 0.1, "#8b0000", "#008B8B", pos - 1);
+//        this.animacao(pos, 1 + pos / 5, 0.5, "#73ee81", "#008B8B").play();
     }
 
     @FXML
@@ -121,7 +141,7 @@ public class ControllerABP implements Initializable {
 
 
     private void configurarPanePersonalizado() {
-        this.PaneDaArvore = new ABPPane<String>(this.ABP);
+        this.PaneDaArvore = new ABPPane<Integer>(this.ABP);
 
         this.APTela.setBottomAnchor(this.PaneDaArvore, 15.0);
         this.APTela.setLeftAnchor(this.PaneDaArvore, 15.0);

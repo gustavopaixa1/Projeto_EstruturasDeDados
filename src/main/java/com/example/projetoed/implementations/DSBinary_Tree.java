@@ -1,14 +1,16 @@
 package com.example.projetoed.implementations;
 
-public interface DSBinary_Tree<T> {
+import java.util.ArrayList;
+
+public interface DSBinary_Tree {
     public boolean isEmpty();
     public int size();
-    public SBTNode<T> root();
-    public void preOrder_Traversal();
-    public void postOrder_Traversal();
-    public void inOrder_Traversal();
-    public boolean search(T v);
-    public void insert(T v);
-    public T remove(T v);
+    public SBTNode<Integer> root();
+    public ArrayList<String> preOrder_Traversal();
+    public ArrayList<String> postOrder_Traversal();
+    public ArrayList<String> inOrder_Traversal();
+    public boolean search(int v);
+    public void insert(int v);
+    public int remove(int v);
     public void clear();
 }

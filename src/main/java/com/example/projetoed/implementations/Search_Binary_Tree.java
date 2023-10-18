@@ -1,11 +1,15 @@
 package com.example.projetoed.implementations;
 
-public class Search_Binary_Tree<T extends Comparable<T>> implements DSBinary_Tree<T> {
-    private SBTNode<T> root;
+import java.util.ArrayList;
+
+public class Search_Binary_Tree implements DSBinary_Tree {
+    private SBTNode<Integer> root;
+    private ArrayList<String> history;
     private int numberOfElements;
 
     public Search_Binary_Tree() {
         this.numberOfElements = 0;
+        this.history = new ArrayList<String>();
         this.root = null;
     }
 
@@ -17,39 +21,25 @@ public class Search_Binary_Tree<T extends Comparable<T>> implements DSBinary_Tre
         return this.numberOfElements;
     }
 
-    public SBTNode<T> root() {
+    public SBTNode<Integer> root() {
         return this.root;
     }
 
-    public void preOrder_Traversal() {
-        preOrder_Traversal(this.root);
-        System.out.println();
+    public ArrayList<String> getHistory() {
+        return this.history;
     }
 
-    public void postOrder_Traversal() {
-        postOrder_Traversal(this.root);
-        System.out.println();
-    }
-
-    public void inOrder_Traversal() {
-        inOrder_Traversal(this.root);
-        System.out.println();
-    }
-
-    public T remove(T v) {
-        if (!isEmpty()) this.numberOfElements--;
-        return remove(this.root, v).getContent();
-    }
-
-    public boolean search(T v) {
-        SBTNode<T> aux = this.root;
+    public boolean search(int v) {
+        this.history.clear();
+        SBTNode<Integer> aux = this.root;
 
         while (aux != null) {
-            if (v.compareTo(aux.getContent()) == 0) {
+            this.history.add(Integer.toString(aux.getContent()));
+            if (v == aux.getContent()) {
                 return true;
             }
 
-            if (v.compareTo(aux.getContent()) < 0) {
+            if (v < aux.getContent()) {
                 aux = aux.getLeft();
             } else {
                 aux = aux.getRight();
@@ -59,12 +49,13 @@ public class Search_Binary_Tree<T extends Comparable<T>> implements DSBinary_Tre
         return false;
     }
 
-    public void insert(T v) {
+    public void insert(int v) {
         if (search(v)) {
             return;
         }
+        this.history.clear();
 
-        SBTNode<T> newNode = new SBTNode<T>();
+        SBTNode<Integer> newNode = new SBTNode<Integer>();
         newNode.setContent(v);
 
         if (isEmpty()) {
@@ -73,13 +64,15 @@ public class Search_Binary_Tree<T extends Comparable<T>> implements DSBinary_Tre
             return;
         }
 
-        SBTNode<T> aux = this.root;
+        SBTNode<Integer> aux = this.root;
 
         privateInsert(newNode, aux);
         this.numberOfElements++;
     }
 
-    private void privateInsert(SBTNode<T> node, SBTNode<T> aux) {
+    private void privateInsert(SBTNode<Integer> node, SBTNode<Integer> aux) {
+        this.history.add(Integer.toString(aux.getContent()));
+
         if (node.getContent().compareTo(aux.getContent()) < 0 && aux.getLeft() == null) {
             aux.setLeft(node);
             return;
@@ -97,7 +90,55 @@ public class Search_Binary_Tree<T extends Comparable<T>> implements DSBinary_Tre
         }
     }
 
-    private SBTNode<T> findMin(SBTNode<T> node) {
+    public int remove(int v) {
+        this.history.clear();
+        if (this.isEmpty())
+            return 0;
+        if (this.size() == 1) {
+            int aux = this.root.getContent();
+            this.root = null;
+            this.numberOfElements--;
+            return aux;
+        }
+
+        this.numberOfElements--;
+        return remove(this.root, v).getContent();
+    }
+
+    private SBTNode<Integer> remove(SBTNode<Integer> node, int v) {
+        if (node != null && node.getContent() != v)
+            this.history.add(Integer.toString(node.getContent()));
+        if (node == null) return null;
+        else if (v < node.getContent()) node.setLeft(remove(node.getLeft(), v));
+        else if (v > node.getContent()) node.setRight(remove(node.getRight(), v));
+        else if (node.getRight() == null && node.getLeft() == null) {
+            node = null;
+            return node;
+        }
+        else if (node.getLeft() == null) {
+            SBTNode<Integer> aux = node.getRight();
+            if (this.root == node)
+                this.root = aux;
+            node = null;
+
+            return aux;
+        }
+        else if (node.getRight() != null) {
+            SBTNode<Integer> aux = findMin(node.getRight());
+            remove(node, aux.getContent());
+            node.setContent(aux.getContent());
+        } else {
+            SBTNode<Integer> aux = node.getLeft();
+            if (this.root == node)
+                this.root = aux;
+            node = null;
+
+            return aux;
+        }
+        return node;
+    }
+
+    private SBTNode<Integer> findMin(SBTNode<Integer> node) {
         if (node.getLeft() == null) {
             return node;
         }
@@ -105,61 +146,59 @@ public class Search_Binary_Tree<T extends Comparable<T>> implements DSBinary_Tre
         return findMin(node.getLeft());
     }
 
-    private SBTNode<T> remove(SBTNode<T> node, T v) {
-        if (node == null) return null;
-        else if (v.compareTo(node.getContent()) < 0) node.setLeft(remove(node.getLeft(), v));
-        else if (v.compareTo(node.getContent()) > 0) node.setRight(remove(node.getRight(), v));
-        else if (node.getRight() == null && node.getLeft() == null) {
-            node = null;
-            return node;
-        }
-        else if (node.getLeft() == null) {
-            SBTNode<T> aux = node.getRight();
-            node = null;
-
-            return aux;
-        }
-        else {
-            SBTNode<T> aux = findMin(node.getRight());
-            remove(node, aux.getContent());
-            node.setContent(aux.getContent());
-        }
-        return node;
+    public ArrayList<String> preOrder_Traversal() {
+        this.history.clear();
+        return preOrder_Traversal(this.root);
     }
 
-    private void preOrder_Traversal(SBTNode<T> node) {
+    private ArrayList<String> preOrder_Traversal(SBTNode<Integer> node) {
         if (node == null) {
-            return;
+            return this.history;
         }
 
-        System.out.print(node.getContent() + " ");
-
+        this.history.add(Integer.toString(node.getContent()));
         preOrder_Traversal(node.getLeft());
         preOrder_Traversal(node.getRight());
+
+        return this.history;
     }
 
-    private void inOrder_Traversal(SBTNode<T> node) {
+    public ArrayList<String> postOrder_Traversal() {
+        this.history.clear();
+        return postOrder_Traversal(this.root);
+    }
+
+    private ArrayList<String> inOrder_Traversal(SBTNode<Integer> node) {
         if (node == null) {
-            return;
+            return this.history;
         }
 
         inOrder_Traversal(node.getLeft());
-        System.out.print(node.getContent() + " ");
+        this.history.add(Integer.toString(node.getContent()));
         inOrder_Traversal(node.getRight());
+
+        return this.history;
     }
 
-    private void postOrder_Traversal(SBTNode<T> node) {
+    public ArrayList<String> inOrder_Traversal() {
+        this.history.clear();
+        return inOrder_Traversal(this.root);
+    }
+
+    private ArrayList<String> postOrder_Traversal(SBTNode<Integer> node) {
         if (node == null) {
-            return;
+            return this.history;
         }
 
         postOrder_Traversal(node.getLeft());
         postOrder_Traversal(node.getRight());
+        this.history.add(Integer.toString(node.getContent()));
 
-        System.out.print(node.getContent() + " ");
+        return this.history;
     }
 
     public void clear() {
+        this.history.clear();
         while (!isEmpty()) remove(this.root, this.root.getContent());
     }
 }

@@ -1,13 +1,9 @@
 package com.example.projetoed;
 
 import com.example.projetoed.implementations.Search_Binary_Tree;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.animation.FillTransition;
-import javafx.geometry.Pos;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import com.example.projetoed.implementations.Linked_Queue;
+import javafx.fxml.*;
+import javafx.scene.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
@@ -15,38 +11,31 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.image.ImageView;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.animation.FillTransition;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.ResourceBundle;
 import java.io.IOException;
 import java.net.URL;
 
-
-import com.example.projetoed.implementations.SingleLinkedList;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.shape.Rectangle;
-
-import java.net.URL;
-import java.util.ResourceBundle;
-
 public class ControllerABP implements Initializable {
-    private Search_Binary_Tree<Integer> ABP;
+    static class TransitionModificada {
+        public FillTransition ft;
+        public Text txt;
 
-    private ABPPane<Integer> PaneDaArvore;
+        public TransitionModificada(FillTransition ft, Text txt) {
+            this.ft = ft;
+            this.txt = txt;
+        }
+    }
+
+    private Search_Binary_Tree ABP;
+
+    private ABPPane PaneDaArvore;
+
+    private Linked_Queue<String> sequenciaDaAnimacao;
 
     @FXML
     private AnchorPane APTela;
@@ -113,8 +102,16 @@ public class ControllerABP implements Initializable {
         this.TFNumeroDeElementos.setText(String.valueOf(this.ABP.size()));
         this.PaneDaArvore.atualizarVisualizacao();
 
-//        this.animacaoSequencia(0, 1, 0.1, "#8b0000", "#008B8B", pos - 1);
-        this.animacao(cont, 2, 0.5, "#73ee81", "#008B8B").play();
+        ArrayList<String> auxStrings = this.ABP.getHistory();
+        for (String auxString : auxStrings)
+            this.sequenciaDaAnimacao.push(auxString);
+        this.animacaoSequencia(1, 0.2, "#8b0000", "#008B8B");
+
+        TransitionModificada tm = this.animacao(Integer.toString(cont), (auxStrings.size() / 5 + 1) * 2, 0.5, "#73ee81", "#008B8B");
+        tm.ft.setOnFinished(evento -> {
+            tm.txt.setVisible(true);
+        });
+        tm.ft.play();
     }
 
     @FXML
@@ -150,13 +147,17 @@ public class ControllerABP implements Initializable {
         this.TFRemover.setText("");
         this.TFNumeroDeElementos.setText(String.valueOf(this.ABP.size()));
 
+        ArrayList<String> auxStrings = this.ABP.getHistory();
+        for (String auxString : auxStrings)
+            this.sequenciaDaAnimacao.push(auxString);
+        this.animacaoSequencia(1, 0.2, "#8b0000", "#008B8B");
 
-//        this.animacaoSequencia(0, 1, 0.1, "#8b0000", "#008B8B", pos - 1);
-        FillTransition aux = this.animacao(cont, 2, 0.5, "#008B8B", "#ffffff");
-        aux.setOnFinished(evento -> {
+        TransitionModificada tm = this.animacao(Integer.toString(cont), (auxStrings.size() / 5 + 1) * 2, 0.5, "#008B8B", "#ffffff");
+        tm.txt.setText("");
+        tm.ft.setOnFinished(evento -> {
             this.PaneDaArvore.atualizarVisualizacao();
         });
-        aux.play();
+        tm.ft.play();
     }
 
     @FXML
@@ -189,40 +190,76 @@ public class ControllerABP implements Initializable {
 
         // Consulta o nó
         this.TFConsultaValor.setText("");
-        this.animacao(cont, 2, 1, "#8b0000", "#008B8B").play();
+
+        this.ABP.search(cont);
+        ArrayList<String> auxStrings = this.ABP.getHistory();
+        for (String auxString : auxStrings)
+            this.sequenciaDaAnimacao.push(auxString);
+        this.animacaoSequencia(1, 0.2, "#8b0000", "#008B8B");
+
+        TransitionModificada tm = this.animacao(Integer.toString(cont), (auxStrings.size() / 5 + 1) * 2, 2, "#8b0000", "#008B8B");
+        tm.ft.setOnFinished(evento -> {
+            tm.txt.setVisible(true);
+        });
+        tm.ft.play();
     }
 
     @FXML
     void EventoPreOrdem(MouseEvent event) {
-        int[] aa = {32, 16, 8, 4, 2, 1, 3, 6, 5, 7, 12, 10, 9, 11, 14, 13, 15, 24, 20, 18, 17, 19, 22, 21, 23, 28, 26,
-                25, 27, 30, 29, 31, 48, 40, 36, 34, 33, 35, 38, 37, 39, 44, 42, 41, 43, 46, 45, 47, 56, 52, 50, 49, 51,
-                54, 53, 55, 60, 58, 57, 59, 62, 61, 63};
-        int[] bb = {128, 64, 32, 16, 8, 4, 2, 1, 3, 6, 5, 7, 12, 10, 9, 11, 14, 13, 15, 24, 20, 18, 17, 19, 22, 21, 23, 28, 26, 25, 27, 30, 29, 31,
-                192, 160, 144, 136, 132, 130, 129, 131, 134, 133, 135, 140, 138, 137, 139, 142, 141, 143, 152, 148, 146, 145, 147, 150, 149, 151,
-                156, 154, 153, 155, 158, 157, 159,
-                224, 208, 200, 196, 194, 193, 195, 198, 197, 199, 204, 202, 201, 203, 206, 205, 207, 216, 212, 210, 209, 211, 214, 213, 215,
-                220, 218, 217, 219, 222, 221, 223,
-                240, 232, 228, 226, 225, 227, 230, 229, 231, 236, 234, 233, 235, 238, 237, 239, 244, 242, 241, 243, 246, 245, 247,
-                252, 250, 249, 251, 254, 253, 255
-        };
-        for (int i: aa) {
-            this.TFInserir.setText(Integer.toString(i));
-            this.EventoInserir(event);
+        if (this.ABP.isEmpty()) {
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("ERRO");
+            alerta.setHeaderText("Árvore vazia.");
+            alerta.setContentText("A árvore está vazia, não existem itens para serem caminhados.");
+            alerta.showAndWait();
+            return;
         }
+
+        ArrayList<String> auxStrings = this.ABP.preOrder_Traversal();
+        for (String auxString : auxStrings)
+            this.sequenciaDaAnimacao.push(auxString);
+
+        this.animacaoSequencia(1, 0.5, "#8b0000", "#008B8B");
     }
 
     @FXML
     void EventoInOrdem(MouseEvent event) {
+        if (this.ABP.isEmpty()) {
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("ERRO");
+            alerta.setHeaderText("Árvore vazia.");
+            alerta.setContentText("A árvore está vazia, não existem itens para serem caminhados.");
+            alerta.showAndWait();
+            return;
+        }
 
+        ArrayList<String> auxStrings = this.ABP.inOrder_Traversal();
+        for (String auxString : auxStrings)
+            this.sequenciaDaAnimacao.push(auxString);
+
+        this.animacaoSequencia(1, 0.5, "#8b0000", "#008B8B");
     }
 
     @FXML
     void EventoPosOrdem(MouseEvent event) {
+        if (this.ABP.isEmpty()) {
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("ERRO");
+            alerta.setHeaderText("Árvore vazia.");
+            alerta.setContentText("A árvore está vazia, não existem itens para serem caminhados.");
+            alerta.showAndWait();
+            return;
+        }
 
+        ArrayList<String> auxStrings = this.ABP.postOrder_Traversal();
+        for (String auxString : auxStrings)
+            this.sequenciaDaAnimacao.push(auxString);
+
+        this.animacaoSequencia(1, 0.5, "#8b0000", "#008B8B");
     }
 
     private void configurarPanePersonalizado() {
-        this.PaneDaArvore = new ABPPane<Integer>(this.ABP);
+        this.PaneDaArvore = new ABPPane(this.ABP);
 
         this.APTela.setBottomAnchor(this.PaneDaArvore, 15.0);
         this.APTela.setLeftAnchor(this.PaneDaArvore, 15.0);
@@ -236,12 +273,12 @@ public class ControllerABP implements Initializable {
         this.PaneDaArvore.setClip(clip);
     }
 
-    private FillTransition animacao(int cont, int cycles, double time, String fromColor, String toColor) {
+    private TransitionModificada animacao(String cont, int cycles, double time, String fromColor, String toColor) {
         ArrayList<StackPane> nodes = this.PaneDaArvore.getNodes();
         Circle no = null;
         Text texto = null;
         for (StackPane sp : nodes) {
-            if (((Text) sp.getChildren().get(1)).getText().equals(Integer.toString(cont))) {
+            if (((Text) sp.getChildren().get(1)).getText().equals(cont)) {
                 no = (Circle) sp.getChildren().get(0);
                 texto = (Text) sp.getChildren().get(1);
                 break;
@@ -254,17 +291,34 @@ public class ControllerABP implements Initializable {
         transition.setToValue(Color.web(toColor));
         transition.setCycleCount(cycles);
         transition.setDuration(Duration.seconds(time));
+
         final Text finalTexto = texto;
+
+        TransitionModificada tm = new TransitionModificada(transition, finalTexto);
         finalTexto.setVisible(false);
         transition.setOnFinished(event -> {
             (finalTexto).setVisible(true);
         });
-        return transition;
+        return tm;
     }
 
+    private void animacaoSequencia(int cycles, double time, String fromColor, String toColor) {
+        if (this.sequenciaDaAnimacao.isEmpty())
+            return;
+        TransitionModificada tm = animacao(this.sequenciaDaAnimacao.pop(), cycles, time, fromColor, toColor);
+        FillTransition aux = tm.ft;
+        aux.setAutoReverse(false);
+        aux.setOnFinished(event -> {
+            tm.txt.setVisible(true);
+            animacaoSequencia(cycles, time, fromColor, toColor);
+        });
+
+        aux.play();
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.ABP = new Search_Binary_Tree<>();
+        this.ABP = new Search_Binary_Tree();
+        this.sequenciaDaAnimacao = new Linked_Queue<>();
         TFNumeroDeElementos.setText("0");
 
         this.configurarPanePersonalizado();

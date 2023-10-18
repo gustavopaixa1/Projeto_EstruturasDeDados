@@ -12,13 +12,13 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import java.util.ArrayList;
 
-public class ABPPane<T extends Comparable<T>> extends Pane {
-    private Search_Binary_Tree<T> abp;
+public class ABPPane extends Pane {
+    private Search_Binary_Tree abp;
     public ArrayList<StackPane> nodes;
     private double raio = 15;
     private int sideGap = 40;
 
-    public ABPPane(Search_Binary_Tree<T> tree) {
+    public ABPPane(Search_Binary_Tree tree) {
         this.abp = tree;
         this.nodes = new ArrayList<>();
         this.setStyle("-fx-border-color: #008B8B; -fx-border-width: 7; -fx-border-radius: 10 10 10 10;");
@@ -34,7 +34,7 @@ public class ABPPane<T extends Comparable<T>> extends Pane {
             atualizarVisualizacao(this.abp.root(), 1, this.widthProperty().subtract(this.sideGap).divide(2).add(this.sideGap / 2), 40, 25);
     }
 
-    private void atualizarVisualizacao(SBTNode<T> raiz, double profundidade, DoubleBinding startXPosition, double startY, double YDistancia) {
+    private void atualizarVisualizacao(SBTNode<Integer> raiz, double profundidade, DoubleBinding startXPosition, double startY, double YDistancia) {
         StackPane sp = new StackPane();
         sp.layoutXProperty().bind(startXPosition.subtract(this.raio / Math.log(profundidade + 1)));
         sp.setLayoutY(startY - this.raio / Math.log(profundidade + 1));
@@ -51,7 +51,6 @@ public class ABPPane<T extends Comparable<T>> extends Pane {
         texto.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         texto.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 3, 1, 0, 0);");
         sp.getChildren().add(texto);
-
 
         if (raiz.getLeft() != null) {
             DoubleBinding endXPosition = startXPosition.subtract(this.widthProperty().subtract(this.sideGap).divide(Math.pow(2, profundidade + 1)));

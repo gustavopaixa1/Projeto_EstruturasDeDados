@@ -37,6 +37,8 @@ public class ControllerABP implements Initializable {
 
     private Linked_Queue<String> sequenciaDaAnimacao;
 
+    private boolean animacaoEmAndamento;
+
     @FXML
     private AnchorPane APTela;
 
@@ -214,7 +216,16 @@ public class ControllerABP implements Initializable {
             alerta.showAndWait();
             return;
         }
+        if (this.animacaoEmAndamento) {
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("ERRO");
+            alerta.setHeaderText("Caminhamento em andamento.");
+            alerta.setContentText("Espere que o caminhamento atual termine antes de iniciar outro.");
+            alerta.showAndWait();
+            return;
+        }
 
+        this.animacaoEmAndamento = true;
         ArrayList<String> auxStrings = this.ABP.preOrder_Traversal();
         for (String auxString : auxStrings)
             this.sequenciaDaAnimacao.push(auxString);
@@ -232,7 +243,16 @@ public class ControllerABP implements Initializable {
             alerta.showAndWait();
             return;
         }
+        if (this.animacaoEmAndamento) {
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("ERRO");
+            alerta.setHeaderText("Caminhamento em andamento.");
+            alerta.setContentText("Espere que o caminhamento atual termine antes de iniciar outro.");
+            alerta.showAndWait();
+            return;
+        }
 
+        this.animacaoEmAndamento = true;
         ArrayList<String> auxStrings = this.ABP.inOrder_Traversal();
         for (String auxString : auxStrings)
             this.sequenciaDaAnimacao.push(auxString);
@@ -250,7 +270,16 @@ public class ControllerABP implements Initializable {
             alerta.showAndWait();
             return;
         }
+        if (this.animacaoEmAndamento) {
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("ERRO");
+            alerta.setHeaderText("Caminhamento em andamento.");
+            alerta.setContentText("Espere que o caminhamento atual termine antes de iniciar outro.");
+            alerta.showAndWait();
+            return;
+        }
 
+        this.animacaoEmAndamento = true;
         ArrayList<String> auxStrings = this.ABP.postOrder_Traversal();
         for (String auxString : auxStrings)
             this.sequenciaDaAnimacao.push(auxString);
@@ -310,6 +339,8 @@ public class ControllerABP implements Initializable {
         aux.setAutoReverse(false);
         aux.setOnFinished(event -> {
             tm.txt.setVisible(true);
+            if (this.sequenciaDaAnimacao.isEmpty())
+                this.animacaoEmAndamento = false;
             animacaoSequencia(cycles, time, fromColor, toColor);
         });
 
@@ -319,6 +350,7 @@ public class ControllerABP implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.ABP = new Search_Binary_Tree();
         this.sequenciaDaAnimacao = new Linked_Queue<>();
+        this.animacaoEmAndamento = false;
         TFNumeroDeElementos.setText("0");
 
         this.configurarPanePersonalizado();

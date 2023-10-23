@@ -15,7 +15,7 @@
    <children>
       <HBox alignment="CENTER" layoutX="160.0" layoutY="13.0" prefHeight="68.0" prefWidth="770.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
          <children>
-            <VBox alignment="CENTER" prefHeight="72.0" prefWidth="321.0" style="-fx-background-radius: 10 10 10 10;" styleClass="profile-layout" stylesheets="@style.css">
+            <VBox alignment="CENTER" onDragDetected="#EventoDebugEncher" onMouseClicked="#EventoDebugEsvaziar" prefHeight="72.0" prefWidth="321.0" style="-fx-background-radius: 10 10 10 10;" styleClass="profile-layout" stylesheets="@style.css">
                <children>
                   <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Árvore Binária de Pesquisa" textAlignment="CENTER" wrappingWidth="200.0">
                      <font>

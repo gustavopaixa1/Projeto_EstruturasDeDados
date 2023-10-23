@@ -199,6 +199,7 @@ public class Search_Binary_Tree implements DSBinary_Tree {
 
     public void clear() {
         this.history.clear();
-        while (!isEmpty()) remove(this.root, this.root.getContent());
+        this.root = null;
+        this.numberOfElements = 0;
     }
 }

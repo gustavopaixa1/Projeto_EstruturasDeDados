@@ -1,6 +1,6 @@
 package com.example.projetoed.implementations;
 
-public class SeqList<T> implements DEList<T> {
+public class SeqList<T> implements DSList<T> {
     private T[] data;
     private int numberOfElements;
     private int maxElements;

@@ -34,6 +34,15 @@ public class ControllerMenuPrincipal implements Initializable {
     private Button botaoLSE;
 
     @FXML
+    private Button botaoABP;
+
+    @FXML
+    private Button botaoFila;
+
+    @FXML
+    private Button botaoPilha;
+
+    @FXML
     private HBox paneMenu;
 
     @FXML
@@ -60,6 +69,32 @@ public class ControllerMenuPrincipal implements Initializable {
         Stage stage = (Stage) botaoLSE.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("LSE.fxml"));
         stage.setTitle("Lista Simplesmente Encadeada");
+        stage.setScene(new Scene(root));
+    }
+
+    @FXML
+    void abrirPilha(MouseEvent event) throws IOException {
+        Stage stage = (Stage) botaoPilha.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("Pilha.fxml"));
+        stage.setTitle("Pilha Encadeada");
+        stage.setScene(new Scene(root));
+    }
+
+
+    @FXML
+    void abrirFila(MouseEvent event) throws IOException {
+        Stage stage = (Stage) botaoFila.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("Fila.fxml"));
+        stage.setTitle("Fila Encadeada");
+        stage.setScene(new Scene(root));
+    }
+
+
+    @FXML
+    void abrirABP(MouseEvent event) throws IOException {
+        Stage stage = (Stage) botaoABP.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("ABP.fxml"));
+        stage.setTitle("Árvore Binária de Pesquisa");
         stage.setScene(new Scene(root));
     }
 

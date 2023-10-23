@@ -3,7 +3,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -17,44 +16,56 @@
          <children>
             <Pane prefHeight="53.0" prefWidth="703.0" styleClass="cabecalho" stylesheets="@style.css">
                <children>
-                  <Text fill="WHITE" layoutX="173.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estrutura de Dados" textAlignment="CENTER" wrappingWidth="357.3333282470703">
+                  <Text fill="WHITE" layoutX="173.0" layoutY="37.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Estrutura de Dados" textAlignment="CENTER" wrappingWidth="357.3333282470703">
                      <font>
-                        <Font name="Consolas" size="33.0" />
+                        <Font name="Nirmala UI" size="33.0" />
                      </font>
-                     <effect>
-                        <DropShadow height="21.99" radius="10.1275" spread="0.28" width="20.52" />
-                     </effect>
                   </Text>
                </children>
             </Pane>
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="19.0" layoutY="174.0" prefHeight="19.0" prefWidth="200.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="173.0">
+      <HBox alignment="CENTER" layoutX="15.0" layoutY="117.0" prefHeight="19.0" prefWidth="200.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="117.0">
          <children>
             <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="html {  font-size: 10px;}h1 {  font-size: 5rem;  text-transform: capitalize;  text-shadow:    1px 1px 1px red,    2px 2px 1px red;  text-align: center;}h1 + p {  font-weight: bold;}p {  font-size: 1.5rem;  color: red;  font-family: Helvetica, Arial, sans-serif;}" text="Por favor, selecione uma opção:" textAlignment="CENTER">
                <font>
-                  <Font name="Consolas Bold" size="19.0" />
+                  <Font name="System Bold" size="19.0" />
                </font>
             </Text>
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="15.0" layoutY="209.0" prefHeight="183.0" prefWidth="200.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="209.0">
+      <HBox alignment="CENTER" layoutX="15.0" layoutY="159.0" prefHeight="319.0" prefWidth="770.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="159.0">
          <children>
             <VBox alignment="CENTER" prefHeight="183.0" prefWidth="351.0" spacing="15.0" styleClass="choice-buttons" stylesheets="@style.css">
                <children>
-                  <Button fx:id="botaoLS" mnemonicParsing="false" onMouseClicked="#abrirLS" prefHeight="33.0" prefWidth="173.0" styleClass="profile-button" stylesheets="@style.css" text="Lista Sequencial" textFill="WHITE">
+                  <Button fx:id="botaoLS" mnemonicParsing="false" onMouseClicked="#abrirLS" prefHeight="33.0" prefWidth="281.0" styleClass="profile-button" stylesheets="@style.css" text="Lista Sequencial" textFill="WHITE">
                      <font>
-                        <Font name="Consolas" size="17.0" />
+                        <Font name="System Bold" size="17.0" />
                      </font>
                   </Button>
-                  <Button fx:id="botaoLSE" mnemonicParsing="false" onMouseClicked="#abrirLSE" styleClass="profile-button" stylesheets="@style.css" text="Lista Simplesmente Encadeada" textFill="WHITE">
+                  <Button fx:id="botaoLSE" mnemonicParsing="false" onMouseClicked="#abrirLSE" prefHeight="38.0" prefWidth="283.0" styleClass="profile-button" stylesheets="@style.css" text="Lista Simplesmente Encadeada" textFill="WHITE">
                      <font>
-                        <Font name="Consolas" size="17.0" />
+                        <Font name="System Bold" size="17.0" />
                      </font>
                   </Button>
-                  <Button fx:id="botaoLDE" mnemonicParsing="false" onMouseClicked="#abrirLDE" prefHeight="25.0" styleClass="profile-button" text="Lista Duplamente Encadeada" textFill="WHITE">
+                  <Button fx:id="botaoLDE" mnemonicParsing="false" onMouseClicked="#abrirLDE" prefHeight="33.0" prefWidth="282.0" styleClass="profile-button" text="Lista Duplamente Encadeada" textFill="WHITE">
                      <font>
-                        <Font name="Consolas" size="17.0" />
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="botaoFila" mnemonicParsing="false" onMouseClicked="#abrirFila" prefHeight="29.0" prefWidth="279.0" styleClass="profile-button" text="Fila Encadeada">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="botaoPilha" mnemonicParsing="false" onMouseClicked="#abrirPilha" prefHeight="38.0" prefWidth="277.0" styleClass="profile-button" text="Pilha Encadeada">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="botaoABP" mnemonicParsing="false" onMouseClicked="#abrirABP" prefHeight="38.0" prefWidth="281.0" styleClass="profile-button" text="Árvore Binária de Pesquisa">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
                      </font>
                   </Button>
                </children>
@@ -68,12 +79,12 @@
                   <Separator prefHeight="4.0" prefWidth="581.0" />
                   <Label text="Universidade Federal da Paraíba" textOverrun="WORD_ELLIPSIS">
                      <font>
-                        <Font name="Consolas Bold" size="17.0" />
+                        <Font name="System Bold" size="17.0" />
                      </font>
                   </Label>
                   <Label text="Centro de Informática" textOverrun="WORD_ELLIPSIS">
                      <font>
-                        <Font name="Consolas Bold" size="17.0" />
+                        <Font name="System Bold" size="17.0" />
                      </font>
                   </Label>
                </children>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="300.0" minWidth="678.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetoed.ControllerPilha">
+   <children>
+      <HBox alignment="CENTER" layoutX="7.0" layoutY="8.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="68.0" prefWidth="113.0" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="8.0">
+         <children>
+            <Button fx:id="BotaoVoltar" mnemonicParsing="false" onMouseClicked="#EventoVoltar" prefHeight="44.0" prefWidth="70.0" styleClass="profile-button" stylesheets="@style.css" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Consolas" size="15.0" />
+               </font>
+               <graphic>
+                  <ImageView disable="true" fitHeight="26.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../imagens/retorno.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+      <VBox alignment="CENTER" layoutX="116.0" layoutY="76.0" prefHeight="277.0" prefWidth="172.0" spacing="60.0" AnchorPane.bottomAnchor="107.0" AnchorPane.leftAnchor="116.0" AnchorPane.topAnchor="81.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="82.0" prefWidth="172.0" spacing="10.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Número de Elementos" textAlignment="CENTER" wrappingWidth="135.0">
+                     <font>
+                        <Font name="Consolas" size="12.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="TFNumeroDeElementos" alignment="CENTER" editable="false" prefHeight="25.0" prefWidth="130.0" styleClass="profile-text-field" stylesheets="@style.css" text="0" />
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+               <children>
+                  <Button fx:id="ConsultarTopo" mnemonicParsing="false" onMouseClicked="#EventoConsultaTopo" prefHeight="28.0" prefWidth="172.0" styleClass="profile-button" stylesheets="@style.css" text="   Consultar Topo" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView disable="true" fitHeight="19.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../imagens/pesquisa.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <TextField fx:id="TopoConteudo" alignment="CENTER" editable="false" prefHeight="25.0" prefWidth="130.0" promptText="Ainda não tem!" styleClass="profile-text-field" stylesheets="@style.css" text="Ainda não tem!" />
+               </children>
+            </VBox>
+            <AnchorPane fx:id="paneInserir" maxHeight="75.0" maxWidth="237.0" minHeight="75.0" minWidth="172.0" prefHeight="75.0" prefWidth="172.0">
+               <children>
+                  <Button layoutY="10.0" mnemonicParsing="false" onMouseClicked="#EventoInserir" prefHeight="28.0" prefWidth="172.0" styleClass="profile-button" stylesheets="@style.css" text="   Inserir" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <TextField fx:id="TFInserirConteudo" alignment="CENTER" layoutX="41.0" layoutY="48.0" prefHeight="26.0" prefWidth="91.0" promptText="Conteúdo" styleClass="profile-text-field" stylesheets="@style.css">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </TextField>
+                  <ImageView disable="true" fitHeight="25.0" fitWidth="20.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../imagens/adicionar.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="paneRemover" maxHeight="114.0" maxWidth="172.0" minHeight="44.0" minWidth="90.0" prefHeight="44.0" prefWidth="172.0">
+               <children>
+                  <Button layoutX="1.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#EventoRemover" prefHeight="28.0" prefWidth="172.0" styleClass="profile-button" stylesheets="@style.css" text="   Remover" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <ImageView disable="true" fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../imagens/lixeira.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="41.0" layoutY="503.0" prefHeight="72.0" prefWidth="316.0" style="-fx-background-radius: 10 10 10 10;" styleClass="profile-layout" stylesheets="@style.css" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="41.0">
+         <children>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Pilha Encadeada" textAlignment="CENTER" wrappingWidth="200.0">
+               <font>
+                  <Font name="Consolas" size="20.0" />
+               </font>
+            </Text>
+         </children>
+      </VBox>
+      <FlowPane fx:id="FPDados" prefHeight="359.0" prefWidth="415.0" rowValignment="TOP" styleClass="profile-flowpane" stylesheets="@style.css" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="370.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0" />
+   </children>
+</AnchorPane>

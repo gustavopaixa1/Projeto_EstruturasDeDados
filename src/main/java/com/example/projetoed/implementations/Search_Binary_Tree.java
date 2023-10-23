@@ -36,6 +36,7 @@ public class Search_Binary_Tree implements DSBinary_Tree {
         while (aux != null) {
             this.history.add(Integer.toString(aux.getContent()));
             if (v == aux.getContent()) {
+                this.history.remove(this.history.size() - 1);
                 return true;
             }
 
@@ -163,11 +164,10 @@ public class Search_Binary_Tree implements DSBinary_Tree {
         return this.history;
     }
 
-    public ArrayList<String> postOrder_Traversal() {
+   public ArrayList<String> inOrder_Traversal() {
         this.history.clear();
-        return postOrder_Traversal(this.root);
+        return inOrder_Traversal(this.root);
     }
-
     private ArrayList<String> inOrder_Traversal(SBTNode<Integer> node) {
         if (node == null) {
             return this.history;
@@ -180,9 +180,9 @@ public class Search_Binary_Tree implements DSBinary_Tree {
         return this.history;
     }
 
-    public ArrayList<String> inOrder_Traversal() {
+    public ArrayList<String> postOrder_Traversal() {
         this.history.clear();
-        return inOrder_Traversal(this.root);
+        return postOrder_Traversal(this.root);
     }
 
     private ArrayList<String> postOrder_Traversal(SBTNode<Integer> node) {

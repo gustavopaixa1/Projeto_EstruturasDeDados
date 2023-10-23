@@ -197,7 +197,7 @@ public class ControllerABP implements Initializable {
             this.sequenciaDaAnimacao.push(auxString);
         this.animacaoSequencia(1, 0.2, "#8b0000", "#008B8B");
 
-        TransitionModificada tm = this.animacao(Integer.toString(cont), (auxStrings.size() / 5 + 1) * 2, 2, "#8b0000", "#008B8B");
+        TransitionModificada tm = this.animacao(Integer.toString(cont), (this.ABP.getHistory().size() / 5 + 1) * 2, 1, "#8b0000", "#008B8B");
         tm.ft.setOnFinished(evento -> {
             tm.txt.setVisible(true);
         });

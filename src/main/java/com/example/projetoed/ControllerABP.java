@@ -79,6 +79,15 @@ public class ControllerABP implements Initializable {
 
     @FXML
     void EventoInserir(MouseEvent event) {
+        if (this.animacaoEmAndamento) {
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("ERRO");
+            alerta.setHeaderText("Caminhamento em andamento.");
+            alerta.setContentText("Espere que o caminhamento atual termine antes de chamar outra função.");
+            alerta.showAndWait();
+            return;
+        }
+
         int cont = 0;
         Alert alerta = new Alert(Alert.AlertType.ERROR);
         alerta.setTitle("ERRO");
@@ -118,6 +127,15 @@ public class ControllerABP implements Initializable {
 
     @FXML
     void EventoRemover(MouseEvent event) {
+        if (this.animacaoEmAndamento) {
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("ERRO");
+            alerta.setHeaderText("Caminhamento em andamento.");
+            alerta.setContentText("Espere que o caminhamento atual termine antes de chamar outra função.");
+            alerta.showAndWait();
+            return;
+        }
+
         int cont;
         Alert alerta = new Alert(Alert.AlertType.ERROR);
         alerta.setTitle("ERRO");
@@ -164,6 +182,15 @@ public class ControllerABP implements Initializable {
 
     @FXML
     void EventoConsultaValor(MouseEvent event) {
+        if (this.animacaoEmAndamento) {
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("ERRO");
+            alerta.setHeaderText("Caminhamento em andamento.");
+            alerta.setContentText("Espere que o caminhamento atual termine antes de chamar outra função.");
+            alerta.showAndWait();
+            return;
+        }
+
         int cont;
         Alert alerta = new Alert(Alert.AlertType.ERROR);
         alerta.setTitle("ERRO");

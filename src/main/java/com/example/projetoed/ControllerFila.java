@@ -132,9 +132,6 @@ public class ControllerFila implements Initializable {
         TFInserirConteudo.setText("");
         TFNumeroDeElementos.setText(String.valueOf(this.Fila.size()));
         TFCampoPrimeiroElemento.setText(String.valueOf(this.Fila.front()));
-        System.out.println(this.Fila.size());
-        System.out.println(cont);
-        System.out.println(this.Fila.front());
 
         FPDados.getChildren().add(this.Fila.size()-1, bloco(cont));
 

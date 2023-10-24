@@ -351,7 +351,8 @@ public class ControllerABP implements Initializable {
         final Text finalTexto = texto;
 
         TransitionModificada tm = new TransitionModificada(transition, finalTexto);
-        finalTexto.setVisible(false);
+        if (finalTexto != null)
+            finalTexto.setVisible(false);
         transition.setOnFinished(event -> {
             (finalTexto).setVisible(true);
         });
@@ -365,7 +366,8 @@ public class ControllerABP implements Initializable {
         FillTransition aux = tm.ft;
         aux.setAutoReverse(false);
         aux.setOnFinished(event -> {
-            tm.txt.setVisible(true);
+            if (tm.txt != null)
+                tm.txt.setVisible(true);
             if (this.sequenciaDaAnimacao.isEmpty())
                 this.animacaoEmAndamento = false;
             animacaoSequencia(cycles, time, fromColor, toColor);

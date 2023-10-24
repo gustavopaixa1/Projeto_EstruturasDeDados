@@ -58,6 +58,9 @@ public class ControllerABP implements Initializable {
     private TextField TFConsultaValor;
 
     @FXML
+    private Slider SliderVelocidadeAnimacao;
+
+    @FXML
     private AnchorPane APInserir;
 
     @FXML
@@ -67,7 +70,11 @@ public class ControllerABP implements Initializable {
     private AnchorPane APConsultarValor;
 
     @FXML
-    private VBox VBCaminhamentos;
+    private AnchorPane APCaminhamentos;
+
+    @FXML
+    private HBox HBoxCaminhamentos;
+
 
     @FXML
     void EventoVoltar(MouseEvent event) throws IOException {
@@ -257,7 +264,7 @@ public class ControllerABP implements Initializable {
         for (String auxString : auxStrings)
             this.sequenciaDaAnimacao.push(auxString);
 
-        this.animacaoSequencia(1, 0.5, "#8b0000", "#008B8B");
+        this.animacaoSequencia(1, this.SliderVelocidadeAnimacao.getValue(), "#8b0000", "#008B8B");
     }
 
     @FXML
@@ -284,7 +291,7 @@ public class ControllerABP implements Initializable {
         for (String auxString : auxStrings)
             this.sequenciaDaAnimacao.push(auxString);
 
-        this.animacaoSequencia(1, 0.5, "#8b0000", "#008B8B");
+        this.animacaoSequencia(1, this.SliderVelocidadeAnimacao.getValue(), "#8b0000", "#008B8B");
     }
 
     @FXML
@@ -311,7 +318,7 @@ public class ControllerABP implements Initializable {
         for (String auxString : auxStrings)
             this.sequenciaDaAnimacao.push(auxString);
 
-        this.animacaoSequencia(1, 0.5, "#8b0000", "#008B8B");
+        this.animacaoSequencia(1, this.SliderVelocidadeAnimacao.getValue(), "#8b0000", "#008B8B");
     }
 
     @FXML
@@ -341,7 +348,7 @@ public class ControllerABP implements Initializable {
         this.APTela.setBottomAnchor(this.PaneDaArvore, 15.0);
         this.APTela.setLeftAnchor(this.PaneDaArvore, 15.0);
         this.APTela.setRightAnchor(this.PaneDaArvore, 15.0);
-        this.APTela.setTopAnchor(this.PaneDaArvore, 200.0);
+        this.APTela.setTopAnchor(this.PaneDaArvore, 223.0);
         this.APTela.getChildren().add(this.PaneDaArvore);
 
         Rectangle clip = new Rectangle();
@@ -372,7 +379,8 @@ public class ControllerABP implements Initializable {
         final Text finalTexto = texto;
 
         TransitionModificada tm = new TransitionModificada(transition, finalTexto);
-        finalTexto.setVisible(false);
+        if (finalTexto != null)
+            finalTexto.setVisible(false);
         transition.setOnFinished(event -> {
             (finalTexto).setVisible(true);
         });
@@ -386,7 +394,8 @@ public class ControllerABP implements Initializable {
         FillTransition aux = tm.ft;
         aux.setAutoReverse(false);
         aux.setOnFinished(event -> {
-            tm.txt.setVisible(true);
+            if (tm.txt != null)
+                tm.txt.setVisible(true);
             if (this.sequenciaDaAnimacao.isEmpty())
                 this.animacaoEmAndamento = false;
             animacaoSequencia(cycles, time, fromColor, toColor);
@@ -411,7 +420,8 @@ public class ControllerABP implements Initializable {
         this.APInserir.setEffect(dropShadow);
         this.APRemover.setEffect(dropShadow);
         this.APConsultarValor.setEffect(dropShadow);
-        this.VBCaminhamentos.setEffect(dropShadow);
+        this.APCaminhamentos.setEffect(dropShadow);
+        this.HBoxCaminhamentos.setEffect(dropShadow);
     }
 
 }

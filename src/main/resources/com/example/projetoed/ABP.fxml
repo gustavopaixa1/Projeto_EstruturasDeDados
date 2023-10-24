@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -43,7 +44,7 @@
       </VBox>
       <HBox alignment="CENTER" layoutY="115.0" prefHeight="56.0" prefWidth="800.0" spacing="20.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="110.0">
          <children>
-            <AnchorPane fx:id="APInserir" maxHeight="75.0" maxWidth="237.0" minHeight="75.0" minWidth="136.0" prefHeight="75.0" prefWidth="136.0">
+            <AnchorPane fx:id="APInserir" maxHeight="111.0" maxWidth="237.0" minHeight="111.0" minWidth="136.0" prefHeight="111.0" prefWidth="136.0">
                <children>
                   <Button layoutX="1.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#EventoInserir" prefHeight="28.0" prefWidth="136.0" styleClass="profile-button" stylesheets="@style.css" text="   Inserir" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -62,7 +63,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="APRemover" maxHeight="114.0" maxWidth="138.0" minHeight="75.0" minWidth="90.0" prefHeight="75.0" prefWidth="138.0">
+            <AnchorPane fx:id="APRemover" maxHeight="111.0" maxWidth="136.0" minHeight="111.0" minWidth="136.0" prefHeight="111.0" prefWidth="136.0">
                <children>
                   <Button layoutX="1.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#EventoRemover" prefHeight="28.0" prefWidth="136.0" styleClass="profile-button" stylesheets="@style.css" text="   Remover" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -81,19 +82,19 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="APConsultarValor" maxHeight="116.0" maxWidth="185.0" minHeight="75.0" minWidth="158.0" prefHeight="75.0" prefWidth="158.0">
+            <AnchorPane fx:id="APConsultarValor" maxHeight="111.0" maxWidth="136.0" minHeight="111.0" minWidth="136.0" prefHeight="111.0" prefWidth="136.0">
                <children>
-                  <Button layoutY="10.0" mnemonicParsing="false" onMouseClicked="#EventoConsultaValor" prefHeight="28.0" prefWidth="157.0" styleClass="profile-button" stylesheets="@style.css" text="   Consultar Valor" textAlignment="CENTER" textFill="WHITE">
+                  <Button layoutX="-10.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#EventoConsultaValor" prefHeight="28.0" prefWidth="157.0" styleClass="profile-button" stylesheets="@style.css" text="   Consultar Valor" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Consolas Bold" size="14.0" />
                      </font>
                   </Button>
-                  <TextField fx:id="TFConsultaValor" alignment="CENTER" layoutX="34.0" layoutY="48.0" prefHeight="26.0" prefWidth="91.0" promptText="Conteúdo" styleClass="profile-text-field" stylesheets="@style.css">
+                  <TextField fx:id="TFConsultaValor" alignment="CENTER" layoutX="23.0" layoutY="48.0" prefHeight="26.0" prefWidth="91.0" promptText="Conteúdo" styleClass="profile-text-field" stylesheets="@style.css">
                      <font>
                         <Font size="11.0" />
                      </font>
                   </TextField>
-                  <ImageView disable="true" fitHeight="19.0" fitWidth="20.0" layoutX="9.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView disable="true" fitHeight="19.0" fitWidth="20.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../imagens/pesquisa.png" />
                      </image>
@@ -102,7 +103,7 @@
             </AnchorPane>
             <VBox fx:id="VBCaminhamentos" alignment="TOP_CENTER" prefHeight="65.0" prefWidth="275.0" spacing="7.0">
                <children>
-                  <AnchorPane fx:id="paneConsultar213" maxHeight="30.0" maxWidth="175.0" minHeight="30.0" minWidth="175.0" prefHeight="30.0" prefWidth="175.0">
+                  <AnchorPane fx:id="APCaminhamentos" maxHeight="30.0" maxWidth="175.0" minHeight="30.0" minWidth="175.0" prefHeight="30.0" prefWidth="175.0">
                      <children>
                         <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="172.0" styleClass="profile-button" stylesheets="@style.css" text="   Caminhamentos" textAlignment="CENTER" textFill="WHITE">
                            <font>
@@ -116,7 +117,7 @@
                         </ImageView>
                      </children>
                   </AnchorPane>
-                  <HBox prefHeight="60.0" prefWidth="201.0" spacing="10.0">
+                  <HBox fx:id="HBoxCaminhamentos" prefHeight="60.0" prefWidth="201.0" spacing="10.0">
                      <children>
                         <Button mnemonicParsing="false" onMouseClicked="#EventoPreOrdem" prefHeight="28.0" prefWidth="172.0" styleClass="profile-button" stylesheets="@style.css" text="Pré-Ordem" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                            <font>
@@ -135,6 +136,7 @@
                         </Button>
                      </children>
                   </HBox>
+                  <Slider fx:id="SliderVelocidadeAnimacao" blockIncrement="0.1" majorTickUnit="1.0" max="2.0" min="0.1" minorTickCount="9" nodeOrientation="RIGHT_TO_LEFT" prefHeight="14.0" prefWidth="117.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="0.5" />
                </children>
                <HBox.margin>
                   <Insets top="10.0" />

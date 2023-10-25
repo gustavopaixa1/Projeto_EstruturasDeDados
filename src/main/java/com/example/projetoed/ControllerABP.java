@@ -373,12 +373,14 @@ public class ControllerABP implements Initializable {
             this.ABP.insert(i);
         }
         this.PaneDaArvore.atualizarVisualizacao();
+        this.TFNumeroDeElementos.setText(Integer.toString(this.ABP.size()));
     }
 
     @FXML
     void EventoDebugEsvaziar(MouseEvent event) throws IOException {
         this.ABP.clear();
         this.PaneDaArvore.atualizarVisualizacao();
+        this.TFNumeroDeElementos.setText("0");
     }
 
     private void configurarPanePersonalizado() {

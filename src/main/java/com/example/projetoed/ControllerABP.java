@@ -75,7 +75,6 @@ public class ControllerABP implements Initializable {
     @FXML
     private HBox HBoxCaminhamentos;
 
-
     @FXML
     void EventoVoltar(MouseEvent event) throws IOException {
         Stage stage = (Stage) BotaoVoltar.getScene().getWindow();
@@ -321,6 +320,39 @@ public class ControllerABP implements Initializable {
         this.animacaoSequencia(1, this.SliderVelocidadeAnimacao.getValue(), "#8b0000", "#008B8B");
     }
 
+    @FXML
+    void EventoCaminhamentos(MouseEvent event) {
+        if (this.ABP.isEmpty()) {
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("ERRO");
+            alerta.setHeaderText("Árvore vazia.");
+            alerta.setContentText("A árvore está vazia, não existem itens para serem caminhados.");
+            alerta.showAndWait();
+            return;
+        }
+        if (this.animacaoEmAndamento) {
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("ERRO");
+            alerta.setHeaderText("Caminhamento em andamento.");
+            alerta.setContentText("Espere que o caminhamento atual termine antes de iniciar outro.");
+            alerta.showAndWait();
+            return;
+        }
+
+        this.animacaoEmAndamento = true;
+        ArrayList<String> auxStrings = this.ABP.preOrder_Traversal();
+        for (String auxString : auxStrings)
+            this.sequenciaDaAnimacao.push(auxString);
+        auxStrings = this.ABP.inOrder_Traversal();
+        for (String auxString : auxStrings)
+            this.sequenciaDaAnimacao.push(auxString);
+        auxStrings = this.ABP.postOrder_Traversal();
+        for (String auxString : auxStrings)
+            this.sequenciaDaAnimacao.push(auxString);
+
+        this.animacaoSequencia(1, this.SliderVelocidadeAnimacao.getValue(), "#8b0000", "#008B8B");
+    }
+
     private void configurarPanePersonalizado() {
         this.PaneDaArvore = new ABPPane(this.ABP);
 
@@ -382,6 +414,7 @@ public class ControllerABP implements Initializable {
 
         aux.play();
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.ABP = new Search_Binary_Tree();
@@ -402,5 +435,4 @@ public class ControllerABP implements Initializable {
         this.APCaminhamentos.setEffect(dropShadow);
         this.HBoxCaminhamentos.setEffect(dropShadow);
     }
-
 }

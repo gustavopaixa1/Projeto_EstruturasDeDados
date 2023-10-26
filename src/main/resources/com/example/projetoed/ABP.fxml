@@ -105,7 +105,7 @@
                <children>
                   <AnchorPane fx:id="APCaminhamentos" maxHeight="30.0" maxWidth="175.0" minHeight="30.0" minWidth="175.0" prefHeight="30.0" prefWidth="175.0">
                      <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#EventoCaminhamentos" prefHeight="28.0" prefWidth="172.0" styleClass="profile-button" stylesheets="@style.css" text="   Caminhamentos" textAlignment="CENTER" textFill="WHITE">
+                        <Button mnemonicParsing="false" onMouseClicked="#EventoDebugCaminhamentos" prefHeight="28.0" prefWidth="172.0" styleClass="profile-button" stylesheets="@style.css" text="   Caminhamentos" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font name="Consolas Bold" size="14.0" />
                            </font>

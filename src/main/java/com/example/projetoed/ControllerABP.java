@@ -327,7 +327,8 @@ public class ControllerABP implements Initializable {
         this.animacaoSequencia(1, this.SliderVelocidadeAnimacao.getValue(), "#8b0000", "#008B8B");
     }
 
-    void EventoCaminhamentos(MouseEvent event) {
+    @FXML
+    void EventoDebugCaminhamentos(MouseEvent event) {
         if (this.ABP.isEmpty()) {
             Alert alerta = new Alert(Alert.AlertType.ERROR);
             alerta.setTitle("ERRO");
